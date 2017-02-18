@@ -1,9 +1,9 @@
 //
 //  ExtensionDelegate.swift
-//  AWSSenseTest WatchKit Extension
+//  AWSenseWatchTest WatchKit Extension
 //
-//  Created by Katrin Haensel on 16/02/2017.
-//  Copyright © 2017 Katrin Haensel. All rights reserved.
+//  Created by Katrin Hansel on 18/02/2017.
+//  Copyright © 2017 QMUL. All rights reserved.
 //
 
 import WatchKit
@@ -12,7 +12,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
-        
     }
 
     func applicationDidBecomeActive() {

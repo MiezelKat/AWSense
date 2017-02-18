@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  AWSSenseTest
+//  AWSenseWatchTest
 //
-//  Created by Katrin Haensel on 16/02/2017.
-//  Copyright © 2017 Katrin Haensel. All rights reserved.
+//  Created by Katrin Hansel on 18/02/2017.
+//  Copyright © 2017 QMUL. All rights reserved.
 //
 
 import UIKit
@@ -42,12 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func applicationShouldRequestHealthAuthorization(application: UIApplication) {
+    
+    func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
         let healthStore = HKHealthStore()
         healthStore.handleAuthorizationForExtension { (success, error) -> Void in
-            
-
+            // ...
         }
     }
+    
 }
 

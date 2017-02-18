@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rFJ-5J-AFm">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AWSenseWatchTest_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="left" text="Accel Aval" id="PZs-1Z-TwH"/>
+                        <label alignment="left" text="---" id="Poe-dK-iqX">
+                            <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                        <label alignment="left" text="HR Avail" id="rJ6-NP-fx6"/>
+                        <label alignment="left" text="---" id="YzF-ov-1Dc">
+                            <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="accelAvailableLabel" destination="Poe-dK-iqX" id="c07-8P-REC"/>
+                        <outlet property="hrAvailableLabel" destination="YzF-ov-1Dc" id="n8D-El-uet"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+        <!--Configuration Interface Controller-->
+        <scene sceneID="6M8-XL-132">
+            <objects>
+                <controller id="rFJ-5J-AFm" customClass="ConfigurationInterfaceController" customModule="AWSenseWatchTest_WatchKit_Extension">
+                    <items>
+                        <switch width="1" alignment="left" title="Accel" id="HGU-He-kO4">
+                            <connections>
+                                <action selector="accelerometerStateChanged:" destination="rFJ-5J-AFm" id="zPM-8H-3C9"/>
+                            </connections>
+                        </switch>
+                        <switch width="1" alignment="left" title="Device" id="xo9-hm-4YA">
+                            <connections>
+                                <action selector="deviceMotionStateChanged:" destination="rFJ-5J-AFm" id="Arl-3E-X3U"/>
+                            </connections>
+                        </switch>
+                        <switch width="1" alignment="left" title="HR" id="QKP-ec-hpm">
+                            <connections>
+                                <action selector="heartRateStateChanged:" destination="rFJ-5J-AFm" id="nY0-Z0-TaX"/>
+                            </connections>
+                        </switch>
+                        <button width="1" alignment="left" title="Start Sensing" enabled="NO" id="K2s-at-ELf">
+                            <connections>
+                                <action selector="startSensingButtonAction" destination="rFJ-5J-AFm" id="xvH-Ec-bmt"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="accelerometerSwitch" destination="HGU-He-kO4" id="2eH-yw-kPx"/>
+                        <outlet property="deviceMotionSwitch" destination="xo9-hm-4YA" id="pfS-gi-DCQ"/>
+                        <outlet property="heartRateSwitch" destination="QKP-ec-hpm" id="BPJ-Yf-VE7"/>
+                        <outlet property="startSensingButton" destination="K2s-at-ELf" id="AcY-Wv-oqG"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-128" y="433"/>
+        </scene>
+        <!--sensingIC-->
+        <scene sceneID="iM6-fv-TPG">
+            <objects>
+                <controller identifier="sensingIC" id="nlJ-ZY-dAB" customClass="SensingDataInterfaceController" customModule="AWSenseWatchTest_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="0.0" alignment="left" layout="vertical" id="325-cU-ktr">
+                            <items>
+                                <label alignment="left" text="Accelerometer" id="AEE-su-IJt"/>
+                                <label alignment="left" text="---" id="YAE-wQ-Iac">
+                                    <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="0.0" alignment="left" layout="vertical" id="Y93-9V-6Mv">
+                            <items>
+                                <label alignment="left" text="Device Motion" id="3tD-v9-tEP"/>
+                                <label alignment="left" text="---" id="HPi-WS-3a4">
+                                    <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="0.0" alignment="left" layout="vertical" id="Ocg-Db-0t2">
+                            <items>
+                                <label alignment="left" text="Heart Rate" id="1Ka-aD-oAu"/>
+                                <label alignment="left" text="---" id="9Bd-qO-7Gz">
+                                    <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="accelerometerLabel" destination="YAE-wQ-Iac" id="NKh-7Q-0v6"/>
+                        <outlet property="accelerometerTextLabel" destination="AEE-su-IJt" id="OXy-0j-XWR"/>
+                        <outlet property="deviceMotionLabel" destination="HPi-WS-3a4" id="BX8-2n-xiP"/>
+                        <outlet property="deviceMotionTextLabel" destination="3tD-v9-tEP" id="iic-fO-Obb"/>
+                        <outlet property="heartRateLabel" destination="9Bd-qO-7Gz" id="Hr6-QX-FU8"/>
+                        <outlet property="heartRateTextLabel" destination="1Ka-aD-oAu" id="LhT-bu-UXM"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="102" y="427"/>
+        </scene>
+    </scenes>
+</document>
