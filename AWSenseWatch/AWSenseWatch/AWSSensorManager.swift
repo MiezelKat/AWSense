@@ -75,10 +75,6 @@ public class AWSSensorManager : NSObject{
             return AWSAccelerometerSensor.sensorSingleton
         case .device_motion:
             return AWSDeviceMotionSensor.sensorSingleton
-        case .magnetometer:
-            return AWSMagnetometerSensor.sensorSingleton
-        case .gyroscope:
-            return AWSGyroscopeSensor.sensorSingleton
         case .heart_rate:
             return AWSHeartRateSensor.sensorSingleton
         default:

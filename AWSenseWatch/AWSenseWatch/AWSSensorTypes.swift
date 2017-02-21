@@ -13,12 +13,10 @@ public enum AWSSensorType : Int, Equatable {
     
     case heart_rate = 0
     case accelerometer
-    case gyroscope
     case ambinent_light
     case microphone
     case bluetooth
     case device_motion
-    case magnetometer
     
     ///The hashValue of the `Component` so we can conform to `Hashable` and be sorted.
     public var hashValue : Int {

@@ -10,12 +10,8 @@ import Foundation
 import HealthKit
 
 public class AWSHeartRateSensorData : AWSSensorData {
-    var _timestamp : AWSTimestamp
-    public var timestamp : AWSTimestamp {
-        get {
-            return _timestamp
-        }
-    }
+    
+    public private(set) var timestamp : AWSTimestamp
     
     public static var csvHeader : String {
         get{
@@ -25,32 +21,32 @@ public class AWSHeartRateSensorData : AWSSensorData {
     
     public var csvString : String {
         get{
-            return "\(_timestamp.date),\(_timestamp.ti),\(_heartRate),"
+            return "\(timestamp.date),\(timestamp.ti),\(heartRate)"
         }
     }
     
     public var prettyPrint : String {
         get{
-            return String(format: "%.2f", _heartRate)
+            return String(format: "%.2f", heartRate)
         }
     }
     
-    private var _heartRate : Double
+    public private(set) var heartRate : Double
     
     public var data : [AnyObject] {
         get{
-            return [_heartRate as AnyObject]
+            return [heartRate as AnyObject]
         }
     }
     
     public required init(timestamp : AWSTimestamp, data: [AnyObject]){
-        _timestamp = timestamp
-        _heartRate = data[0] as! Double
+        self.timestamp = timestamp
+        self.heartRate = data[0] as! Double
     }
     
     public init(timestamp : AWSTimestamp, heartRate : Double){
-        _timestamp = timestamp
-        _heartRate = heartRate
+        self.timestamp = timestamp
+        self.heartRate = heartRate
     }
     
 }

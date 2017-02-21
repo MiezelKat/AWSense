@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rFJ-5J-AFm">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rFJ-5J-AFm">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -78,7 +78,7 @@
                                 </label>
                             </items>
                         </group>
-                        <group width="1" height="0.0" alignment="left" layout="vertical" id="Y93-9V-6Mv">
+                        <group width="1" alignment="left" layout="vertical" id="Y93-9V-6Mv">
                             <items>
                                 <label alignment="left" text="Device Motion" id="3tD-v9-tEP"/>
                                 <label alignment="left" text="---" id="HPi-WS-3a4">

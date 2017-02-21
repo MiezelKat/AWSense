@@ -23,16 +23,18 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
     @IBOutlet var deviceMotionTextLabel: WKInterfaceLabel!
     @IBOutlet var deviceMotionLabel: WKInterfaceLabel!
     
+    var sensors : [AWSSensorType: Bool]?
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         // Configure interface objects here.
         
-        let contextCast = context as! [AWSSensorType: Bool]
+        sensors = context as! [AWSSensorType: Bool]
         
         let manager = AWSSensorManager.sharedInstance
         
-        if(contextCast[.heart_rate]! && manager.isSensorAvailable(sensor: .heart_rate)){
+        if(sensors![.heart_rate]! && manager.isSensorAvailable(sensor: .heart_rate)){
             manager.register(eventhandler: self, with: .heart_rate)
             manager.startSensing(with: .heart_rate)
         }else{
@@ -40,7 +42,7 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
             heartRateTextLabel.setHidden(true)
         }
         
-        if(contextCast[.accelerometer]! && manager.isSensorAvailable(sensor: .accelerometer)){
+        if(sensors![.accelerometer]! && manager.isSensorAvailable(sensor: .accelerometer)){
             manager.register(eventhandler: self, with: .accelerometer)
             manager.startSensing(with: .accelerometer)
         }else{
@@ -48,7 +50,7 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
             accelerometerTextLabel.setHidden(true)
         }
         
-        if(contextCast[.device_motion]! && manager.isSensorAvailable(sensor: .device_motion)){
+        if(sensors![.device_motion]! && manager.isSensorAvailable(sensor: .device_motion)){
             manager.register(eventhandler: self, with: .device_motion)
             manager.startSensing(with: .device_motion)
         }else{
@@ -84,6 +86,20 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
         }
     }
     
-    
+    override func willDisappear() {
+        let manager = AWSSensorManager.sharedInstance
+        
+        if(sensors![.heart_rate]! && manager.isSensorAvailable(sensor: .heart_rate)){
+            manager.stopSensing(with: .heart_rate)
+        }
+        
+        if(sensors![.accelerometer]! && manager.isSensorAvailable(sensor: .accelerometer)){
+            manager.stopSensing(with: .accelerometer)
+        }
+        
+        if(sensors![.device_motion]! && manager.isSensorAvailable(sensor: .device_motion)){
+            manager.stopSensing(with: .device_motion)
+        }
+    }
 }
 
