@@ -29,8 +29,15 @@ class InterfaceController: WKInterfaceController, AWSSensorEventHandler {
             manager.startSensing(with: AWSSensorType.heart_rate)
         }
         
+        // test 
+        
+        let fileName = "Tasks.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
+        
         
     }
+    
+
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user

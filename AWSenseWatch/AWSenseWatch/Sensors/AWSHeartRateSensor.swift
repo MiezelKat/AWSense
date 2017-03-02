@@ -13,6 +13,7 @@ import WatchKit
 import Foundation
 import HealthKit
 
+
 class AWSHeartRateSensor : NSObject, AWSSensor, HKWorkoutSessionDelegate{
     
     static let sensorSingleton = AWSHeartRateSensor()
@@ -40,6 +41,9 @@ class AWSHeartRateSensor : NSObject, AWSSensor, HKWorkoutSessionDelegate{
         healthStore = HKHealthStore()
         super.init()
         let quantityType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.heartRate)
+        
+        
+        
         if(quantityType != nil){
             let dataTypes = Set(arrayLiteral: quantityType!)
             healthStore.requestAuthorization(toShare: nil, read: dataTypes) { (success, error) -> Void in
@@ -72,7 +76,7 @@ class AWSHeartRateSensor : NSObject, AWSSensor, HKWorkoutSessionDelegate{
     
     func startSensing(){
         startedSensing = true
-        
+
         // If we have already started the workout, then do nothing.
         if (session != nil) {
             print ("session nil")

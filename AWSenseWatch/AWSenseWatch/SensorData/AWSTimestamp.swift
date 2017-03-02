@@ -1,6 +1,6 @@
 //
 //  AWSTimestamp.swift
-//  AWSenseWatch
+//  AWSense
 //
 //  Created by Katrin Haensel on 17/02/2017.
 //  Copyright © 2017 Katrin Haensel. All rights reserved.
@@ -38,17 +38,17 @@ public class AWSTimestamp : NSObject{
         ti = date.timeIntervalSince(AWSTimestamp.lastBoot)
     }
     
-    init(date: Date, ti : TimeInterval){
+    public init(date: Date, ti : TimeInterval){
         self.date = date
         self.ti = ti
     }
     
-    init(ti : TimeInterval){
+    public init(ti : TimeInterval){
         self.date = Date(timeInterval: ti, since: AWSTimestamp.lastBoot as Date)
         self.ti = ti
     }
     
-    init(date : Date){
+    public init(date : Date){
         self.date = date
         self.ti = date.timeIntervalSince(AWSTimestamp.lastBoot)
     }

@@ -10,6 +10,7 @@ import WatchKit
 import Foundation
 import CoreMotion
 
+
 class AWSDeviceMotionSensor : AWSSensor{
     
     static let sensorSingleton = AWSDeviceMotionSensor()
@@ -55,7 +56,7 @@ class AWSDeviceMotionSensor : AWSSensor{
             
             let handler:CMDeviceMotionHandler = {(data: CMDeviceMotion?, error: Error?) -> Void in
                 if(data != nil ){
-                   
+                    
                     self.event.raise(data: AWSDeviceMotionSensorData(timestamp: AWSTimestamp(ti: (data?.timestamp)!), deviceMotion : data!))
                 }
                 else{

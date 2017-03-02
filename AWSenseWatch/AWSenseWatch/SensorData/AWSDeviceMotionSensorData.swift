@@ -1,6 +1,6 @@
 //
 //  AWSDeviceMotionSensorData.swift
-//  AWSenseWatch
+//  AWSense
 //
 //  Created by Katrin Haensel on 21/02/2017.
 //  Copyright © 2017 Katrin Haensel. All rights reserved.

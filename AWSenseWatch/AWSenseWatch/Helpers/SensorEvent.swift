@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public class AWSSensorEvent {
     
     private let type : AWSSensorType
