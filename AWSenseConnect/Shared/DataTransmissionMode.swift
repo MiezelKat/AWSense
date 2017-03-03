@@ -8,8 +8,7 @@
 
 import Foundation
 
-public enum DataTransmissionMode{
+public enum DataTransmissionMode : String{
     case stream
     case batch
-    case atTheEnd
 }

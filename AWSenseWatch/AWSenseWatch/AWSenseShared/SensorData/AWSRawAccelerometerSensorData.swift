@@ -44,7 +44,7 @@ public class AWSRawAccelerometerSensorData : AWSSensorData {
         self.acceleration = data[0] as! CMAcceleration
     }
     
-    internal init(timestamp : AWSTimestamp, acceleration : CMAcceleration){
+    public init(timestamp : AWSTimestamp, acceleration : CMAcceleration){
         self.timestamp = timestamp
         self.acceleration = acceleration
     }

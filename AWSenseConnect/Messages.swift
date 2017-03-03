@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import AWSenseWatch
+import AWSenseShared
 
-public enum MessageType : Int {
+internal enum MessageType : Int {
     case configuration
     case startSensing
     case stopSensing
@@ -21,11 +21,16 @@ public enum MessageType : Int {
     static let typeKey : String = "type"
 }
 
-public protocol Message{
+internal protocol Message{
     
     static var type : MessageType{
         get
     }
+    
+    var type : MessageType{
+        get
+    }
+    
     
     func createPayload() -> [String : Any]
     
@@ -37,7 +42,7 @@ public protocol Message{
 
 internal class MessageParser{
     
-    static func parseMessage(fromPayload payload: [String : Any]) -> Message?{
+    internal static func parseMessage(fromPayload payload: [String : Any]) -> Message?{
         let type : MessageType = MessageType(rawValue: payload[MessageType.typeKey] as! Int)!
         
         switch type {
@@ -61,91 +66,120 @@ internal class MessageParser{
     
 }
 
-public class AbstractMessage : Message{
+internal class AbstractMessage : Message{
     
     /// message type
-    public class var type: MessageType {
+    internal class var type: MessageType {
         return .undefined
     }
     
+    internal var type: MessageType{
+        return type(of: self).type
+    }
+    
     private static let timestampKey = "ts"
-    public internal(set) var timestamp : Date
+    internal private(set) var timestamp : Date
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         timestamp = payload[type(of: self).timestampKey] as! Date
+    }
+    
+    internal init() {
+        timestamp = Date()
     }
     
     
     /// Create a payload dictionary
     ///
     /// - Returns: the payload
-    public func createPayload() -> [String : Any] {
+    internal func createPayload() -> [String : Any] {
         var payload : [String : Any] = [String : Any]()
         payload[type(of: self).timestampKey] = timestamp
-        payload[MessageType.typeKey] = type(of: self).type
+        payload[MessageType.typeKey] = type(of: self).type.rawValue
         return payload
     }
     
 }
 
-public class ConfigurationMessage : AbstractMessage{
+internal class ConfigurationMessage : AbstractMessage{
     
     /// message type
-    public override class var type: MessageType {
+    internal override class var type: MessageType {
         return .configuration
     }
     
     private static let configurationKey = "config"
-    public internal(set) var configuration : SensingConfiguration
+    internal private(set) var configuration : SensingConfiguration
     
+    private static let transmissionModeKey = "transmission"
+    internal private(set) var transmissionMode : DataTransmissionMode
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         configuration = payload[type(of: self).configurationKey] as! SensingConfiguration
+        transmissionMode = payload[type(of: self).transmissionModeKey] as! DataTransmissionMode
+        // DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)
         super.init(fromPayload: payload)
     }
     
     
+    /// Create with a configuration
+    ///
+    /// - Parameter config: configuration
+    internal init(withConfiguration config: SensingConfiguration, transmisssionMode mode: DataTransmissionMode = .batch){
+        self.configuration = config
+        self.transmissionMode = mode
+        super.init()
+    }
+    
     /// Create a payload dictionary
     ///
     /// - Returns: the payload
-    public override func createPayload() -> [String : Any] {
+    internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
         payload[type(of: self).configurationKey] = configuration
+        payload[type(of: self).transmissionModeKey] = transmissionMode
         return payload
     }
     
 }
 
-public class SensingDataMessage : AbstractMessage{
+internal class SensingDataMessage : AbstractMessage{
     
     /// message type
-    public override class var type: MessageType {
+    internal override class var type: MessageType {
         return .sensingData
     }
     
     private static let sensingDataKey = "data"
-    public internal(set) var sensingData : [AWSSensorData]
+    internal private(set) var sensingData : [AWSSensorData]
     
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         sensingData = payload[type(of: self).sensingDataKey] as! [AWSSensorData]
         super.init(fromPayload: payload)
     }
     
+    /// Initialise with sensing data
+    ///
+    /// - Parameter data: data array
+    internal init(withSensingData data: [AWSSensorData]){
+        self.sensingData = data
+        super.init()
+    }
     
     /// Create a payload dictionary
     ///
     /// - Returns: the payload
-    public override func createPayload() -> [String : Any] {
+    internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
         payload[type(of: self).sensingDataKey] = sensingData
         return payload
@@ -154,85 +188,79 @@ public class SensingDataMessage : AbstractMessage{
 }
 
 
-public class StopSensingMessage : AbstractMessage{
+internal class StopSensingMessage : AbstractMessage{
     
     /// message type
-    public override class var type: MessageType {
+    internal override class var type: MessageType {
         return .stopSensing
     }
     
+    internal override init() {
+        super.init()
+    }
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         super.init(fromPayload: payload)
-    }
-    
-    
-    /// Create a payload dictionary
-    ///
-    /// - Returns: the payload
-    public override func createPayload() -> [String : Any] {
-        var payload = super.createPayload()
-
-        return payload
     }
     
 }
 
 
-public class StartSensingMessage : AbstractMessage{
+internal class StartSensingMessage : AbstractMessage{
     
     /// message type
-    public override class var type: MessageType {
+    internal override class var type: MessageType {
         return .startSensing
     }
     
+    internal override init() {
+        super.init()
+    }
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         super.init(fromPayload: payload)
     }
-    
-    
-    /// Create a payload dictionary
-    ///
-    /// - Returns: the payload
-    public override func createPayload() -> [String : Any] {
-        var payload = super.createPayload()
-        
-        return payload
-    }
+
 }
 
 
-public class StartedSensingMessage : AbstractMessage{
+internal class StartedSensingMessage : AbstractMessage{
     
     /// message type
-    public override class var type: MessageType {
+    internal override class var type: MessageType {
         return .startedSensing
     }
     
     private static let startTimeKey = "startTime"
-    public internal(set) var startTime : Date
+    internal private(set) var startTime : Date
     
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         startTime = payload[type(of: self).startTimeKey] as! Date
         super.init(fromPayload: payload)
     }
     
+    /// Init with a start data when sensing began
+    ///
+    /// - Parameter startDate: start date of sensing
+    internal init(withStartDate startDate: Date){
+        self.startTime = startDate
+        super.init()
+    }
     
     /// Create a payload dictionary
     ///
     /// - Returns: the payload
-    public override func createPayload() -> [String : Any] {
+    internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
         payload[type(of: self).startTimeKey] = startTime
         return payload
@@ -241,30 +269,37 @@ public class StartedSensingMessage : AbstractMessage{
 }
 
 
-public class StoppedSensingMessage : AbstractMessage{
+internal class StoppedSensingMessage : AbstractMessage{
     
     /// message type
-    public override class var type: MessageType {
+    internal override class var type: MessageType {
         return .stoppedSensing
     }
     
     private static let stopTimeKey = "endTime"
-    public internal(set) var stopTime : Date
+    internal private(set) var stopTime : Date
     
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
-    public required init(fromPayload payload: [String : Any]) {
+    internal required init(fromPayload payload: [String : Any]) {
         stopTime = payload[type(of: self).stopTimeKey] as! Date
         super.init(fromPayload: payload)
     }
     
+    /// Init with a start data when sensing began
+    ///
+    /// - Parameter startDate: start date of sensing
+    internal init(withStopDate stopDate: Date){
+        self.stopTime = stopDate
+        super.init()
+    }
     
     /// Create a payload dictionary
     ///
     /// - Returns: the payload
-    public override func createPayload() -> [String : Any] {
+    internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
         payload[type(of: self).stopTimeKey] = stopTime
         return payload

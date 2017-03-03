@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import CoreMotion
-
+import AWSenseShared
 
 class AWSDeviceMotionSensor : AWSSensor{
     

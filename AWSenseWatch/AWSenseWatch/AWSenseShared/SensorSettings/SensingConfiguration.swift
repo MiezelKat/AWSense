@@ -12,11 +12,19 @@ public class SensingConfiguration{
     
     public var enabledSensors : Set<AWSSensorType> = Set<AWSSensorType>()
     
-    func enableSensor(withType type : AWSSensorType){
+    public init(withEnabledSensors sensors:[AWSSensorType]) {
+        for s: AWSSensorType in sensors {
+            self.enableSensor(withType: s)
+        }
+    }
+    
+    public init() {}
+    
+    public func enableSensor(withType type : AWSSensorType){
         enabledSensors.insert(type)
     }
  
-    func disableSensor(withType type : AWSSensorType){
+    public func disableSensor(withType type : AWSSensorType){
         enabledSensors.remove(type)
     }
 }

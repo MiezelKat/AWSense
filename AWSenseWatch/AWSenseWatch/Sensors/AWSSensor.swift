@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import AWSenseShared
 
 protocol AWSSensor{
     

@@ -7,31 +7,31 @@
 //
 
 import Foundation
-import AWSenseWatch
+import AWSenseShared
 
 
-public class MessageEvent{
+internal class MessageEvent{
     
     private var eventHandlers = [MessageEventHandler]()
     
-    public func raise( message: Message, withType type: MessageType) {
+    internal func raiseEvent(withMessage message: Message) {
         for handler in self.eventHandlers {
-            handler.handle(message: message , withType: type)
+            handler.handle(message: message)
         }
     }
     
-    public func add(handler: MessageEventHandler){
+    internal func add(handler: MessageEventHandler){
         eventHandlers.append(handler)
     }
     
-    public func remove(handler: MessageEventHandler){
+    internal func remove(handler: MessageEventHandler){
         eventHandlers = eventHandlers.filter { $0 !== handler }
     }
 }
 
-public protocol MessageEventHandler : class {
+internal protocol MessageEventHandler : class {
     
-    func handle(message : Message, withType type: MessageType)
+    func handle(message : Message)
     
 }
 

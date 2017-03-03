@@ -12,7 +12,7 @@ import Foundation
 import WatchKit
 import Foundation
 import HealthKit
-
+import AWSenseShared
 
 class AWSHeartRateSensor : NSObject, AWSSensor, HKWorkoutSessionDelegate{
     

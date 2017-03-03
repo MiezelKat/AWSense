@@ -7,6 +7,8 @@
 //
 
 import XCTest
+@testable import AWSenseConnectPhone
+@testable import AWSenseShared
 
 class AWSenseConnectPhoneTests: XCTestCase {
     
@@ -20,10 +22,25 @@ class AWSenseConnectPhoneTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testMessageParsing() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let startedMessage = ConfigurationMessage(withConfiguration: SensingConfiguration(), transmisssionMode: .stream)
+        
+        let payload = startedMessage.createPayload()
+        print(payload)
+        
+        
+        let parsedMessage = MessageParser.parseMessage(fromPayload: payload) as! ConfigurationMessage
+        
+        let parsedMessagePayload = parsedMessage.createPayload()
+        print(parsedMessagePayload)
+        
+        XCTAssert(startedMessage.transmissionMode == parsedMessage.transmissionMode)
     }
+    
+
     
     func testPerformanceExample() {
         // This is an example of a performance test case.

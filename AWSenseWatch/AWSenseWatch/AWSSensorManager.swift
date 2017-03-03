@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AWSenseShared
 
 
 public class AWSSensorManager : NSObject{
@@ -42,12 +43,30 @@ public class AWSSensorManager : NSObject{
         }
     }
     
+    public func startSensing(withSensors sensors: Set<AWSSensorType>) {
+        for s in sensors{
+            startSensing(with: s)
+        }
+    }
+    
     public func stopSensing(with sensor: AWSSensorType) {
         let sensor : AWSSensor? = get(sensor: sensor)
         if(sensor != nil){
             sensor!.stopSensing()
         }else{
             //TODO: error handling
+        }
+    }
+    
+    public func stopSensing(withSensors sensors: Set<AWSSensorType>) {
+        for s in sensors{
+            stopSensing(with: s)
+        }
+    }
+    
+    public func register(eventhandler : AWSSensorEventHandler, withConfiguration config: SensingConfiguration) {
+        for s in config.enabledSensors{
+            register(eventhandler: eventhandler, with: s)
         }
     }
     

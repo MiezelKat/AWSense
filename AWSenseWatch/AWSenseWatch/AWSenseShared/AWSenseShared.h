@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 //! Project version number for AWSenseShared_iOS.
-FOUNDATION_EXPORT double AWSenseSharedPhoneVersionNumber;
+FOUNDATION_EXPORT double AWSenseSharedVersionNumber;
 
 //! Project version string for AWSenseShared_iOS.
-FOUNDATION_EXPORT const unsigned char AWSenseSharedPhoneVersionString[];
+FOUNDATION_EXPORT const unsigned char AWSenseSharedVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <AWSenseSharedPhone/PublicHeader.h>
 
