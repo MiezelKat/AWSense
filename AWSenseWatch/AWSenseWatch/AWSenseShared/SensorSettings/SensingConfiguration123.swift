@@ -18,10 +18,6 @@ public class SensingConfiguration{
         }
     }
     
-    public func getSensorArray() -> [AWSSensorType]{
-        return Array(enabledSensors)
-    }
-    
     public init() {}
     
     public func enableSensor(withType type : AWSSensorType){

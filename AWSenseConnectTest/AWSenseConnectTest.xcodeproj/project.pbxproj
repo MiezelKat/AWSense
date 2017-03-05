@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		46569B6D1E5DCC0700F6C02D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46569B6C1E5DCC0700F6C02D /* AppDelegate.swift */; };
-		46569B6F1E5DCC0700F6C02D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46569B6E1E5DCC0700F6C02D /* ViewController.swift */; };
+		46569B6F1E5DCC0700F6C02D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46569B6E1E5DCC0700F6C02D /* MainViewController.swift */; };
 		46569B721E5DCC0700F6C02D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46569B701E5DCC0700F6C02D /* Main.storyboard */; };
 		46569B741E5DCC0700F6C02D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46569B731E5DCC0700F6C02D /* Assets.xcassets */; };
 		46569B771E5DCC0700F6C02D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46569B751E5DCC0700F6C02D /* LaunchScreen.storyboard */; };
@@ -22,6 +22,19 @@
 		46569B981E5DCC0700F6C02D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46569B971E5DCC0700F6C02D /* Assets.xcassets */; };
 		46569BAA1E5DD4A900F6C02D /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46569BA91E5DD4A900F6C02D /* HealthKit.framework */; };
 		46569BAD1E5DD4AD00F6C02D /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46569BAC1E5DD4AD00F6C02D /* HealthKit.framework */; };
+		4F8B60341E6B36E400A2B22B /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B60331E6B36E400A2B22B /* AWSenseShared.framework */; };
+		4F8B60351E6B36E400A2B22B /* AWSenseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B60331E6B36E400A2B22B /* AWSenseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F8B60391E6B36F000A2B22B /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B60381E6B36F000A2B22B /* AWSenseShared.framework */; };
+		4F8B603A1E6B36F000A2B22B /* AWSenseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B60381E6B36F000A2B22B /* AWSenseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F8B603D1E6B36FA00A2B22B /* AWSenseWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B603C1E6B36FA00A2B22B /* AWSenseWatch.framework */; };
+		4F8B603E1E6B36FA00A2B22B /* AWSenseWatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B603C1E6B36FA00A2B22B /* AWSenseWatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F8B60401E6B370B00A2B22B /* AWSenseConnectWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B603F1E6B370B00A2B22B /* AWSenseConnectWatch.framework */; };
+		4F8B60411E6B370B00A2B22B /* AWSenseConnectWatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B603F1E6B370B00A2B22B /* AWSenseConnectWatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4F8B60431E6B389200A2B22B /* AWSenseConnectPhone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B60421E6B389200A2B22B /* AWSenseConnectPhone.framework */; };
+		4F8B60441E6B389200A2B22B /* AWSenseConnectPhone.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8B60421E6B389200A2B22B /* AWSenseConnectPhone.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4FD1D1451E6AF21D000C996E /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD1D1441E6AF21D000C996E /* AWSenseShared.framework */; };
+		4FD1D1461E6AF21D000C996E /* AWSenseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD1D1441E6AF21D000C996E /* AWSenseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4FD1D14B1E6B079B000C996E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD1D14A1E6B079B000C996E /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +83,32 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4FD1D1461E6AF21D000C996E /* AWSenseShared.framework in Embed Frameworks */,
+				4F8B60441E6B389200A2B22B /* AWSenseConnectPhone.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F8B60371E6B36E400A2B22B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4F8B60351E6B36E400A2B22B /* AWSenseShared.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F8B603B1E6B36F000A2B22B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4F8B60411E6B370B00A2B22B /* AWSenseConnectWatch.framework in Embed Frameworks */,
+				4F8B603A1E6B36F000A2B22B /* AWSenseShared.framework in Embed Frameworks */,
+				4F8B603E1E6B36FA00A2B22B /* AWSenseWatch.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,7 +118,7 @@
 /* Begin PBXFileReference section */
 		46569B691E5DCC0700F6C02D /* AWSenseConnectTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AWSenseConnectTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46569B6C1E5DCC0700F6C02D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		46569B6E1E5DCC0700F6C02D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		46569B6E1E5DCC0700F6C02D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		46569B711E5DCC0700F6C02D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46569B731E5DCC0700F6C02D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46569B761E5DCC0700F6C02D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,6 +139,14 @@
 		46569BAC1E5DD4AD00F6C02D /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
 		46569BAE1E5DD4AD00F6C02D /* AWSenseConnectTest WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "AWSenseConnectTest WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		46569BB31E5DD4C900F6C02D /* AWSenseConnectWatch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSenseConnectWatch.framework; path = "../../../../Desktop/Build/Products/Debug-watchos/AWSenseConnectWatch.framework"; sourceTree = "<group>"; };
+		4F8B602F1E6B2E8100A2B22B /* AWSenseConnectPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSenseConnectPhone.framework; path = "../../../Library/Developer/Xcode/DerivedData/AWSense-aqjnumdwovrvlwaotbareadomgek/Build/Products/Debug-iphonesimulator/AWSenseConnectPhone.framework"; sourceTree = "<group>"; };
+		4F8B60331E6B36E400A2B22B /* AWSenseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F8B60381E6B36F000A2B22B /* AWSenseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F8B603C1E6B36FA00A2B22B /* AWSenseWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F8B603F1E6B370B00A2B22B /* AWSenseConnectWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseConnectWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F8B60421E6B389200A2B22B /* AWSenseConnectPhone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseConnectPhone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FD1D1441E6AF21D000C996E /* AWSenseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FD1D14A1E6B079B000C996E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +154,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FD1D1451E6AF21D000C996E /* AWSenseShared.framework in Frameworks */,
 				46569BAA1E5DD4A900F6C02D /* HealthKit.framework in Frameworks */,
+				4F8B60431E6B389200A2B22B /* AWSenseConnectPhone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +164,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F8B60401E6B370B00A2B22B /* AWSenseConnectWatch.framework in Frameworks */,
+				4F8B60391E6B36F000A2B22B /* AWSenseShared.framework in Frameworks */,
 				46569BAD1E5DD4AD00F6C02D /* HealthKit.framework in Frameworks */,
+				4F8B603D1E6B36FA00A2B22B /* AWSenseWatch.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4F8B60361E6B36E400A2B22B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F8B60341E6B36E400A2B22B /* AWSenseShared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +185,12 @@
 		46569B601E5DCC0700F6C02D = {
 			isa = PBXGroup;
 			children = (
+				4F8B60421E6B389200A2B22B /* AWSenseConnectPhone.framework */,
+				4F8B603F1E6B370B00A2B22B /* AWSenseConnectWatch.framework */,
+				4F8B603C1E6B36FA00A2B22B /* AWSenseWatch.framework */,
+				4F8B60381E6B36F000A2B22B /* AWSenseShared.framework */,
+				4F8B60331E6B36E400A2B22B /* AWSenseShared.framework */,
+				4FD1D1441E6AF21D000C996E /* AWSenseShared.framework */,
 				46569B6B1E5DCC0700F6C02D /* AWSenseConnectTest */,
 				46569B7F1E5DCC0700F6C02D /* AWSenseConnectTest WatchKit App */,
 				46569B8E1E5DCC0700F6C02D /* AWSenseConnectTest WatchKit Extension */,
@@ -148,7 +214,8 @@
 			children = (
 				46569BAB1E5DD4A900F6C02D /* AWSenseConnectTest.entitlements */,
 				46569B6C1E5DCC0700F6C02D /* AppDelegate.swift */,
-				46569B6E1E5DCC0700F6C02D /* ViewController.swift */,
+				46569B6E1E5DCC0700F6C02D /* MainViewController.swift */,
+				4FD1D14A1E6B079B000C996E /* SettingsViewController.swift */,
 				46569B701E5DCC0700F6C02D /* Main.storyboard */,
 				46569B731E5DCC0700F6C02D /* Assets.xcassets */,
 				46569B751E5DCC0700F6C02D /* LaunchScreen.storyboard */,
@@ -192,6 +259,7 @@
 		46569BA81E5DD4A900F6C02D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F8B602F1E6B2E8100A2B22B /* AWSenseConnectPhone.framework */,
 				46569BB31E5DD4C900F6C02D /* AWSenseConnectWatch.framework */,
 				46569BAC1E5DD4AD00F6C02D /* HealthKit.framework */,
 				46569BA91E5DD4A900F6C02D /* HealthKit.framework */,
@@ -228,6 +296,8 @@
 			buildPhases = (
 				46569B791E5DCC0700F6C02D /* Resources */,
 				46569B9F1E5DCC0700F6C02D /* Embed App Extensions */,
+				4F8B60361E6B36E400A2B22B /* Frameworks */,
+				4F8B60371E6B36E400A2B22B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -246,6 +316,7 @@
 				46569B861E5DCC0700F6C02D /* Sources */,
 				46569B871E5DCC0700F6C02D /* Frameworks */,
 				46569B881E5DCC0700F6C02D /* Resources */,
+				4F8B603B1E6B36F000A2B22B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -348,8 +419,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46569B6F1E5DCC0700F6C02D /* ViewController.swift in Sources */,
+				46569B6F1E5DCC0700F6C02D /* MainViewController.swift in Sources */,
 				46569B6D1E5DCC0700F6C02D /* AppDelegate.swift in Sources */,
+				4FD1D14B1E6B079B000C996E /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +613,7 @@
 				DEVELOPMENT_TEAM = 2TN3WZF956;
 				IBSC_MODULE = AWSenseConnectTest_WatchKit_Extension;
 				INFOPLIST_FILE = "AWSenseConnectTest WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ac.uk.qmul.AWSenseConnectTest.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -559,6 +632,7 @@
 				DEVELOPMENT_TEAM = 2TN3WZF956;
 				IBSC_MODULE = AWSenseConnectTest_WatchKit_Extension;
 				INFOPLIST_FILE = "AWSenseConnectTest WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ac.uk.qmul.AWSenseConnectTest.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;

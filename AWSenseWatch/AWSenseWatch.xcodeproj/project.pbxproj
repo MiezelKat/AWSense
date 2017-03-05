@@ -12,20 +12,6 @@
 		46393B281E69AAE300DB8C50 /* Info-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46393B251E69AAE300DB8C50 /* Info-iOS.plist */; };
 		46393B291E69AAE300DB8C50 /* Info-watchOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46393B261E69AAE300DB8C50 /* Info-watchOS.plist */; };
 		46393B2A1E69AB0900DB8C50 /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46393B0A1E69A8FE00DB8C50 /* AWSenseShared.framework */; };
-		46393B2B1E69AB2900DB8C50 /* SensingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B141E69AA7A00DB8C50 /* SensingConfiguration.swift */; };
-		46393B2C1E69AB2A00DB8C50 /* SensingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B141E69AA7A00DB8C50 /* SensingConfiguration.swift */; };
-		46393B311E69AB3500DB8C50 /* AWSSensorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B121E69AA6000DB8C50 /* AWSSensorTypes.swift */; };
-		46393B321E69AB3500DB8C50 /* AWSSensorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B121E69AA6000DB8C50 /* AWSSensorTypes.swift */; };
-		46393B331E69AB3900DB8C50 /* AWSDeviceMotionSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1A1E69AA9A00DB8C50 /* AWSDeviceMotionSensorData.swift */; };
-		46393B341E69AB3900DB8C50 /* AWSDeviceMotionSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1A1E69AA9A00DB8C50 /* AWSDeviceMotionSensorData.swift */; };
-		46393B351E69AB3E00DB8C50 /* AWSHeartRateSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1B1E69AA9A00DB8C50 /* AWSHeartRateSensorData.swift */; };
-		46393B361E69AB3E00DB8C50 /* AWSHeartRateSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1B1E69AA9A00DB8C50 /* AWSHeartRateSensorData.swift */; };
-		46393B371E69AB4200DB8C50 /* AWSRawAccelerometerSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1C1E69AA9A00DB8C50 /* AWSRawAccelerometerSensorData.swift */; };
-		46393B381E69AB4200DB8C50 /* AWSRawAccelerometerSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1C1E69AA9A00DB8C50 /* AWSRawAccelerometerSensorData.swift */; };
-		46393B391E69AB4400DB8C50 /* AWSSensorDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1D1E69AA9A00DB8C50 /* AWSSensorDataProtocol.swift */; };
-		46393B3A1E69AB4500DB8C50 /* AWSSensorDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1D1E69AA9A00DB8C50 /* AWSSensorDataProtocol.swift */; };
-		46393B3B1E69AB4800DB8C50 /* AWSTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1E1E69AA9A00DB8C50 /* AWSTimestamp.swift */; };
-		46393B3C1E69AB4900DB8C50 /* AWSTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46393B1E1E69AA9A00DB8C50 /* AWSTimestamp.swift */; };
 		46393B3D1E69AB6700DB8C50 /* AWSenseShared.h in Headers */ = {isa = PBXBuildFile; fileRef = 46393B241E69AAE300DB8C50 /* AWSenseShared.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		46393B3E1E69AB6700DB8C50 /* AWSenseShared.h in Headers */ = {isa = PBXBuildFile; fileRef = 46393B241E69AAE300DB8C50 /* AWSenseShared.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		46724BEF1E5CBBD50055B8DB /* AWSHeartRateSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46724BEC1E5CBBD50055B8DB /* AWSHeartRateSensor.swift */; };
@@ -34,19 +20,26 @@
 		46809D991E55E8CA000DE644 /* AWSSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46809D981E55E8CA000DE644 /* AWSSensorManager.swift */; };
 		46809D9B1E55EBB4000DE644 /* AWSAccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46809D9A1E55EBB4000DE644 /* AWSAccelerometerSensor.swift */; };
 		46B1C60F1E576EF200EB9238 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B1C60E1E576EF200EB9238 /* HealthKit.framework */; };
+		4F8B60211E6B2E4B00A2B22B /* AWSDeviceMotionSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60171E6B2E3900A2B22B /* AWSDeviceMotionSensorData.swift */; };
+		4F8B60221E6B2E4B00A2B22B /* AWSHeartRateSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60181E6B2E3900A2B22B /* AWSHeartRateSensorData.swift */; };
+		4F8B60231E6B2E4B00A2B22B /* AWSRawAccelerometerSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60191E6B2E3900A2B22B /* AWSRawAccelerometerSensorData.swift */; };
+		4F8B60241E6B2E4B00A2B22B /* AWSSensorDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B601A1E6B2E3900A2B22B /* AWSSensorDataProtocol.swift */; };
+		4F8B60251E6B2E4B00A2B22B /* AWSTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B601B1E6B2E3900A2B22B /* AWSTimestamp.swift */; };
+		4F8B60261E6B2E4B00A2B22B /* SensingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60151E6B2E1600A2B22B /* SensingConfiguration.swift */; };
+		4F8B60271E6B2E4B00A2B22B /* AWSSensorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B600F1E6B2DEF00A2B22B /* AWSSensorTypes.swift */; };
+		4F8B60281E6B2E4C00A2B22B /* AWSDeviceMotionSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60171E6B2E3900A2B22B /* AWSDeviceMotionSensorData.swift */; };
+		4F8B60291E6B2E4C00A2B22B /* AWSHeartRateSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60181E6B2E3900A2B22B /* AWSHeartRateSensorData.swift */; };
+		4F8B602A1E6B2E4C00A2B22B /* AWSRawAccelerometerSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60191E6B2E3900A2B22B /* AWSRawAccelerometerSensorData.swift */; };
+		4F8B602B1E6B2E4C00A2B22B /* AWSSensorDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B601A1E6B2E3900A2B22B /* AWSSensorDataProtocol.swift */; };
+		4F8B602C1E6B2E4C00A2B22B /* AWSTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B601B1E6B2E3900A2B22B /* AWSTimestamp.swift */; };
+		4F8B602D1E6B2E4C00A2B22B /* SensingConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B60151E6B2E1600A2B22B /* SensingConfiguration.swift */; };
+		4F8B602E1E6B2E4C00A2B22B /* AWSSensorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8B600F1E6B2DEF00A2B22B /* AWSSensorTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4600E5191E572750008A7D3B /* AWSDeviceMotionSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSDeviceMotionSensor.swift; path = Sensors/AWSDeviceMotionSensor.swift; sourceTree = "<group>"; };
 		460DD0851E57331500CB67CE /* SensorEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorEvent.swift; path = Helpers/SensorEvent.swift; sourceTree = "<group>"; };
 		46393B0A1E69A8FE00DB8C50 /* AWSenseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AWSenseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46393B121E69AA6000DB8C50 /* AWSSensorTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSSensorTypes.swift; path = ../AWSenseWatch/AWSenseShared/AWSSensorTypes.swift; sourceTree = "<group>"; };
-		46393B141E69AA7A00DB8C50 /* SensingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensingConfiguration.swift; path = AWSenseShared/SensorSettings/SensingConfiguration.swift; sourceTree = "<group>"; };
-		46393B1A1E69AA9A00DB8C50 /* AWSDeviceMotionSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSDeviceMotionSensorData.swift; path = AWSenseShared/SensorData/AWSDeviceMotionSensorData.swift; sourceTree = "<group>"; };
-		46393B1B1E69AA9A00DB8C50 /* AWSHeartRateSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSHeartRateSensorData.swift; path = AWSenseShared/SensorData/AWSHeartRateSensorData.swift; sourceTree = "<group>"; };
-		46393B1C1E69AA9A00DB8C50 /* AWSRawAccelerometerSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSRawAccelerometerSensorData.swift; path = AWSenseShared/SensorData/AWSRawAccelerometerSensorData.swift; sourceTree = "<group>"; };
-		46393B1D1E69AA9A00DB8C50 /* AWSSensorDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSSensorDataProtocol.swift; path = AWSenseShared/SensorData/AWSSensorDataProtocol.swift; sourceTree = "<group>"; };
-		46393B1E1E69AA9A00DB8C50 /* AWSTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSTimestamp.swift; path = AWSenseShared/SensorData/AWSTimestamp.swift; sourceTree = "<group>"; };
 		46393B241E69AAE300DB8C50 /* AWSenseShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AWSenseShared.h; path = AWSenseWatch/AWSenseShared/AWSenseShared.h; sourceTree = SOURCE_ROOT; };
 		46393B251E69AAE300DB8C50 /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-iOS.plist"; path = "AWSenseWatch/AWSenseShared/Info-iOS.plist"; sourceTree = SOURCE_ROOT; };
 		46393B261E69AAE300DB8C50 /* Info-watchOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-watchOS.plist"; path = "AWSenseWatch/AWSenseShared/Info-watchOS.plist"; sourceTree = SOURCE_ROOT; };
@@ -62,6 +55,13 @@
 		46809D981E55E8CA000DE644 /* AWSSensorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWSSensorManager.swift; sourceTree = "<group>"; };
 		46809D9A1E55EBB4000DE644 /* AWSAccelerometerSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSAccelerometerSensor.swift; path = Sensors/AWSAccelerometerSensor.swift; sourceTree = "<group>"; };
 		46B1C60E1E576EF200EB9238 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		4F8B600F1E6B2DEF00A2B22B /* AWSSensorTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSSensorTypes.swift; path = AWSenseWatch/AWSenseShared/AWSSensorTypes.swift; sourceTree = SOURCE_ROOT; };
+		4F8B60151E6B2E1600A2B22B /* SensingConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensingConfiguration.swift; path = AWSenseWatch/AWSenseShared/SensorSettings/SensingConfiguration.swift; sourceTree = SOURCE_ROOT; };
+		4F8B60171E6B2E3900A2B22B /* AWSDeviceMotionSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSDeviceMotionSensorData.swift; path = AWSenseWatch/AWSenseShared/SensorData/AWSDeviceMotionSensorData.swift; sourceTree = SOURCE_ROOT; };
+		4F8B60181E6B2E3900A2B22B /* AWSHeartRateSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSHeartRateSensorData.swift; path = AWSenseWatch/AWSenseShared/SensorData/AWSHeartRateSensorData.swift; sourceTree = SOURCE_ROOT; };
+		4F8B60191E6B2E3900A2B22B /* AWSRawAccelerometerSensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSRawAccelerometerSensorData.swift; path = AWSenseWatch/AWSenseShared/SensorData/AWSRawAccelerometerSensorData.swift; sourceTree = SOURCE_ROOT; };
+		4F8B601A1E6B2E3900A2B22B /* AWSSensorDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSSensorDataProtocol.swift; path = AWSenseWatch/AWSenseShared/SensorData/AWSSensorDataProtocol.swift; sourceTree = SOURCE_ROOT; };
+		4F8B601B1E6B2E3900A2B22B /* AWSTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSTimestamp.swift; path = AWSenseWatch/AWSenseShared/SensorData/AWSTimestamp.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,11 +94,6 @@
 		46569B291E5DC7BA00F6C02D /* SensorData */ = {
 			isa = PBXGroup;
 			children = (
-				46393B1A1E69AA9A00DB8C50 /* AWSDeviceMotionSensorData.swift */,
-				46393B1B1E69AA9A00DB8C50 /* AWSHeartRateSensorData.swift */,
-				46393B1C1E69AA9A00DB8C50 /* AWSRawAccelerometerSensorData.swift */,
-				46393B1D1E69AA9A00DB8C50 /* AWSSensorDataProtocol.swift */,
-				46393B1E1E69AA9A00DB8C50 /* AWSTimestamp.swift */,
 			);
 			name = SensorData;
 			path = ../AWSenseWatch;
@@ -107,11 +102,17 @@
 		46569B551E5DCBB300F6C02D /* AWSenseShared */ = {
 			isa = PBXGroup;
 			children = (
+				4F8B60171E6B2E3900A2B22B /* AWSDeviceMotionSensorData.swift */,
+				4F8B60181E6B2E3900A2B22B /* AWSHeartRateSensorData.swift */,
+				4F8B60191E6B2E3900A2B22B /* AWSRawAccelerometerSensorData.swift */,
+				4F8B601A1E6B2E3900A2B22B /* AWSSensorDataProtocol.swift */,
+				4F8B601B1E6B2E3900A2B22B /* AWSTimestamp.swift */,
+				4F8B60151E6B2E1600A2B22B /* SensingConfiguration.swift */,
+				4F8B600F1E6B2DEF00A2B22B /* AWSSensorTypes.swift */,
 				46393B241E69AAE300DB8C50 /* AWSenseShared.h */,
 				46393B251E69AAE300DB8C50 /* Info-iOS.plist */,
 				46393B261E69AAE300DB8C50 /* Info-watchOS.plist */,
 				46809D9C1E55EBDA000DE644 /* Settings */,
-				46393B121E69AA6000DB8C50 /* AWSSensorTypes.swift */,
 				46569B291E5DC7BA00F6C02D /* SensorData */,
 			);
 			name = AWSenseShared;
@@ -153,7 +154,6 @@
 		46809D9C1E55EBDA000DE644 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				46393B141E69AA7A00DB8C50 /* SensingConfiguration.swift */,
 			);
 			name = Settings;
 			path = ../AWSenseWatch;
@@ -350,13 +350,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46393B2C1E69AB2A00DB8C50 /* SensingConfiguration.swift in Sources */,
-				46393B381E69AB4200DB8C50 /* AWSRawAccelerometerSensorData.swift in Sources */,
-				46393B361E69AB3E00DB8C50 /* AWSHeartRateSensorData.swift in Sources */,
-				46393B341E69AB3900DB8C50 /* AWSDeviceMotionSensorData.swift in Sources */,
-				46393B321E69AB3500DB8C50 /* AWSSensorTypes.swift in Sources */,
-				46393B3A1E69AB4500DB8C50 /* AWSSensorDataProtocol.swift in Sources */,
-				46393B3C1E69AB4900DB8C50 /* AWSTimestamp.swift in Sources */,
+				4F8B602A1E6B2E4C00A2B22B /* AWSRawAccelerometerSensorData.swift in Sources */,
+				4F8B60291E6B2E4C00A2B22B /* AWSHeartRateSensorData.swift in Sources */,
+				4F8B60281E6B2E4C00A2B22B /* AWSDeviceMotionSensorData.swift in Sources */,
+				4F8B602E1E6B2E4C00A2B22B /* AWSSensorTypes.swift in Sources */,
+				4F8B602B1E6B2E4C00A2B22B /* AWSSensorDataProtocol.swift in Sources */,
+				4F8B602D1E6B2E4C00A2B22B /* SensingConfiguration.swift in Sources */,
+				4F8B602C1E6B2E4C00A2B22B /* AWSTimestamp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,13 +364,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46393B2B1E69AB2900DB8C50 /* SensingConfiguration.swift in Sources */,
-				46393B371E69AB4200DB8C50 /* AWSRawAccelerometerSensorData.swift in Sources */,
-				46393B351E69AB3E00DB8C50 /* AWSHeartRateSensorData.swift in Sources */,
-				46393B331E69AB3900DB8C50 /* AWSDeviceMotionSensorData.swift in Sources */,
-				46393B311E69AB3500DB8C50 /* AWSSensorTypes.swift in Sources */,
-				46393B391E69AB4400DB8C50 /* AWSSensorDataProtocol.swift in Sources */,
-				46393B3B1E69AB4800DB8C50 /* AWSTimestamp.swift in Sources */,
+				4F8B60231E6B2E4B00A2B22B /* AWSRawAccelerometerSensorData.swift in Sources */,
+				4F8B60221E6B2E4B00A2B22B /* AWSHeartRateSensorData.swift in Sources */,
+				4F8B60211E6B2E4B00A2B22B /* AWSDeviceMotionSensorData.swift in Sources */,
+				4F8B60271E6B2E4B00A2B22B /* AWSSensorTypes.swift in Sources */,
+				4F8B60241E6B2E4B00A2B22B /* AWSSensorDataProtocol.swift in Sources */,
+				4F8B60261E6B2E4B00A2B22B /* SensingConfiguration.swift in Sources */,
+				4F8B60251E6B2E4B00A2B22B /* AWSTimestamp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +634,7 @@
 				46393B111E69A8FE00DB8C50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		46569B591E5DCBB300F6C02D /* Build configuration list for PBXNativeTarget "AWSenseShared iOS" */ = {
 			isa = XCConfigurationList;

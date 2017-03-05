@@ -31,6 +31,15 @@ public class SensingSession{
         self.transmissionMode = transmissionMode
     }
     
+    init(enabledSensorSet sensors: Set<AWSSensorType>, transmissionMode: DataTransmissionMode = .batch){
+        state = .created
+        
+        sensorConfig = SensingConfiguration()
+        sensorConfig.enabledSensors = sensors
+
+        self.transmissionMode = transmissionMode
+    }
+    
     
     // MARK: - methods
     
@@ -43,9 +52,23 @@ public class SensingSession{
     }
 }
 
-public enum SensingSessionState{
+public enum SensingSessionState : String{
     case created
     case running
     case terminated
     
+//    public var description : String{
+//        get{
+//            switch self {
+//            case .created:
+//                return "created"
+//            case .running:
+//                return "runing"
+//            case .terminated:
+//                return "terminated"
+//            default:
+//                return "undefined"
+//            }
+//        }
+//    }
 }

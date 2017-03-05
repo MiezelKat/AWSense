@@ -9,13 +9,23 @@
 import WatchKit
 import Foundation
 
+import AWSenseShared
+import AWSenseWatch
+import AWSenseConnectWatch
 
-class InterfaceController: WKInterfaceController {
 
+class InterfaceController: WKInterfaceController, SensingEventHandler{
+   
+    @IBOutlet var stateLabel: WKInterfaceLabel!
+    
+    let sessionManager : SensingSessionManager = SensingSessionManager.instance
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
         // Configure interface objects here.
+        
+        sessionManager.subscribe(handler: self)
     }
     
     override func willActivate() {
@@ -27,5 +37,16 @@ class InterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
+    
+    public func handle(withType type: SensingEventType, forSession session: SensingSession) {
+        DispatchQueue.main.async {
+            if(type == .sessionCreated){
+                self.stateLabel.setText("created")
+            }else if( type == .sessionStateChanged){
+                self.stateLabel.setText(session.state.rawValue)
+            }
+        }
+    }
+
 
 }

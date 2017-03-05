@@ -48,7 +48,7 @@ public class RemoteSensingSession{
     }
 }
 
-public enum RemoteSensingSessionState{
+public enum RemoteSensingSessionState : String{
     case created
     case prepareRunning
     case running

@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
-    func applicationShouldRequestHealthAuthorization(application: UIApplication) {
+    func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
         let healthStore = HKHealthStore()
         healthStore.handleAuthorizationForExtension {(success, error) -> Void in
             // Add anything you need here after authorization

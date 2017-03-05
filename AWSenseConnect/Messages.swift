@@ -10,7 +10,6 @@ import Foundation
 import AWSenseShared
 
 internal enum MessageType : Int {
-    case configuration
     case startSensing
     case stopSensing
     case sensingData
@@ -46,8 +45,6 @@ internal class MessageParser{
         let type : MessageType = MessageType(rawValue: payload[MessageType.typeKey] as! Int)!
         
         switch type {
-        case .configuration:
-            return ConfigurationMessage(fromPayload: payload)
         case .startSensing:
             return StartSensingMessage(fromPayload: payload)
         case .stopSensing:
@@ -99,51 +96,6 @@ internal class AbstractMessage : Message{
         var payload : [String : Any] = [String : Any]()
         payload[type(of: self).timestampKey] = timestamp
         payload[MessageType.typeKey] = type(of: self).type.rawValue
-        return payload
-    }
-    
-}
-
-internal class ConfigurationMessage : AbstractMessage{
-    
-    /// message type
-    internal override class var type: MessageType {
-        return .configuration
-    }
-    
-    private static let configurationKey = "config"
-    internal private(set) var configuration : SensingConfiguration
-    
-    private static let transmissionModeKey = "transmission"
-    internal private(set) var transmissionMode : DataTransmissionMode
-    
-    /// Parse a configuration message from the payload
-    ///
-    /// - Parameter payload: dictionary of values
-    internal required init(fromPayload payload: [String : Any]) {
-        configuration = payload[type(of: self).configurationKey] as! SensingConfiguration
-        transmissionMode = payload[type(of: self).transmissionModeKey] as! DataTransmissionMode
-        // DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)
-        super.init(fromPayload: payload)
-    }
-    
-    
-    /// Create with a configuration
-    ///
-    /// - Parameter config: configuration
-    internal init(withConfiguration config: SensingConfiguration, transmisssionMode mode: DataTransmissionMode = .batch){
-        self.configuration = config
-        self.transmissionMode = mode
-        super.init()
-    }
-    
-    /// Create a payload dictionary
-    ///
-    /// - Returns: the payload
-    internal override func createPayload() -> [String : Any] {
-        var payload = super.createPayload()
-        payload[type(of: self).configurationKey] = configuration
-        payload[type(of: self).transmissionModeKey] = transmissionMode
         return payload
     }
     
@@ -216,15 +168,48 @@ internal class StartSensingMessage : AbstractMessage{
         return .startSensing
     }
     
-    internal override init() {
-        super.init()
-    }
+    private static let configurationKey = "config"
+    internal private(set) var configuration : SensingConfiguration
+    
+    private static let transmissionModeKey = "transmission"
+    internal private(set) var transmissionMode : DataTransmissionMode
+    
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
+        let sensArr = payload[type(of: self).configurationKey] as! [Int]
+        let s = sensArr.map{ sens in
+            return AWSSensorType(rawValue: sens)
+        } as! [AWSSensorType]
+        configuration = SensingConfiguration(withEnabledSensors: s)
+        transmissionMode = DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)!
+        // DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)
         super.init(fromPayload: payload)
+    }
+    
+    
+    /// Create with a configuration
+    ///
+    /// - Parameter config: configuration
+    internal init(withConfiguration config: SensingConfiguration, transmisssionMode mode: DataTransmissionMode = .batch){
+        self.configuration = config
+        self.transmissionMode = mode
+        super.init()
+    }
+    
+    /// Create a payload dictionary
+    ///
+    /// - Returns: the payload
+    internal override func createPayload() -> [String : Any] {
+        var payload = super.createPayload()
+        let configPayload = configuration.getSensorArray().map{ s in
+            return s.rawValue
+        }
+        payload[type(of: self).configurationKey] = configPayload
+        payload[type(of: self).transmissionModeKey] = transmissionMode.rawValue
+        return payload
     }
 
 }

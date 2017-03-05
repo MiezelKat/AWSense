@@ -16,7 +16,7 @@ public class SessionManager : MessageEventHandler{
     public static let instance : SessionManager = SessionManager()
     
     private init() {
-    
+        CommunicationManager.instance.subscribe(handler: self)
     }
     
     // MARK: - properties
@@ -46,58 +46,26 @@ public class SessionManager : MessageEventHandler{
     
     // MARK: - methods
     
-    public func createSession(withName name: String? = nil, configuration: [AWSSensorType]? = nil, transmissionMode : DataTransmissionMode = .batch) throws -> RemoteSensingSession  {
-        if(currentSession != nil && (currentSession!.state == .running || currentSession!.state == .prepareRunning || currentSession!.state == .prepareStopping )){
-            throw RemoteSensingSessionError.cannotCreateSession(reason: "Invalid Session State: \(currentSession?.state)")
-        }
-
-        currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, transmissionMode: transmissionMode)
-        remoteSensingEvent.raiseEvent(withType: .sessionCreated, forSession: currentSession!)
-        return currentSession!
-    }
-    
-    public func configureSession(withSensors sensors: [AWSSensorType]? = nil, transmissionMode : DataTransmissionMode? = nil) throws{
-        if(sensors == nil && transmissionMode == nil){
-            return
+    public func startSensingSession(withName name: String? = nil, configuration: [AWSSensorType]? = nil, transmissionMode : DataTransmissionMode = .batch) throws{
+        
+        if(currentSession != nil && currentSession!.state != .stopped) {
+            throw RemoteSensingSessionError.invalidSessionState(reason: "Session cannot be started, it is already running, terminated or archived")
         }
         
-        if(currentSession != nil && currentSession!.state == .created){
-            if(sensors != nil){
-                currentSession!.resetConfig(enabledSensors: sensors!)
-            }
-            if(transmissionMode != nil){
-                currentSession!.reset(transmissionMode: transmissionMode!)
-            }
-            
-            // Todo: send to watch
-            
-            let configMessage = ConfigurationMessage(withConfiguration: currentSession!.sensorConfig, transmisssionMode: currentSession!.transmissionMode)
-            CommunicationManager.instance.send(message: configMessage)
-            
-        }else
-        {
-            throw RemoteSensingSessionError.cannotChangeSessionConfig(reason: "Session is running, terminated or archived")
-        }
-    }
-    
-    
-    
-    public func startSensing() throws{
+        currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, transmissionMode: transmissionMode)
+        remoteSensingEvent.raiseEvent(withType: .sessionCreated, forSession: currentSession!)
+        
         if(currentSession != nil && currentSession!.state == .created){
             
             currentSession!.state = .prepareRunning
             
-            let message = StartSensingMessage()
+            let message = StartSensingMessage(withConfiguration: currentSession!.sensorConfig, transmisssionMode: currentSession!.transmissionMode)
             CommunicationManager.instance.send(message: message)
             
             remoteSensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)
             
-        }else if(currentSession == nil){
-            throw RemoteSensingSessionError.invalidSessionState(reason: "Session cannot be started, create a session first")
         }
-        else {
-            throw RemoteSensingSessionError.invalidSessionState(reason: "Session cannot be started, it is already running, terminated or archived")
-        }
+
     }
     
     public func stopSensing() throws{

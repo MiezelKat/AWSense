@@ -18,7 +18,8 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     public static let instance : SensingSessionManager = SensingSessionManager()
     
     private init() {
-        
+        sensingManager =  AWSSensorManager.sharedInstance
+        CommunicationManager.instance.subscribe(handler: self)
     }
     
     
@@ -28,19 +29,17 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     
     private let sensingEvent : SensingEvent = SensingEvent()
     
-    private let sensingManager : AWSSensorManager = AWSSensorManager.sharedInstance
+    private let sensingManager : AWSSensorManager
     
     // MARK: - MessageEventHandler interface
     
     internal func handle(message : Message){
         switch message.type {
         case .startSensing:
-            handleStartTriggered()
+            let m = message as! StartSensingMessage
+            handleStart(configuration: m.configuration, transmissionMode: m.transmissionMode)
         case .stopSensing:
             handleStopTriggered()
-        case .configuration :
-            let m = message as! ConfigurationMessage
-            handleConfigurationChanged(configuration: m.configuration, transmissionMode: m.transmissionMode)
         default: break
             // todo error handling
         }
@@ -50,13 +49,20 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     
     public func handleSensing(data: AWSSensorData, type: AWSSensorType) {
         if(currentSession!.sensorConfig.enabledSensors.contains(type)){
-            // todo handle sensing data
+            SensingDataManager.instance.manage(sensingData: data, forType: type)
         }
     }
     
     // MARK: - methods
     
-    private func handleStartTriggered(){
+    private func handleStart(configuration: SensingConfiguration, transmissionMode mode : DataTransmissionMode){
+
+        currentSession = SensingSession(enabledSensorSet: configuration.enabledSensors, transmissionMode: mode)
+        
+        // prepare the data manager
+        
+        SensingDataManager.instance.initialise(withSession: currentSession!)
+        
         
         sensingManager.startSensing(withSensors: currentSession!.sensorConfig.enabledSensors)
         
@@ -69,17 +75,12 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     private func handleStopTriggered(){
         sensingManager.stopSensing(withSensors: currentSession!.sensorConfig.enabledSensors)
         
+
+        
         CommunicationManager.instance.send(message: StoppedSensingMessage(withStopDate: Date()))
         
         currentSession!.state = .terminated
         sensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)
-    }
-    
-    private func handleConfigurationChanged(configuration: SensingConfiguration, transmissionMode mode : DataTransmissionMode){
-        currentSession?.reset(transmissionMode: mode)
-        currentSession?.reset(configuration: configuration)
-        
-        
     }
     
     

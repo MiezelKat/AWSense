@@ -28,12 +28,10 @@ internal class CommunicationManager: NSObject, WCSessionDelegate {
     /// Init
     private override init() {
         super.init()
-        if WCSession.isSupported() {
-            session = WCSession.default()
-            
-            session?.delegate = self
-            session?.activate()
-        }
+        session = WCSession.default()
+        
+        session!.delegate = self
+        session!.activate()
     }
     
     // MARK: - EventHandler
