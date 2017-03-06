@@ -11,11 +11,11 @@ import Foundation
 
 public class AWSTimestamp : NSObject{
     
-    private static var _lastBoot : Date?
+    private static var _lastWatchBoot : Date?
     
-    static var lastBoot : Date{
+    static var lastWatchBoot : Date{
         get{
-            if(_lastBoot == nil){
+            if(_lastWatchBoot == nil){
                 // now since boot
                 let uptime = ProcessInfo.processInfo.systemUptime
                 // Now since 1970
@@ -23,9 +23,9 @@ public class AWSTimestamp : NSObject{
                 
                 // offset from 1970
                 let offset = nowTimeIntervalSince1970 - uptime;
-                _lastBoot = Date(timeIntervalSince1970: offset)
+                _lastWatchBoot = Date(timeIntervalSince1970: offset)
             }
-            return _lastBoot!
+            return _lastWatchBoot!
         }
     }
     
@@ -33,9 +33,17 @@ public class AWSTimestamp : NSObject{
     
     public private(set) var ti : TimeInterval
     
+    public var data : [AnyObject] {
+        get{
+            return [date as AnyObject,
+                ti as AnyObject] as [AnyObject]
+        }
+    }
+
+    
     override init(){
         date = Date()
-        ti = date.timeIntervalSince(AWSTimestamp.lastBoot)
+        ti = date.timeIntervalSince(AWSTimestamp.lastWatchBoot)
     }
     
     public init(date: Date, ti : TimeInterval){
@@ -44,13 +52,20 @@ public class AWSTimestamp : NSObject{
     }
     
     public init(ti : TimeInterval){
-        self.date = Date(timeInterval: ti, since: AWSTimestamp.lastBoot as Date)
+        self.date = Date(timeInterval: ti, since: AWSTimestamp.lastWatchBoot as Date)
         self.ti = ti
     }
     
     public init(date : Date){
         self.date = date
-        self.ti = date.timeIntervalSince(AWSTimestamp.lastBoot)
+        self.ti = date.timeIntervalSince(AWSTimestamp.lastWatchBoot)
     }
+    
+    public init(data : [AnyObject]){
+        date = data[0] as! Date
+        ti = data[1] as! TimeInterval
+    }
+    
+    
     
 }

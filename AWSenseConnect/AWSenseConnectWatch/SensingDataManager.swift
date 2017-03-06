@@ -50,13 +50,15 @@ internal class SensingDataManager : SensingBufferEventHandler {
         if(transmissionMode! == .batch){
             sensingDataBuffer!.append(sensingData: data, forType: type)
         }else if(transmissionMode! == .stream){
-            let message = SensingDataMessage(withSensingData: [data])
+            let message = SensingDataMessage(withSensingData: [data], ofType: type)
             CommunicationManager.instance.send(message: message)
         }
     }
     
     func sessionStopped(){
-        sensingDataBuffer!.clearAllBuffers()
+        if(transmissionMode! == .batch && sensingDataBuffer != nil){
+            sensingDataBuffer!.clearAllBuffers()
+        }
     }
     
     // MARK: - SensingBufferEventHandler
@@ -64,7 +66,7 @@ internal class SensingDataManager : SensingBufferEventHandler {
     func handle(withType type: SensingBufferEventType, forSensor stype: AWSSensorType){
         if(type == .bufferLimitReached){
             let data = sensingDataBuffer?.prepareDataToSend(forType: stype)
-            let message = SensingDataMessage(withSensingData: data!)
+            let message = SensingDataMessage(withSensingData: data!, ofType: stype)
             CommunicationManager.instance.send(message: message)
         }
     }

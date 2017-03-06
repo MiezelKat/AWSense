@@ -63,7 +63,7 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
         
         SensingDataManager.instance.initialise(withSession: currentSession!)
         
-        
+        sensingManager.register(eventhandler: self, withConfiguration: currentSession!.sensorConfig)
         sensingManager.startSensing(withSensors: currentSession!.sensorConfig.enabledSensors)
         
         CommunicationManager.instance.send(message: StartedSensingMessage(withStartDate: Date()))
@@ -74,8 +74,9 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     
     private func handleStopTriggered(){
         sensingManager.stopSensing(withSensors: currentSession!.sensorConfig.enabledSensors)
+        sensingManager.deregister(eventhandler: self, withConfiguration: currentSession!.sensorConfig)
         
-
+        SensingDataManager.instance.sessionStopped()
         
         CommunicationManager.instance.send(message: StoppedSensingMessage(withStopDate: Date()))
         

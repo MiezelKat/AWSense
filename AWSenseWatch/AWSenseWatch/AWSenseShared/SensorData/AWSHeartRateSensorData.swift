@@ -11,11 +11,19 @@ import HealthKit
 
 public class AWSHeartRateSensorData : AWSSensorData {
     
+    public var sensorType : AWSSensorType { return .heart_rate }
+    
     public private(set) var timestamp : AWSTimestamp
     
     public static var csvHeader : String {
         get{
             return "date,ti,bpm"
+        }
+    }
+    
+    public var csvHeader : String {
+        get{
+            return type(of: self).csvHeader
         }
     }
     
@@ -35,13 +43,14 @@ public class AWSHeartRateSensorData : AWSSensorData {
     
     public var data : [AnyObject] {
         get{
-            return [heartRate as AnyObject]
+            return [timestamp.data as AnyObject, // 0
+                    heartRate as AnyObject] // 1
         }
     }
     
-    public required init(timestamp : AWSTimestamp, data: [AnyObject]){
-        self.timestamp = timestamp
-        self.heartRate = data[0] as! Double
+    public required init(withData data: [AnyObject]){
+        self.timestamp = AWSTimestamp(data: data[0] as! [AnyObject])
+        self.heartRate = data[1] as! Double
     }
     
     public init(timestamp : AWSTimestamp, heartRate : Double){

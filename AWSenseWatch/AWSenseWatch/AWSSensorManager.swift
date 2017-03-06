@@ -79,6 +79,12 @@ public class AWSSensorManager : NSObject{
         }
     }
     
+    public func deregister(eventhandler : AWSSensorEventHandler, withConfiguration config: SensingConfiguration) {
+        for s in config.enabledSensors{
+            deregister(eventhandler: eventhandler, with: s)
+        }
+    }
+    
     public func deregister(eventhandler : AWSSensorEventHandler, with sensor: AWSSensorType) {
         let sensor : AWSSensor? = get(sensor: sensor)
         if(sensor != nil){

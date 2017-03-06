@@ -11,11 +11,19 @@ import CoreMotion
 
 public class AWSDeviceMotionSensorData : AWSSensorData {
     
+    public     var sensorType : AWSSensorType { return .device_motion }
+    
     public private(set) var timestamp : AWSTimestamp
     
     public static var csvHeader : String {
         get{
             return "date,ti,accel_x,accel_y,accel_z,gyro_x,gyro_y,gyro_z,grav_x,grav_y,grav_z,atti_pitch,atti_roll,atti_yaw"
+        }
+    }
+    
+    public var csvHeader : String {
+        get{
+            return type(of: self).csvHeader
         }
     }
     
@@ -38,24 +46,25 @@ public class AWSDeviceMotionSensorData : AWSSensorData {
     public private(set) var linearAcceleration : CMAcceleration
     public private(set) var rotationRate : CMRotationRate
     public private(set) var gravity : CMAcceleration
-    public private(set) var attitude : CMAttitude
+    public private(set) var attitude : Attitude
     
     
     public var data : [AnyObject] {
         get{
-            return [linearAcceleration as AnyObject,
-                    rotationRate as AnyObject,
-                    gravity as AnyObject,
-                    attitude as AnyObject] as [AnyObject]
+            return [timestamp.data as AnyObject, // 0
+                    linearAcceleration.serialise() as AnyObject, // 1
+                    rotationRate.serialise() as AnyObject, // 2
+                    gravity.serialise() as AnyObject, //3
+                    attitude.serialise() as AnyObject] as [AnyObject] // 4
         }
     }
     
-    public required init(timestamp : AWSTimestamp, data: [AnyObject]){
-        self.timestamp = timestamp
-        self.linearAcceleration = data[0] as! CMAcceleration
-        self.rotationRate = data[0] as! CMRotationRate
-        self.gravity = data[0] as! CMAcceleration
-        self.attitude = data[0] as! CMAttitude
+    public required init(withData data: [AnyObject]){
+        self.timestamp = AWSTimestamp(data: data[0] as! [AnyObject])
+        self.linearAcceleration =  CMAcceleration(fromData: data[1] as! [AnyObject])
+        self.rotationRate = CMRotationRate(fromData: data[2] as! [AnyObject])
+        self.gravity =  CMAcceleration(fromData: data[3] as! [AnyObject])
+        self.attitude = Attitude(fromData: data[4] as! [AnyObject])
     }
     
     public init(timestamp : AWSTimestamp, deviceMotion : CMDeviceMotion){
@@ -63,7 +72,7 @@ public class AWSDeviceMotionSensorData : AWSSensorData {
         linearAcceleration = deviceMotion.userAcceleration
         rotationRate = deviceMotion.rotationRate
         gravity = deviceMotion.gravity
-        attitude = deviceMotion.attitude
+        attitude = Attitude(fromCM: deviceMotion.attitude)
     }
     
 }

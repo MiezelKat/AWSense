@@ -38,7 +38,8 @@ public class SessionManager : MessageEventHandler{
             currentSession!.state = .stopped
             remoteSensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)
         case .sensingData:
-            remoteSensingEvent.raiseEvent(withType: .remoteSessionDataReceived, forSession: currentSession!)
+            let data = (message as! SensingDataMessage).sensingData
+            remoteSensingEvent.raiseEvent(withType: .remoteSessionDataReceived, forSession: currentSession!, withData: data)
         default: break
             // todo error handling
         }

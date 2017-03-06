@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		460700501E6DBDDC003FCEE3 /* RemoteSensingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4607004F1E6DBDDC003FCEE3 /* RemoteSensingDataManager.swift */; };
 		46393B401E69AF1700DB8C50 /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46393B3F1E69AF1700DB8C50 /* AWSenseShared.framework */; };
 		46393B421E69AF1F00DB8C50 /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46393B411E69AF1F00DB8C50 /* AWSenseShared.framework */; };
 		46393B441E69AF2500DB8C50 /* AWSenseWatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46393B431E69AF2500DB8C50 /* AWSenseWatch.framework */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4607004F1E6DBDDC003FCEE3 /* RemoteSensingDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteSensingDataManager.swift; sourceTree = "<group>"; };
 		46393B031E69A6D700DB8C50 /* AWSenseSharedPhone.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSenseSharedPhone.framework; path = "../../../../Desktop/Build/Products/Debug-iphonesimulator/AWSenseSharedPhone.framework"; sourceTree = "<group>"; };
 		46393B3F1E69AF1700DB8C50 /* AWSenseShared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSenseShared.framework; path = "../../../../Desktop/Build/Products/Debug-iphonesimulator/AWSenseShared.framework"; sourceTree = "<group>"; };
 		46393B411E69AF1F00DB8C50 /* AWSenseShared.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSenseShared.framework; path = "../../../../Desktop/Build/Products/Debug-watchsimulator/AWSenseShared.framework"; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				46393B471E69C53400DB8C50 /* SessionManager.swift */,
 				46393B491E69C5A600DB8C50 /* RemoteSensingSession.swift */,
 				46393B4B1E69D7D600DB8C50 /* RemoteSensingSessionEvents.swift */,
+				4607004F1E6DBDDC003FCEE3 /* RemoteSensingDataManager.swift */,
 			);
 			path = AWSenseConnectPhone;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46EE63B81E6864DE002ABD7F /* MessageEventHandling.swift in Sources */,
+				460700501E6DBDDC003FCEE3 /* RemoteSensingDataManager.swift in Sources */,
 				46EE63BA1E687596002ABD7F /* Messages.swift in Sources */,
 				46393B481E69C53400DB8C50 /* SessionManager.swift in Sources */,
 				46393B4C1E69D7D600DB8C50 /* RemoteSensingSessionEvents.swift in Sources */,

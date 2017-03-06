@@ -7,15 +7,15 @@
 //
 
 import Foundation
-
+import AWSenseShared
 
 public class RemoteSensingEvent{
     
     private var eventHandlers = [RemoteSensingEventHandler]()
     
-    public func raiseEvent(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession) {
+    public func raiseEvent(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession? = nil, withData data: [AWSSensorData]? = nil) {
         for handler in self.eventHandlers {
-            handler.handle(withType: type, forSession: session)
+            handler.handle(withType: type, forSession: session, withData: data)
         }
     }
     
@@ -30,7 +30,7 @@ public class RemoteSensingEvent{
 
 public protocol RemoteSensingEventHandler : class {
     
-    func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession) 
+    func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: [AWSSensorData]?)
     
 }
 

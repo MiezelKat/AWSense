@@ -17,7 +17,7 @@ internal enum MessageType : Int {
     case stoppedSensing
     case undefined
     
-    static let typeKey : String = "type"
+    static let typeKey : String = "m_type"
 }
 
 internal protocol Message{
@@ -111,19 +111,34 @@ internal class SensingDataMessage : AbstractMessage{
     private static let sensingDataKey = "data"
     internal private(set) var sensingData : [AWSSensorData]
     
+    private static let sensingDataTypeKey = "sd_type"
+    internal private(set) var sensingDataType : AWSSensorType
+    
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        sensingData = payload[type(of: self).sensingDataKey] as! [AWSSensorData]
+        
+        sensingDataType = AWSSensorType(rawValue: payload[type(of: self).sensingDataTypeKey] as! Int)!
+        
+        let dataArr : [[AnyObject]] = payload[type(of: self).sensingDataKey] as! [[AnyObject]]
+
+        // TODO: That is quite ugly: Improve!
+        sensingData = [AWSSensorData]()
+        
         super.init(fromPayload: payload)
+        sensingData = dataArr.map{ e in
+            return AWSSensorDataParser.parse(fromData: e, forType: sensingDataType)!
+        }
     }
     
     /// Initialise with sensing data
     ///
     /// - Parameter data: data array
-    internal init(withSensingData data: [AWSSensorData]){
+    /// - Parameter type: type of the sensor
+    internal init(withSensingData data: [AWSSensorData], ofType type: AWSSensorType){
+        self.sensingDataType = type
         self.sensingData = data
         super.init()
     }
@@ -133,7 +148,11 @@ internal class SensingDataMessage : AbstractMessage{
     /// - Returns: the payload
     internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
-        payload[type(of: self).sensingDataKey] = sensingData
+        payload[type(of: self).sensingDataTypeKey] = sensingDataType.rawValue
+        payload[type(of: self).sensingDataKey] = sensingData.map{ e in
+            return e.data
+        }
+        //dump(payload)
         return payload
     }
     

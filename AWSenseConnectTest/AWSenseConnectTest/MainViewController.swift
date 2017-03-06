@@ -16,7 +16,6 @@ import AWSenseConnectPhone
 class MainViewController: UITableViewController, RemoteSensingEventHandler {
 
 
-
     @IBOutlet weak var heartRateSwitch: UISwitch!
     
     @IBOutlet weak var accelerometerSwitch: UISwitch!
@@ -36,6 +35,14 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
     @IBOutlet weak var stopSessionButton: UIButton!
     
     @IBOutlet var beforeStartCollection: [UISwitch]!
+    
+    @IBOutlet weak var hrLabel: UILabel!
+    
+    @IBOutlet weak var accelLabel: UILabel!
+    
+    @IBOutlet weak var deviceMLabel: UILabel!
+    
+    @IBOutlet weak var messageCountLabel: UILabel!
     
     var timer : Timer?
     
@@ -106,20 +113,45 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
         }
     }
     
-    public func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession) {
+    public func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: [AWSSensorData]?) {
         if(type == .sessionCreated){
             self.sessionStatusLabel.text = "session created"
         }else if(type == .sessionStateChanged){
             DispatchQueue.main.async {
-                self.sessionStatusLabel.text = session.state.rawValue
+                self.sessionStatusLabel.text = session!.state.rawValue
                 
-                if(session.state == .running){
+                if(session!.state == .running){
                     self.sessionStartDate = Date()
                     self.timer = Timer.init(timeInterval: 1, target: self, selector: #selector(self.updateTimerLabel), userInfo: nil, repeats: true)
                 }
             }
+        }else if(type == .remoteSessionDataReceived){
+            print("data received: \(data![0].sensorType)")
+            if(data!.count < 1){
+                return
+            }else{
+                messageCount += 1
+                DispatchQueue.main.async {
+                    self.messageCountLabel.text = self.messageCount.description
+                }
+            }
+            if(data![0].sensorType == .heart_rate){
+                DispatchQueue.main.async {
+                    self.hrLabel.text = data!.last!.prettyPrint
+                }
+            }else if(data![0].sensorType == .accelerometer){
+                DispatchQueue.main.async {
+                    self.accelLabel.text = data!.last!.prettyPrint
+                }
+            }else if(data![0].sensorType == .device_motion){
+                DispatchQueue.main.async {
+                    self.deviceMLabel.text = data!.last!.prettyPrint
+                }
+            }
         }
     }
+    
+    var messageCount = 0
     
     public func updateTimerLabel(){
         DispatchQueue.main.async {

@@ -11,11 +11,19 @@ import CoreMotion
 
 public class AWSRawAccelerometerSensorData : AWSSensorData {
 
+    public var sensorType : AWSSensorType { return .accelerometer }
+    
     public private(set) var timestamp : AWSTimestamp
     
     public static var csvHeader : String {
         get{
             return "date,ti,x,y,z"
+        }
+    }
+    
+    public var csvHeader : String {
+        get{
+            return type(of: self).csvHeader
         }
     }
     
@@ -35,18 +43,22 @@ public class AWSRawAccelerometerSensorData : AWSSensorData {
     
     public var data : [AnyObject] {
         get{
-            return [acceleration as AnyObject]
+            return [timestamp.data as AnyObject, // 0
+                    acceleration.serialise() as AnyObject] // 1
         }
     }
     
-    public required init(timestamp : AWSTimestamp, data: [AnyObject]){
-        self.timestamp = timestamp
-        self.acceleration = data[0] as! CMAcceleration
+    public required init(withData data: [AnyObject]){
+        self.timestamp = AWSTimestamp(data: data[0] as! [AnyObject])
+        self.acceleration = CMAcceleration(fromData: data[1] as! [AnyObject])
     }
     
     public init(timestamp : AWSTimestamp, acceleration : CMAcceleration){
         self.timestamp = timestamp
         self.acceleration = acceleration
     }
-    
 }
+
+
+
+
