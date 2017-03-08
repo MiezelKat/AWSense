@@ -34,13 +34,20 @@ internal class SensingDataManager : SensingBufferEventHandler {
         return SensingSessionManager.instance.currentSession?.transmissionMode
     }
     
+    var lastTransmissions : [AWSSensorType : Date] = [AWSSensorType : Date]()
+    
     // MARK: - methods
     
     func initialise(withSession session: SensingSession){
         if(session.transmissionMode == .batch){
             sensingDataBuffer = SensingDataBuffer(withSession: session)
         }else if(session.transmissionMode == .stream){
-            sensingDataBuffer = nil
+            sensingDataBuffer = SensingDataBuffer(withSession: session)
+            
+            let now = Date()
+            for type in session.sensorConfig.enabledSensors{
+                lastTransmissions[type] = now
+            }
         }
     }
     
@@ -48,8 +55,15 @@ internal class SensingDataManager : SensingBufferEventHandler {
         if(transmissionMode! == .batch){
             sensingDataBuffer!.append(sensingData: data, forType: type)
         }else if(transmissionMode! == .stream){
-            let message = SensingDataMessage(withSensingData: [data], ofType: type)
-            CommunicationManager.instance.send(message: message)
+//            let message = SensingDataMessage(withSensingData: [data], ofType: type)
+//            CommunicationManager.instance.send(message: message)
+            let now = Date()
+            sensingDataBuffer!.append(sensingData: data, forType: type)
+            if(lastTransmissions[type]!.addingTimeInterval(60).compare(now) == .orderedAscending){
+                let data = sensingDataBuffer?.prepareDataToSend(forType: type)
+                let message = SensingDataMessage(withSensingData: data!, ofType: type)
+                CommunicationManager.instance.send(message: message)
+            }
         }
     }
     
