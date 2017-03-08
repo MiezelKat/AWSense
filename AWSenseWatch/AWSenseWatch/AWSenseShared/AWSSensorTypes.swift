@@ -11,6 +11,10 @@ import Foundation
 /// Enum with different sensor types for AWSense
 public enum AWSSensorType : Int, Equatable {
     
+    public static let supportedSensors : [AWSSensorType] = [
+        .heart_rate, .accelerometer, .device_motion
+    ]
+    
     case heart_rate = 0
     case accelerometer
     case ambinent_light
@@ -28,6 +32,36 @@ public enum AWSSensorType : Int, Equatable {
             return self.rawValue == (another).rawValue
         }else{
             return false
+        }
+    }
+    
+    public var short : String{
+        switch self{
+        case .heart_rate:
+            return "hr"
+        case .accelerometer:
+            return "ac"
+        case .ambinent_light:
+            return "al"
+        case .microphone:
+            return "mp"
+        case .bluetooth:
+            return "bl"
+        case .device_motion:
+            return "dm"
+        }
+    }
+    
+    public var csvHeader : String{
+        switch self {
+        case .heart_rate:
+            return AWSHeartRateSensorData.csvHeader
+        case .accelerometer:
+            return AWSRawAccelerometerSensorData.csvHeader
+        case .device_motion:
+            return AWSDeviceMotionSensorData.csvHeader
+        default:
+            return ""
         }
     }
 }

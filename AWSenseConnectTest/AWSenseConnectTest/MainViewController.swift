@@ -126,7 +126,6 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
                 }
             }
         }else if(type == .remoteSessionDataReceived){
-            print("data received: \(data![0].sensorType)")
             if(data!.count < 1){
                 return
             }else{
@@ -157,6 +156,15 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
         DispatchQueue.main.async {
             self.sessionTimeLabel.text = Date().timeIntervalSince(self.sessionStartDate!).description
         }
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = event?.allTouches?.first
+        if (nameTextField.isFirstResponder && touch?.view != nameTextField){
+            nameTextField.resignFirstResponder()
+        }
+        super.touchesBegan(touches, with: event)
     }
     
 }

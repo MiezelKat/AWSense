@@ -17,7 +17,7 @@ public class AWSDeviceMotionSensorData : AWSSensorData {
     
     public static var csvHeader : String {
         get{
-            return "date,ti,accel_x,accel_y,accel_z,gyro_x,gyro_y,gyro_z,grav_x,grav_y,grav_z,atti_pitch,atti_roll,atti_yaw"
+            return "date,ti,accel_x,accel_y,accel_z,gyro_x,gyro_y,gyro_z,grav_x,grav_y,grav_z,atti_pitch,atti_roll,atti_yaw\n"
         }
     }
     
@@ -29,7 +29,7 @@ public class AWSDeviceMotionSensorData : AWSSensorData {
     
     public var csvString : String {
         get{
-            return "\(timestamp.date),\(timestamp.ti),\(linearAcceleration.x),\(linearAcceleration.y),\(linearAcceleration.z),\(rotationRate.x),\(rotationRate.y),\(rotationRate.z),\(gravity.x),\(gravity.y),\(gravity.z),\(attitude.pitch),\(attitude.roll),\(attitude.yaw)"
+            return "\(timestamp.date),\(timestamp.ti),\(linearAcceleration.x),\(linearAcceleration.y),\(linearAcceleration.z),\(rotationRate.x),\(rotationRate.y),\(rotationRate.z),\(gravity.x),\(gravity.y),\(gravity.z),\(attitude.pitch),\(attitude.roll),\(attitude.yaw)\n"
         }
     }
     

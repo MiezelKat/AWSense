@@ -39,8 +39,6 @@ internal class SensingDataManager : SensingBufferEventHandler {
     func initialise(withSession session: SensingSession){
         if(session.transmissionMode == .batch){
             sensingDataBuffer = SensingDataBuffer(withSession: session)
-            
-            
         }else if(session.transmissionMode == .stream){
             sensingDataBuffer = nil
         }
@@ -64,9 +62,9 @@ internal class SensingDataManager : SensingBufferEventHandler {
     // MARK: - SensingBufferEventHandler
 
     func handle(withType type: SensingBufferEventType, forSensor stype: AWSSensorType){
-        if(type == .bufferLimitReached){
-            let data = sensingDataBuffer?.prepareDataToSend(forType: stype)
-            let message = SensingDataMessage(withSensingData: data!, ofType: stype)
+        if(type == .bufferLimitReached && sensingDataBuffer != nil){
+            let data = sensingDataBuffer!.prepareDataToSend(forType: stype)
+            let message = SensingDataMessage(withSensingData: data, ofType: stype)
             CommunicationManager.instance.send(message: message)
         }
     }

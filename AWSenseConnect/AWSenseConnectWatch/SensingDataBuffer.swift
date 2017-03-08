@@ -51,7 +51,7 @@ internal class SensingDataBuffer{
         let data = sensingBuffers[type]!
         // reset the buffer
         sync (array: sensingBuffers[type]!) {
-            sensingBuffers[type] = [AWSSensorData]()
+            sensingBuffers[type]!.removeAll(keepingCapacity: true)
         }
         return data
     }

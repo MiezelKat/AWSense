@@ -47,7 +47,7 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     
     // MARK: - SensingEventHandler interface
     
-    public func handleSensing(data: AWSSensorData, type: AWSSensorType) {
+    public func handleSensing(data: AWSSensorData, type: AWSSensorType) {        
         if(currentSession!.sensorConfig.enabledSensors.contains(type)){
             SensingDataManager.instance.manage(sensingData: data, forType: type)
         }

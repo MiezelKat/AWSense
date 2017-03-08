@@ -17,7 +17,7 @@ public class AWSHeartRateSensorData : AWSSensorData {
     
     public static var csvHeader : String {
         get{
-            return "date,ti,bpm"
+            return "date,ti,bpm\n"
         }
     }
     
@@ -29,7 +29,7 @@ public class AWSHeartRateSensorData : AWSSensorData {
     
     public var csvString : String {
         get{
-            return "\(timestamp.date),\(timestamp.ti),\(heartRate)"
+            return "\(timestamp.date),\(timestamp.ti),\(heartRate)\n"
         }
     }
     

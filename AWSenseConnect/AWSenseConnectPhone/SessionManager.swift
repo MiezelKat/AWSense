@@ -25,6 +25,8 @@ public class SessionManager : MessageEventHandler{
     
     private let remoteSensingEvent : RemoteSensingEvent = RemoteSensingEvent()
     
+    private let sensingBuffer = RemoteSensingDataBuffer.instance
+    
     // MARK: - MessageEventHandler interface
     
     internal func handle(message : Message){
@@ -37,9 +39,13 @@ public class SessionManager : MessageEventHandler{
             assert(currentSession!.state == .prepareStopping)
             currentSession!.state = .stopped
             remoteSensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)
+            sensingBuffer.serialiseAll()
         case .sensingData:
-            let data = (message as! SensingDataMessage).sensingData
+            let pm = message as! SensingDataMessage
+            let data = pm.sensingData
+            let t = pm.sensingDataType
             remoteSensingEvent.raiseEvent(withType: .remoteSessionDataReceived, forSession: currentSession!, withData: data)
+            sensingBuffer.append(sensingData: data, forType: t)
         default: break
             // todo error handling
         }
@@ -55,6 +61,8 @@ public class SessionManager : MessageEventHandler{
         
         currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, transmissionMode: transmissionMode)
         remoteSensingEvent.raiseEvent(withType: .sessionCreated, forSession: currentSession!)
+        
+        sensingBuffer.initialise(withSession: currentSession!)
         
         if(currentSession != nil && currentSession!.state == .created){
             

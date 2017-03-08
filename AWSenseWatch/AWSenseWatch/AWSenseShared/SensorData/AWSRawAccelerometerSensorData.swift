@@ -17,7 +17,7 @@ public class AWSRawAccelerometerSensorData : AWSSensorData {
     
     public static var csvHeader : String {
         get{
-            return "date,ti,x,y,z"
+            return "date,ti,x,y,z\n"
         }
     }
     
@@ -29,7 +29,7 @@ public class AWSRawAccelerometerSensorData : AWSSensorData {
     
     public var csvString : String {
         get{
-            return "\(timestamp.date),\(timestamp.ti),\(acceleration.x),\(acceleration.y),\(acceleration.z)"
+            return "\(timestamp.date),\(timestamp.ti),\(acceleration.x),\(acceleration.y),\(acceleration.z)\n"
         }
     }
     
