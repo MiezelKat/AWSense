@@ -34,7 +34,7 @@ internal class SensingDataManager : SensingBufferEventHandler {
         return SensingSessionManager.instance.currentSession?.transmissionMode
     }
     
-    var lastTransmissions : [AWSSensorType : Date] = [AWSSensorType : Date]
+    var lastTransmissions : [AWSSensorType : Date] = [AWSSensorType : Date]()
     
     // MARK: - methods
     
@@ -61,8 +61,8 @@ internal class SensingDataManager : SensingBufferEventHandler {
             let now = Date()
             sensingDataBuffer!.append(sensingData: data, forType: type)
             if(lastTransmissions[type]!.addingTimeInterval(60).compare(now) == .orderedAscending){
-                let data = sensingDataBuffer?.prepareDataToSend(forType: stype)
-                let message = SensingDataMessage(withSensingData: data!, ofType: stype)
+                let data = sensingDataBuffer?.prepareDataToSend(forType: type)
+                let message = SensingDataMessage(withSensingData: data!, ofType: type)
                 CommunicationManager.instance.send(message: message)
             }
         }
