@@ -55,11 +55,10 @@ internal class SensingDataManager : SensingBufferEventHandler {
         if(transmissionMode! == .batch){
             sensingDataBuffer!.append(sensingData: data, forType: type)
         }else if(transmissionMode! == .stream){
-//            let message = SensingDataMessage(withSensingData: [data], ofType: type)
-//            CommunicationManager.instance.send(message: message)
-            let now = Date()
+            let refDate = Date().addingTimeInterval(-2)
             sensingDataBuffer!.append(sensingData: data, forType: type)
-            if(lastTransmissions[type]!.addingTimeInterval(60).compare(now) == .orderedAscending){
+            if(lastTransmissions[type]!.compare(refDate) == .orderedAscending){
+                lastTransmissions[type] = Date()
                 let data = sensingDataBuffer?.prepareDataToSend(forType: type)
                 let message = SensingDataMessage(withSensingData: data!, ofType: type)
                 CommunicationManager.instance.send(message: message)
