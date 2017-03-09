@@ -11,9 +11,7 @@ import AWSenseShared
 
 internal class SensingDataBuffer{
     
-    private let bufferLimit = 1024
-    
-    private let bufferLimitHR = 10
+    private let bufferLimit = 1024 * 10
     
     // MARK: - properties
     
@@ -40,20 +38,18 @@ internal class SensingDataBuffer{
         sync (array: sensingBuffers[type]!) {
             sensingBuffers[type]?.append(data)
         }
-        if(type != .heart_rate && (sensingBuffers[type]!.count) > bufferLimit){
-            sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
-        }else if (type == .heart_rate && sensingBuffers[type]!.count > bufferLimitHR){
-            sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
+        if(sensingBuffers[type]!.count > bufferLimit){
+            self.sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
         }
     }
     
-    func prepareDataToSend(forType type: AWSSensorType) -> [AWSSensorData]{
-        let data = sensingBuffers[type]!
+    func prepareFileToSend(forType type: AWSSensorType) -> URL{
+        let url = serialise(forType: type)
         // reset the buffer
         sync (array: sensingBuffers[type]!) {
             sensingBuffers[type]!.removeAll(keepingCapacity: true)
         }
-        return data
+        return url!
     }
 
     private func sync(array: [AWSSensorData], closure: () -> Void) {

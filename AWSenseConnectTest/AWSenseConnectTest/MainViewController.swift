@@ -15,7 +15,6 @@ import AWSenseConnectPhone
 
 class MainViewController: UITableViewController, RemoteSensingEventHandler {
 
-
     @IBOutlet weak var heartRateSwitch: UISwitch!
     
     @IBOutlet weak var accelerometerSwitch: UISwitch!
@@ -115,7 +114,8 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
         }
     }
     
-    public func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: [AWSSensorData]?) {
+    
+    public func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: AWSSensorData?, url: URL?) {
         if(type == .sessionCreated){
             self.sessionStatusLabel.text = "session created"
         }else if(type == .sessionStateChanged){
@@ -127,8 +127,8 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
                     self.timer = Timer.init(timeInterval: 1, target: self, selector: #selector(self.updateTimerLabel), userInfo: nil, repeats: true)
                 }
             }
-        }else if(type == .remoteSessionDataReceived){
-            if(data!.count < 1){
+        }else if(type == .remoteSensingSampleReceived){
+            if(data == nil){
                 return
             }else{
                 messageCount += 1
@@ -136,17 +136,17 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
                     self.messageCountLabel.text = self.messageCount.description
                 }
             }
-            if(data![0].sensorType == .heart_rate){
+            if(data!.sensorType == .heart_rate){
                 DispatchQueue.main.async {
-                    self.hrLabel.text = data!.last!.prettyPrint
+                    self.hrLabel.text = data!.prettyPrint
                 }
-            }else if(data![0].sensorType == .accelerometer){
+            }else if(data!.sensorType == .accelerometer){
                 DispatchQueue.main.async {
-                    self.accelLabel.text = data!.last!.prettyPrint
+                    self.accelLabel.text = data!.prettyPrint
                 }
-            }else if(data![0].sensorType == .device_motion){
+            }else if(data!.sensorType == .device_motion){
                 DispatchQueue.main.async {
-                    self.deviceMLabel.text = data!.last!.prettyPrint
+                    self.deviceMLabel.text = data!.prettyPrint
                 }
             }
         }

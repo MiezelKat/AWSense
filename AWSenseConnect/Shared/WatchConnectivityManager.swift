@@ -50,13 +50,15 @@ internal class CommunicationManager: NSObject, WCSessionDelegate {
     // Mark: - Send Messages
     
     
-    func send(message: Message, urgent : Bool = true) {
+    func send(message: Message, userInfo : Bool = false) {
         
         let payload = message.createPayload()
-        
-        if(session?.isReachable)!{
+        if(message.type == .sensingData){
+            let m = message as! SensingFileMessage
+            session?.transferFile(m.sensingFile!, metadata: payload)
+        } else if(session!.isReachable && !userInfo){
             session?.sendMessage(payload, replyHandler: nil, errorHandler: nil)
-        }else {
+        } else {
             session?.transferUserInfo(payload)
         }
     }
@@ -78,6 +80,14 @@ internal class CommunicationManager: NSObject, WCSessionDelegate {
         messageEvent.raiseEvent(withMessage: message!)
     }
     
+    func session(_ session: WCSession, didReceive file: WCSessionFile) {
+        let message = MessageParser.parseMessage(fromPayload: file.metadata!)!
+        if(message.type == .sensingData){
+            let m = message as! SensingFileMessage
+            m.sensingFile = file.fileURL
+        }
+        messageEvent.raiseEvent(withMessage: message)
+    }
     
     // MARK: WCSessionDelegate - Activation
     

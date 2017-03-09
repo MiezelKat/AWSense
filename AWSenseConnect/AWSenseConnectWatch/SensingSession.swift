@@ -14,6 +14,8 @@ public class SensingSession{
     
     // MARK: - properties
     
+    public internal(set) var id : String = UUID().uuidString
+    
     public internal(set) var state : SensingSessionState
     
     public private(set) var sensorConfig : SensingConfiguration
@@ -55,5 +57,6 @@ public class SensingSession{
 public enum SensingSessionState : String{
     case created
     case running
+    case stopTriggered
     case terminated
 }

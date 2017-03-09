@@ -13,6 +13,7 @@ internal enum MessageType : Int {
     case startSensing
     case stopSensing
     case sensingData
+    case sensingDataSample
     case startedSensing
     case stoppedSensing
     case undefined
@@ -34,9 +35,7 @@ internal protocol Message{
     func createPayload() -> [String : Any]
     
     init(fromPayload payload : [String : Any])
-    
 
-    
 }
 
 internal class MessageParser{
@@ -50,7 +49,9 @@ internal class MessageParser{
         case .stopSensing:
             return StopSensingMessage(fromPayload: payload)
         case .sensingData:
-            return SensingDataMessage(fromPayload: payload)
+            return SensingFileMessage(fromPayload: payload)
+        case .sensingDataSample:
+            return SensingSampleMessage(fromPayload: payload)
         case .startedSensing:
             return StartedSensingMessage(fromPayload: payload)
         case .stoppedSensing:
@@ -101,45 +102,95 @@ internal class AbstractMessage : Message{
     
 }
 
-internal class SensingDataMessage : AbstractMessage{
+//internal class SensingDataMessage : AbstractMessage{
+//    
+//    /// message type
+//    internal override class var type: MessageType {
+//        return .sensingData
+//    }
+//    
+//    private static let sensingDataKey = "data"
+//    internal private(set) var sensingData : [AWSSensorData]
+//    
+//    private static let sensingDataTypeKey = "sd_type"
+//    internal private(set) var sensingDataType : AWSSensorType
+//    
+//    
+//    /// Parse a configuration message from the payload
+//    ///
+//    /// - Parameter payload: dictionary of values
+//    internal required init(fromPayload payload: [String : Any]) {
+//        
+//        sensingDataType = AWSSensorType(rawValue: payload[type(of: self).sensingDataTypeKey] as! Int)!
+//        
+//        let dataArr : [[AnyObject]] = payload[type(of: self).sensingDataKey] as! [[AnyObject]]
+//
+//        // TODO: That is quite ugly: Improve!
+//        sensingData = [AWSSensorData]()
+//        
+//        super.init(fromPayload: payload)
+//        sensingData = dataArr.map{ e in
+//            return AWSSensorDataParser.parse(fromData: e, forType: sensingDataType)!
+//        }
+//    }
+//    
+//    /// Initialise with sensing data
+//    ///
+//    /// - Parameter data: data array
+//    /// - Parameter type: type of the sensor
+//    internal init(withSensingData data: [AWSSensorData], ofType type: AWSSensorType){
+//        self.sensingDataType = type
+//        self.sensingData = data
+//        super.init()
+//    }
+//    
+//    /// Create a payload dictionary
+//    ///
+//    /// - Returns: the payload
+//    internal override func createPayload() -> [String : Any] {
+//        var payload = super.createPayload()
+//        payload[type(of: self).sensingDataTypeKey] = sensingDataType.rawValue
+//        payload[type(of: self).sensingDataKey] = sensingData.map{ e in
+//            return e.data
+//        }
+//        //dump(payload)
+//        return payload
+//    }
+//    
+//}
+
+internal class SensingFileMessage : AbstractMessage{
     
     /// message type
     internal override class var type: MessageType {
         return .sensingData
     }
     
-    private static let sensingDataKey = "data"
-    internal private(set) var sensingData : [AWSSensorData]
+    internal var sensingFile : URL?
     
     private static let sensingDataTypeKey = "sd_type"
     internal private(set) var sensingDataType : AWSSensorType
     
+    private static let batchNoKey = "batch_no"
+    internal private(set) var batchNo : Int
     
     /// Parse a configuration message from the payload
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        
         sensingDataType = AWSSensorType(rawValue: payload[type(of: self).sensingDataTypeKey] as! Int)!
-        
-        let dataArr : [[AnyObject]] = payload[type(of: self).sensingDataKey] as! [[AnyObject]]
-
-        // TODO: That is quite ugly: Improve!
-        sensingData = [AWSSensorData]()
-        
-        super.init(fromPayload: payload)
-        sensingData = dataArr.map{ e in
-            return AWSSensorDataParser.parse(fromData: e, forType: sensingDataType)!
-        }
+        batchNo = payload[type(of: self).batchNoKey] as! Int
+        super.init()
     }
     
     /// Initialise with sensing data
     ///
     /// - Parameter data: data array
     /// - Parameter type: type of the sensor
-    internal init(withSensingData data: [AWSSensorData], ofType type: AWSSensorType){
+    internal init(withURL url: URL, ofType type: AWSSensorType, batchNo : Int = 1){
+        self.sensingFile = url
         self.sensingDataType = type
-        self.sensingData = data
+        self.batchNo = batchNo
         super.init()
     }
     
@@ -149,14 +200,66 @@ internal class SensingDataMessage : AbstractMessage{
     internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
         payload[type(of: self).sensingDataTypeKey] = sensingDataType.rawValue
-        payload[type(of: self).sensingDataKey] = sensingData.map{ e in
-            return e.data
-        }
+        payload[type(of: self).batchNoKey] = batchNo
+        return payload
+    }
+    
+}
+
+
+internal class SensingSampleMessage : AbstractMessage{
+    
+    /// message type
+    internal override class var type: MessageType {
+        return .sensingDataSample
+    }
+    
+    private static let sensorDataKey = "data"
+    internal private(set) var sensorData : AWSSensorData
+    
+    private static let sensorDataTypeKey = "sd_type"
+    internal private(set) var sensorDataType : AWSSensorType
+    
+    
+    /// Parse a configuration message from the payload
+    ///
+    /// - Parameter payload: dictionary of values
+    internal required init(fromPayload payload: [String : Any]) {
+        
+        sensorDataType = AWSSensorType(rawValue: payload[type(of: self).sensorDataTypeKey] as! Int)!
+        
+        let dataArr : [AnyObject] = payload[type(of: self).sensorDataKey] as! [AnyObject]
+        
+        // TODO: That is quite ugly: Improve!
+        sensorData = AWSSensorDataParser.parse(fromData: dataArr, forType: sensorDataType)!
+        
+        super.init(fromPayload: payload)
+
+    }
+    
+    /// Initialise with sensing data
+    ///
+    /// - Parameter data: data array
+    /// - Parameter type: type of the sensor
+    internal init(withSensorData data: AWSSensorData, ofType type: AWSSensorType){
+        self.sensorDataType = type
+        self.sensorData = data
+        super.init()
+    }
+    
+    /// Create a payload dictionary
+    ///
+    /// - Returns: the payload
+    internal override func createPayload() -> [String : Any] {
+        var payload = super.createPayload()
+        payload[type(of: self).sensorDataTypeKey] = sensorDataType.rawValue
+        payload[type(of: self).sensorDataKey] = sensorData.data
         //dump(payload)
         return payload
     }
     
 }
+
 
 
 internal class StopSensingMessage : AbstractMessage{

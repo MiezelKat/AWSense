@@ -13,9 +13,9 @@ public class RemoteSensingEvent{
     
     private var eventHandlers = [RemoteSensingEventHandler]()
     
-    public func raiseEvent(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession? = nil, withData data: [AWSSensorData]? = nil) {
+    public func raiseEvent(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession? = nil, withData data: AWSSensorData? = nil, url: URL? = nil) {
         for handler in self.eventHandlers {
-            handler.handle(withType: type, forSession: session, withData: data)
+            handler.handle(withType: type, forSession: session, withData: data, url: url)
         }
     }
     
@@ -30,11 +30,12 @@ public class RemoteSensingEvent{
 
 public protocol RemoteSensingEventHandler : class {
     
-    func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: [AWSSensorData]?)
+    func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: AWSSensorData?, url: URL?)
     
 }
 
 public enum RemoteSensingEventType{
+    case remoteSensingSampleReceived
     case remoteSessionDataReceived
     case sessionStateChanged
     case sessionCreated

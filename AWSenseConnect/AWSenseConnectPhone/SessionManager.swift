@@ -25,7 +25,7 @@ public class SessionManager : MessageEventHandler{
     
     private let remoteSensingEvent : RemoteSensingEvent = RemoteSensingEvent()
     
-    private let sensingBuffer = RemoteSensingDataBuffer.instance
+    private let sensingFileHandler = RemoteSensingFileHandler.instance
     
     // MARK: - MessageEventHandler interface
     
@@ -43,13 +43,17 @@ public class SessionManager : MessageEventHandler{
             assert(currentSession!.state == .prepareStopping)
             currentSession!.state = .stopped
             remoteSensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)
-            sensingBuffer.serialiseAll()
+        case .sensingDataSample:
+            let pm = message as! SensingSampleMessage
+            let data = pm.sensorData
+            let t = pm.sensorDataType
+            remoteSensingEvent.raiseEvent(withType: .remoteSensingSampleReceived, forSession: currentSession!, withData: data)
         case .sensingData:
-            let pm = message as! SensingDataMessage
-            let data = pm.sensingData
+            let pm = message as! SensingFileMessage
             let t = pm.sensingDataType
-            remoteSensingEvent.raiseEvent(withType: .remoteSessionDataReceived, forSession: currentSession!, withData: data)
-            sensingBuffer.append(sensingData: data, forType: t)
+            let url = pm.sensingFile!
+            let localURL = sensingFileHandler.handleFileReceived(url: url, forType: t)!
+            remoteSensingEvent.raiseEvent(withType: .remoteSessionDataReceived, forSession: currentSession!, url: localURL)
         default: break
             // todo error handling
         }
@@ -66,7 +70,7 @@ public class SessionManager : MessageEventHandler{
         currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, transmissionIntervall: intervall)
         remoteSensingEvent.raiseEvent(withType: .sessionCreated, forSession: currentSession!)
         
-        sensingBuffer.initialise(withSession: currentSession!)
+        sensingFileHandler.initialise(withSession: currentSession!)
         
         if(currentSession != nil && currentSession!.state == .created){
             
