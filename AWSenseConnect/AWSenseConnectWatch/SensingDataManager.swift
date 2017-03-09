@@ -30,8 +30,8 @@ internal class SensingDataManager : SensingBufferEventHandler {
         return SensingSessionManager.instance.currentSession
     }
     
-    var transmissionMode : DataTransmissionMode?{
-        return SensingSessionManager.instance.currentSession?.transmissionMode
+    var transmissionIntervall: DataTransmissionInterval?{
+        return SensingSessionManager.instance.currentSession?.transmissionIntervall
     }
     
     var lastTransmissions : [AWSSensorType : Date] = [AWSSensorType : Date]()
@@ -39,36 +39,32 @@ internal class SensingDataManager : SensingBufferEventHandler {
     // MARK: - methods
     
     func initialise(withSession session: SensingSession){
-        if(session.transmissionMode == .batch){
-            sensingDataBuffer = SensingDataBuffer(withSession: session)
-        }else if(session.transmissionMode == .stream){
-            sensingDataBuffer = SensingDataBuffer(withSession: session)
-            
-            let now = Date()
-            for type in session.sensorConfig.enabledSensors{
-                lastTransmissions[type] = now
-            }
+        sensingDataBuffer = SensingDataBuffer(withSession: session)
+        
+        let now = Date()
+        for type in session.sensorConfig.enabledSensors{
+            lastTransmissions[type] = now
         }
     }
     
     func manage(sensingData data : AWSSensorData, forType type: AWSSensorType){
-        if(transmissionMode! == .batch){
-            sensingDataBuffer!.append(sensingData: data, forType: type)
-        }else if(transmissionMode! == .stream){
-            let refDate = Date().addingTimeInterval(-2)
-            sensingDataBuffer!.append(sensingData: data, forType: type)
-            if(lastTransmissions[type]!.compare(refDate) == .orderedAscending){
-                lastTransmissions[type] = Date()
-                let data = sensingDataBuffer?.prepareDataToSend(forType: type)
-                let message = SensingDataMessage(withSensingData: data!, ofType: type)
-                CommunicationManager.instance.send(message: message)
-            }
+        let nextTransmission = lastTransmissions[type]!.addingTimeInterval(transmissionIntervall!.intervallSeconds)
+        
+        let refDate = Date().addingTimeInterval(-2)
+        
+        sensingDataBuffer!.append(sensingData: data, forType: type)
+        //if(lastTransmissions[type]!.compare(refDate) == .orderedAscending){
+        if(nextTransmission.compare(Date()) == .orderedAscending){
+            sendData(forType: type)
         }
+
     }
     
     func sessionStopped(){
-        if(transmissionMode! == .batch && sensingDataBuffer != nil){
-            sensingDataBuffer!.clearAllBuffers()
+        if(sensingDataBuffer != nil){
+            for s in sensingSession!.sensorConfig.enabledSensors{
+                sendData(forType: s)
+            }
         }
     }
     
@@ -76,10 +72,15 @@ internal class SensingDataManager : SensingBufferEventHandler {
 
     func handle(withType type: SensingBufferEventType, forSensor stype: AWSSensorType){
         if(type == .bufferLimitReached && sensingDataBuffer != nil){
-            let data = sensingDataBuffer!.prepareDataToSend(forType: stype)
-            let message = SensingDataMessage(withSensingData: data, ofType: stype)
-            CommunicationManager.instance.send(message: message)
+            sendData(forType: stype)
         }
+    }
+    
+    func sendData(forType type: AWSSensorType){
+        lastTransmissions[type] = Date()
+        let data = sensingDataBuffer?.prepareDataToSend(forType: type)
+        let message = SensingDataMessage(withSensingData: data!, ofType: type)
+        CommunicationManager.instance.send(message: message)
     }
 
 }

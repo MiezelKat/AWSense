@@ -30,6 +30,10 @@ public class SessionManager : MessageEventHandler{
     // MARK: - MessageEventHandler interface
     
     internal func handle(message : Message){
+        if(currentSession == nil){
+            return
+        }
+        
         switch message.type {
         case .startedSensing:
             assert(currentSession!.state == .prepareRunning)
@@ -53,13 +57,13 @@ public class SessionManager : MessageEventHandler{
     
     // MARK: - methods
     
-    public func startSensingSession(withName name: String? = nil, configuration: [AWSSensorType]? = nil, transmissionMode : DataTransmissionMode = .batch) throws{
+    public func startSensingSession(withName name: String? = nil, configuration: [AWSSensorType]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard) throws{
         
         if(currentSession != nil && currentSession!.state != .stopped) {
             throw RemoteSensingSessionError.invalidSessionState(reason: "Session cannot be started, it is already running, terminated or archived")
         }
         
-        currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, transmissionMode: transmissionMode)
+        currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, transmissionIntervall: intervall)
         remoteSensingEvent.raiseEvent(withType: .sessionCreated, forSession: currentSession!)
         
         sensingBuffer.initialise(withSession: currentSession!)
@@ -68,7 +72,7 @@ public class SessionManager : MessageEventHandler{
             
             currentSession!.state = .prepareRunning
             
-            let message = StartSensingMessage(withConfiguration: currentSession!.sensorConfig, transmisssionMode: currentSession!.transmissionMode)
+            let message = StartSensingMessage(withConfiguration: currentSession!.sensorConfig, transmisssionIntervall: intervall)
             CommunicationManager.instance.send(message: message)
             
             remoteSensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)

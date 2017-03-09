@@ -55,14 +55,6 @@ internal class SensingDataBuffer{
         }
         return data
     }
-    
-    func clearAllBuffers(){
-        
-        // reset the buffer
-        for s in sensingSession.sensorConfig.enabledSensors{
-            sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: s)
-        }
-    }
 
     private func sync(array: [AWSSensorData], closure: () -> Void) {
         objc_sync_enter(array)

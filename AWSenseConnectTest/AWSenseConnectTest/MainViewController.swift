@@ -22,7 +22,9 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
     
     @IBOutlet weak var deviceMotionSwitch: UISwitch!
     
-    @IBOutlet weak var batchSwitch: UISwitch!
+    @IBOutlet weak var intervallSlider: UISlider!
+    
+    @IBOutlet weak var intervallSecondLabel: UILabel!
     
     @IBOutlet weak var nameTextField: UITextField!
     
@@ -77,10 +79,10 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
             enabledSensors.append(.device_motion)
         }
         
-        let transmissionMode : DataTransmissionMode = batchSwitch.isOn ? .batch : .stream
+        let transmissionIntervall = DataTransmissionInterval(Double(intervallSlider.value))
         
         do {
-            try sessionManager.startSensingSession(withName: nameTextField.text, configuration: enabledSensors, transmissionMode: transmissionMode)
+            try sessionManager.startSensingSession(withName: nameTextField.text, configuration: enabledSensors, transmissionIntervall: transmissionIntervall)
             
         }catch let error as Error{
             print(error)
@@ -158,6 +160,12 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
         }
     }
     
+    @IBAction func intervallValueChanged(_ sender: Any) {
+        let roundedValue = lroundf(intervallSlider.value)
+        intervallSlider.setValue(Float(roundedValue), animated: true)
+        
+        intervallSecondLabel.text = roundedValue.description
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = event?.allTouches?.first

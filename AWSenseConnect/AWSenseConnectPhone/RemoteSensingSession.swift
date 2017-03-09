@@ -20,11 +20,11 @@ public class RemoteSensingSession{
     public internal(set) var state : RemoteSensingSessionState
     
     public private(set) var sensorConfig : SensingConfiguration
-    public private(set) var transmissionMode : DataTransmissionMode
+    public private(set) var transmissionIntervall : DataTransmissionInterval
     
     // MARK: - init
     
-    init(withName name: String? = nil, enabledSensors sensors: [AWSSensorType]? = nil, transmissionMode: DataTransmissionMode = .batch){
+    init(withName name: String? = nil, enabledSensors sensors: [AWSSensorType]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
         state = .created
         if(sensors != nil){
             sensorConfig = SensingConfiguration(withEnabledSensors: sensors!)
@@ -33,7 +33,7 @@ public class RemoteSensingSession{
         }
         id = UUID().uuidString
         self.name = name
-        self.transmissionMode = transmissionMode
+        self.transmissionIntervall = intervall
     }
 
     
@@ -43,8 +43,8 @@ public class RemoteSensingSession{
         sensorConfig = SensingConfiguration(withEnabledSensors: sensors)
     }
     
-    internal func reset(transmissionMode mode: DataTransmissionMode){
-        transmissionMode = mode
+    internal func reset(transmissionIntervall intervall: DataTransmissionInterval){
+        transmissionIntervall = intervall
     }
 }
 

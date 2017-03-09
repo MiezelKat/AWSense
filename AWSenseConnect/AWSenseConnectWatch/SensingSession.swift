@@ -17,27 +17,27 @@ public class SensingSession{
     public internal(set) var state : SensingSessionState
     
     public private(set) var sensorConfig : SensingConfiguration
-    public private(set) var transmissionMode : DataTransmissionMode
+    public private(set) var transmissionIntervall : DataTransmissionInterval
     
     // MARK: - init
     
-    init(enabledSensors sensors: [AWSSensorType]? = nil, transmissionMode: DataTransmissionMode = .batch){
+    init(enabledSensors sensors: [AWSSensorType]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
         state = .created
         if(sensors != nil){
             sensorConfig = SensingConfiguration(withEnabledSensors: sensors!)
         }else{
             sensorConfig = SensingConfiguration()
         }
-        self.transmissionMode = transmissionMode
+        self.transmissionIntervall = intervall
     }
     
-    init(enabledSensorSet sensors: Set<AWSSensorType>, transmissionMode: DataTransmissionMode = .batch){
+    init(enabledSensorSet sensors: Set<AWSSensorType>, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
         state = .created
         
         sensorConfig = SensingConfiguration()
         sensorConfig.enabledSensors = sensors
 
-        self.transmissionMode = transmissionMode
+        self.transmissionIntervall = intervall
     }
     
     
@@ -47,8 +47,8 @@ public class SensingSession{
         sensorConfig = configuration
     }
     
-    internal func reset(transmissionMode mode: DataTransmissionMode){
-        transmissionMode = mode
+    internal func reset(transmissionIntervall intervall: DataTransmissionInterval){
+        transmissionIntervall = intervall
     }
 }
 
@@ -56,19 +56,4 @@ public enum SensingSessionState : String{
     case created
     case running
     case terminated
-    
-//    public var description : String{
-//        get{
-//            switch self {
-//            case .created:
-//                return "created"
-//            case .running:
-//                return "runing"
-//            case .terminated:
-//                return "terminated"
-//            default:
-//                return "undefined"
-//            }
-//        }
-//    }
 }

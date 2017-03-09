@@ -37,7 +37,7 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
         switch message.type {
         case .startSensing:
             let m = message as! StartSensingMessage
-            handleStart(configuration: m.configuration, transmissionMode: m.transmissionMode)
+            handleStart(configuration: m.configuration, transmissionIntervall: m.transmissionIntervall)
         case .stopSensing:
             handleStopTriggered()
         default: break
@@ -55,9 +55,9 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     
     // MARK: - methods
     
-    private func handleStart(configuration: SensingConfiguration, transmissionMode mode : DataTransmissionMode){
+    private func handleStart(configuration: SensingConfiguration, transmissionIntervall intervall : DataTransmissionInterval){
 
-        currentSession = SensingSession(enabledSensorSet: configuration.enabledSensors, transmissionMode: mode)
+        currentSession = SensingSession(enabledSensorSet: configuration.enabledSensors, transmissionIntervall: intervall)
         
         // prepare the data manager
         

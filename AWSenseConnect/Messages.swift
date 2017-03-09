@@ -191,7 +191,7 @@ internal class StartSensingMessage : AbstractMessage{
     internal private(set) var configuration : SensingConfiguration
     
     private static let transmissionModeKey = "transmission"
-    internal private(set) var transmissionMode : DataTransmissionMode
+    internal private(set) var transmissionIntervall : DataTransmissionInterval
     
     
     /// Parse a configuration message from the payload
@@ -203,7 +203,7 @@ internal class StartSensingMessage : AbstractMessage{
             return AWSSensorType(rawValue: sens)
         } as! [AWSSensorType]
         configuration = SensingConfiguration(withEnabledSensors: s)
-        transmissionMode = DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)!
+        transmissionIntervall = DataTransmissionInterval(payload[type(of: self).transmissionModeKey] as! Double)
         // DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)
         super.init(fromPayload: payload)
     }
@@ -212,9 +212,9 @@ internal class StartSensingMessage : AbstractMessage{
     /// Create with a configuration
     ///
     /// - Parameter config: configuration
-    internal init(withConfiguration config: SensingConfiguration, transmisssionMode mode: DataTransmissionMode = .batch){
+    internal init(withConfiguration config: SensingConfiguration, transmisssionIntervall intervall: DataTransmissionInterval){
         self.configuration = config
-        self.transmissionMode = mode
+        self.transmissionIntervall = intervall
         super.init()
     }
     
@@ -227,7 +227,7 @@ internal class StartSensingMessage : AbstractMessage{
             return s.rawValue
         }
         payload[type(of: self).configurationKey] = configPayload
-        payload[type(of: self).transmissionModeKey] = transmissionMode.rawValue
+        payload[type(of: self).transmissionModeKey] = transmissionIntervall.intervallSeconds
         return payload
     }
 
