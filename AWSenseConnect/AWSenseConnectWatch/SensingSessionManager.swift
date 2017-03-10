@@ -75,6 +75,7 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     private func handleStopTriggered(){
         currentSession!.state = .stopTriggered
         sensingEvent.raiseEvent(withType: .sessionStateChanged, forSession: currentSession!)
+        
         sensingManager.stopSensing(withSensors: currentSession!.sensorConfig.enabledSensors)
         sensingManager.deregister(eventhandler: self, withConfiguration: currentSession!.sensorConfig)
         

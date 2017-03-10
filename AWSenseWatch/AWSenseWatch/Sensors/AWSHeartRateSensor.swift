@@ -129,7 +129,6 @@ class AWSHeartRateSensor : NSObject, AWSSensor, HKWorkoutSessionDelegate{
         DispatchQueue.main.async {
             guard let sample = heartRateSamples.first else{return}
             let value = sample.quantity.doubleValue(for: self.heartRateUnit)
-            print("value")
             self.event.raise(data: AWSHeartRateSensorData(timestamp: AWSTimestamp(date: sample.endDate) , heartRate: value ))
         }
     }

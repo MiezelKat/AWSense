@@ -35,9 +35,9 @@ internal class SensingDataBuffer{
     // MARK: - methods
     
     func append(sensingData data: AWSSensorData, forType type: AWSSensorType){
-        sync (array: sensingBuffers[type]!) {
+        //sync (array: sensingBuffers[type]!) {
             sensingBuffers[type]?.append(data)
-        }
+//        }
         if(sensingBuffers[type]!.count > bufferLimit){
             self.sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
         }
@@ -46,17 +46,17 @@ internal class SensingDataBuffer{
     func prepareFileToSend(forType type: AWSSensorType) -> URL{
         let url = serialise(forType: type)
         // reset the buffer
-        sync (array: sensingBuffers[type]!) {
+//        sync (array: sensingBuffers[type]!) {
             sensingBuffers[type]!.removeAll(keepingCapacity: true)
-        }
+//        }
         return url!
     }
 
-    private func sync(array: [AWSSensorData], closure: () -> Void) {
-        objc_sync_enter(array)
-        closure()
-        objc_sync_exit(array)
-    }
+//    private func sync(array: [AWSSensorData], closure: () -> Void) {
+//        objc_sync_enter(array)
+//        closure()
+//        objc_sync_exit(array)
+//    }
     
     public func subscribe(handler: SensingBufferEventHandler){
         sensingBufferEvent.add(handler: handler)
