@@ -62,7 +62,7 @@ class AWSAccelerometerSensor : AWSSensor{
                 }
             }
             
-            motionManager.accelerometerUpdateInterval = 0.1
+            motionManager.accelerometerUpdateInterval = 0.01
             motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler: handler)
         }
     }

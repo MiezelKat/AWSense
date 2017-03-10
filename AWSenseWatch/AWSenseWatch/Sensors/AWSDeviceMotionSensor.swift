@@ -64,7 +64,7 @@ class AWSDeviceMotionSensor : AWSSensor{
                 }
             }
             
-            motionManager.deviceMotionUpdateInterval = 0.1
+            motionManager.deviceMotionUpdateInterval = 0.01
             motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: handler)
         }
     }
