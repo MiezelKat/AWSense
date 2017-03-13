@@ -11,20 +11,19 @@ import AWSenseShared
 
 internal extension SensingDataBuffer{
     
-
-    
-    func serialise(forType type: AWSSensorType, batchNo: Int) {
+    func serialiseAndSend(forType type: AWSSensorType, batchNo: Int) {
 
         var writeString : String = type.csvHeader
+        // copy of the buffer
         let data = self.sensingBuffers[type]!
         
+        // do it asyncronously
         writeQueue.async{
             
             let rootDirectory = NSTemporaryDirectory().appending("/\(self.sensingSession.id)")
             
             do {
                 try FileManager.default.createDirectory(atPath: rootDirectory, withIntermediateDirectories: true, attributes: nil)
-                //.createDirectory(atPath: dataPath.absoluteString, withIntermediateDirectories: false, attributes: nil)
             } catch let error as NSError {
                 print(error.localizedDescription);
             }
@@ -35,13 +34,9 @@ internal extension SensingDataBuffer{
             print(path)
             
             
-            
-            let count = data.count - 1
-            //for d in data {
-            for i in 0...count-1{
-                if(data[i] != nil){
-                    writeString.append(data[i]!.csvString)
-                    self.sensingBuffers[type]![i] = nil
+            for d in data {
+                if(d != nil){
+                    writeString.append(d.csvString)
                 }
             }
             

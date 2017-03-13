@@ -63,11 +63,7 @@ internal class SensingDataManager : SensingBufferEventHandler {
     }
     
     func sendDataFile(forType type: AWSSensorType){
-        sensingDataBuffer!.prepareFileToSend(forType: type)
-        
-//        let message = SensingFileMessage(withURL: url, ofType: type, batchNo: batchNo)
-//        
-//        CommunicationManager.instance.send(message: message, userInfo: true)
+        sensingDataBuffer!.sendFile(forType: type)
     }
 
 }
