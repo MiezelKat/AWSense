@@ -20,6 +20,7 @@ internal class SensingDataBuffer{
     var sensingSession : SensingSession
     
     var sensingBuffers : [AWSSensorType : [AWSSensorData]]
+    var sensingBufferBatchNo : [AWSSensorType : Int]
     
     var sensingBufferEvent : SensingBufferEvent = SensingBufferEvent()
     
@@ -28,8 +29,10 @@ internal class SensingDataBuffer{
     init(withSession session : SensingSession){
         sensingSession = session
         sensingBuffers = [AWSSensorType : [AWSSensorData]]()
+        sensingBufferBatchNo = [AWSSensorType : Int]()
         for s : AWSSensorType in sensingSession.sensorConfig.enabledSensors{
             sensingBuffers[s] = [AWSSensorData]()
+            sensingBufferBatchNo[s] = 1
         }
     }
     
@@ -37,30 +40,24 @@ internal class SensingDataBuffer{
     // MARK: - methods
     
     func append(sensingData data: AWSSensorData, forType type: AWSSensorType){
-//        sync (array: sensingBuffers[type]!) {
-            sensingBuffers[type]?.append(data)
-//        }
-        if(type != .heart_rate && (sensingBuffers[type]!.count) > bufferLimit){
+        let count = sensingBuffers[type]!.count
+        sensingBuffers[type]?.append(data)
+        
+        if(type != .heart_rate && count > bufferLimit){
             sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
-        }else if (type == .heart_rate && sensingBuffers[type]!.count > bufferLimitHR){
+        }else if (type == .heart_rate && count > bufferLimitHR){
             sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
         }
     }
     
-    func prepareDataToSend(forType type: AWSSensorType) -> [AWSSensorData]{
+    func prepareDataToSend(forType type: AWSSensorType) -> (Int, [AWSSensorData]){
+        let batchNo = sensingBufferBatchNo[type]!
         let data = sensingBuffers[type]!
         // reset the buffer
-//        sync (array: sensingBuffers[type]!) {
-            sensingBuffers[type]!.removeAll(keepingCapacity: true)
-//        }
-        return data
+        sensingBuffers[type]!.removeAll(keepingCapacity: true)
+        
+        return (batchNo, data)
     }
-
-//    private func sync(array: [AWSSensorData], closure: () -> Void) {
-//        objc_sync_enter(array)
-//        closure()
-//        objc_sync_exit(array)
-//    }
     
     public func subscribe(handler: SensingBufferEventHandler){
         sensingBufferEvent.add(handler: handler)

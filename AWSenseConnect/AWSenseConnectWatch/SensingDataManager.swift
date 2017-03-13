@@ -23,7 +23,6 @@ internal class SensingDataManager : SensingBufferEventHandler {
     
     // MARK: - properties
 
-    
     var sensingDataBuffer : SensingDataBuffer?
     
     var sensingSession : SensingSession? {
@@ -35,6 +34,8 @@ internal class SensingDataManager : SensingBufferEventHandler {
     }
     
     var lastTransmissions : [AWSSensorType : Date] = [AWSSensorType : Date]()
+    
+    let writeQueue = DispatchQueue(label: "send")
     
     // MARK: - methods
     
@@ -78,8 +79,8 @@ internal class SensingDataManager : SensingBufferEventHandler {
     
     func sendData(forType type: AWSSensorType){
         lastTransmissions[type] = Date()
-        let data = sensingDataBuffer?.prepareDataToSend(forType: type)
-        let message = SensingDataMessage(withSensingData: data!, ofType: type)
+        let (batchNo, data) = sensingDataBuffer!.prepareDataToSend(forType: type)
+        let message = SensingDataMessage(withSensingData: data, ofType: type)
         CommunicationManager.instance.send(message: message)
     }
 
