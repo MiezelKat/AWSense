@@ -9,7 +9,7 @@
 import Foundation
 import CoreMotion
 
-public class AWSDeviceMotionSensorData : AWSSensorData {
+public struct AWSDeviceMotionSensorData : AWSSensorData {
     
     public     var sensorType : AWSSensorType { return .device_motion }
     
@@ -59,7 +59,7 @@ public class AWSDeviceMotionSensorData : AWSSensorData {
         }
     }
     
-    public required init(withData data: [AnyObject]){
+    public init(withData data: [AnyObject]){
         self.timestamp = AWSTimestamp(data: data[0] as! [AnyObject])
         self.linearAcceleration =  CMAcceleration(fromData: data[1] as! [AnyObject])
         self.rotationRate = CMRotationRate(fromData: data[2] as! [AnyObject])

@@ -52,7 +52,7 @@ public class SessionManager : MessageEventHandler{
             let pm = message as! SensingFileMessage
             let t = pm.sensingDataType
             let url = pm.sensingFile!
-            let localURL = sensingFileHandler.handleFileReceived(url: url, forType: t)!
+            let localURL = sensingFileHandler.handleFileReceived(url: url, forType: t, batchNo: pm.batchNo)!
             remoteSensingEvent.raiseEvent(withType: .remoteSessionDataReceived, forSession: currentSession!, url: localURL)
         default: break
             // todo error handling

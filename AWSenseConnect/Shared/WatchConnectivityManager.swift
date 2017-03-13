@@ -89,6 +89,22 @@ internal class CommunicationManager: NSObject, WCSessionDelegate {
         messageEvent.raiseEvent(withMessage: message)
     }
     
+    func session(_ session: WCSession, didFinish fileTransfer: WCSessionFileTransfer, error: Error?) {
+    #if os(watchOS)
+        let url : URL = fileTransfer.file.fileURL
+    #else
+        let url : URL = fileTransfer.file.fileURL!
+    #endif
+        // TODO: put somewhere els if it works
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(at: url)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong: \(error)")
+        }
+    }
+    
     // MARK: WCSessionDelegate - Activation
     
     // The next method is required in order to support asynchronous session activation as well as for quick watch switching.

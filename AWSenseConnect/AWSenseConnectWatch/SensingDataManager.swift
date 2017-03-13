@@ -39,6 +39,7 @@ internal class SensingDataManager : SensingBufferEventHandler {
     
     func initialise(withSession session: SensingSession){
         sensingDataBuffer = SensingDataBuffer(withSession: session)
+        sensingDataBuffer?.subscribe(handler: self)
     }
     
     func manage(sensingData data : AWSSensorData, forType type: AWSSensorType){
@@ -62,9 +63,11 @@ internal class SensingDataManager : SensingBufferEventHandler {
     }
     
     func sendDataFile(forType type: AWSSensorType){
-        let url = sensingDataBuffer!.prepareFileToSend(forType: type)
-        let message = SensingFileMessage(withURL: url, ofType: type)
-        CommunicationManager.instance.send(message: message, userInfo: true)
+        sensingDataBuffer!.prepareFileToSend(forType: type)
+        
+//        let message = SensingFileMessage(withURL: url, ofType: type, batchNo: batchNo)
+//        
+//        CommunicationManager.instance.send(message: message, userInfo: true)
     }
 
 }

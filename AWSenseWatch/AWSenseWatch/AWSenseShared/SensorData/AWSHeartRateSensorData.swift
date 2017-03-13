@@ -9,7 +9,7 @@
 import Foundation
 import HealthKit
 
-public class AWSHeartRateSensorData : AWSSensorData {
+public struct AWSHeartRateSensorData : AWSSensorData {
     
     public var sensorType : AWSSensorType { return .heart_rate }
     
@@ -48,7 +48,7 @@ public class AWSHeartRateSensorData : AWSSensorData {
         }
     }
     
-    public required init(withData data: [AnyObject]){
+    public init(withData data: [AnyObject]){
         self.timestamp = AWSTimestamp(data: data[0] as! [AnyObject])
         self.heartRate = data[1] as! Double
     }

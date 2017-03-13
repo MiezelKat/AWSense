@@ -11,23 +11,30 @@ import AWSenseShared
 
 internal class SensingDataBuffer{
     
-    private let bufferLimit = 1024 * 10
+    private let bufferLimit = 400//1024
     
     // MARK: - properties
     
     var sensingSession : SensingSession
     
-    var sensingBuffers : [AWSSensorType : [AWSSensorData]]
-    
+    var sensingBuffers : [AWSSensorType : [AWSSensorData?]]
+    var sensingBufferBatchNo : [AWSSensorType : Int]
+    var sensingBufferCounter : [AWSSensorType : Int]
     var sensingBufferEvent : SensingBufferEvent = SensingBufferEvent()
+    
+    let writeQueue = DispatchQueue(label: "write")
     
     // MARK: - init
     
     init(withSession session : SensingSession){
         sensingSession = session
         sensingBuffers = [AWSSensorType : [AWSSensorData]]()
+        sensingBufferBatchNo = [AWSSensorType : Int]()
+        sensingBufferCounter = [AWSSensorType : Int]()
         for s : AWSSensorType in sensingSession.sensorConfig.enabledSensors{
-            sensingBuffers[s] = [AWSSensorData]()
+            sensingBuffers[s] = [AWSSensorData?](repeating: nil, count: bufferLimit)
+            sensingBufferBatchNo[s] = 1
+            sensingBufferCounter[s] = 0
         }
     }
     
@@ -35,21 +42,37 @@ internal class SensingDataBuffer{
     // MARK: - methods
     
     func append(sensingData data: AWSSensorData, forType type: AWSSensorType){
-        //sync (array: sensingBuffers[type]!) {
-            sensingBuffers[type]?.append(data)
-//        }
-        if(sensingBuffers[type]!.count > bufferLimit){
-            self.sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
+        let count = sensingBufferCounter[type]!
+        sensingBuffers[type]![count] = data
+        sensingBufferCounter[type] = count + 1
+        print("elements: \(count)")
+        if(count >= (bufferLimit-1)){
+            //queue.async {
+                print("full buffer \(type)")
+                self.sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
+            //}
         }
     }
     
-    func prepareFileToSend(forType type: AWSSensorType) -> URL{
-        let url = serialise(forType: type)
+//    func copyAndClear(forType type : AWSSensorType) -> [AWSSensorData]{
+//        let copy = sensingBuffers[type]
+//        sensingBuffers[type]!.removeAll()
+//        return copy
+//    }
+    
+    func prepareFileToSend(forType type: AWSSensorType){ // -> (URL, Int){
+        let batchNo = sensingBufferBatchNo[type]!
+        //let url = 
+        serialise(forType: type, batchNo: batchNo)
         // reset the buffer
 //        sync (array: sensingBuffers[type]!) {
-            sensingBuffers[type]!.removeAll(keepingCapacity: true)
+            sensingBufferCounter[type]! = 0
+        
+        // sensingBuffers[type]!.removeAll(keepingCapacity: true)
+        
 //        }
-        return url!
+        sensingBufferBatchNo[type] = sensingBufferBatchNo[type]! + 1
+       // return (url!, batchNo)
     }
 
 //    private func sync(array: [AWSSensorData], closure: () -> Void) {

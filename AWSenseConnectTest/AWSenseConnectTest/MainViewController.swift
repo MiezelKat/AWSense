@@ -149,7 +149,14 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
                     self.deviceMLabel.text = data!.prettyPrint
                 }
             }
+        }else if(type == .remoteSessionDataReceived){
+            
+            messageCount += 1
+            DispatchQueue.main.async {
+                self.messageCountLabel.text = self.messageCount.description
+            }
         }
+
     }
     
     var messageCount = 0

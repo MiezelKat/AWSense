@@ -9,7 +9,7 @@
 import Foundation
 import CoreMotion
 
-public class AWSRawAccelerometerSensorData : AWSSensorData {
+public struct AWSRawAccelerometerSensorData : AWSSensorData {
 
     public var sensorType : AWSSensorType { return .accelerometer }
     
@@ -48,7 +48,7 @@ public class AWSRawAccelerometerSensorData : AWSSensorData {
         }
     }
     
-    public required init(withData data: [AnyObject]){
+    public init(withData data: [AnyObject]){
         self.timestamp = AWSTimestamp(data: data[0] as! [AnyObject])
         self.acceleration = CMAcceleration(fromData: data[1] as! [AnyObject])
     }

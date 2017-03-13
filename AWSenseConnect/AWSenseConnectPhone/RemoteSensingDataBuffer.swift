@@ -24,7 +24,7 @@ internal class RemoteSensingFileHandler{
             sensingSession = session
         }
 
-    internal func handleFileReceived(url: URL, forType type: AWSSensorType) -> URL?{
+    internal func handleFileReceived(url: URL, forType type: AWSSensorType, batchNo : Int) -> URL?{
         
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let documentsDirectory = paths.first!
@@ -37,7 +37,7 @@ internal class RemoteSensingFileHandler{
         }
         
         let name = sensingSession!.name != nil ? sensingSession!.name! : "export"
-        let path = dataPath.appending("/\(name)_\(type.short).csv")
+        let path = dataPath.appending("/\(name)_\(batchNo)_\(type.short).csv")
         
         let fileManager = FileManager.default
         
