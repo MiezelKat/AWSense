@@ -11,7 +11,7 @@ import AWSenseShared
 
 internal class SensingDataBuffer{
     
-    private let bufferLimit = 1024
+    private let bufferLimit = 600 //1024
     
     private let bufferLimitHR = 10
     
@@ -41,9 +41,12 @@ internal class SensingDataBuffer{
     
     func append(sensingData data: AWSSensorData, forType type: AWSSensorType){
         let count = sensingBuffers[type]!.count
-        sensingBuffers[type]?.append(data)
+        sensingBuffers[type]!.append(data)
         
         if(type != .heart_rate && count > bufferLimit){
+            if(type == .device_motion){
+                print("devide motion")
+            }
             sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
         }else if (type == .heart_rate && count > bufferLimitHR){
             sensingBufferEvent.raiseEvent(withType: .bufferLimitReached, forSensor: type)
