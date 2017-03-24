@@ -57,7 +57,7 @@ public class SensingSessionManager : MessageEventHandler, AWSSensorEventHandler{
     
     private func handleStart(configuration: SensingConfiguration, transmissionIntervall intervall : DataTransmissionInterval){
 
-        currentSession = SensingSession(enabledSensorSet: configuration.enabledSensors, transmissionIntervall: intervall)
+        currentSession = SensingSession(configuration: configuration, transmissionIntervall: intervall)
         
         // prepare the data manager
         

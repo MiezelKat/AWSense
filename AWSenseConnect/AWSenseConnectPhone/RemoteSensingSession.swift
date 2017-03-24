@@ -24,13 +24,11 @@ public class RemoteSensingSession{
     
     // MARK: - init
     
-    init(withName name: String? = nil, enabledSensors sensors: [AWSSensorType]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
+    init(withName name: String? = nil, enabledSensors sensors: [AWSSensorType], sensorSettings settings: [SensorSettings]?, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
         state = .created
-        if(sensors != nil){
-            sensorConfig = SensingConfiguration(withEnabledSensors: sensors!)
-        }else{
-            sensorConfig = SensingConfiguration()
-        }
+
+        sensorConfig = SensingConfiguration(withEnabledSensors: sensors, sensorSettings: settings)
+
         id = UUID().uuidString
         self.name = name
         self.transmissionIntervall = intervall
@@ -39,8 +37,8 @@ public class RemoteSensingSession{
     
     // MARK: - methods
     
-    internal func resetConfig(enabledSensors sensors: [AWSSensorType]){
-        sensorConfig = SensingConfiguration(withEnabledSensors: sensors)
+    internal func resetConfig(enabledSensors sensors: [AWSSensorType], sensorSettings settings: [SensorSettings]){
+        sensorConfig = SensingConfiguration(withEnabledSensors: sensors, sensorSettings: settings)
     }
     
     internal func reset(transmissionIntervall intervall: DataTransmissionInterval){

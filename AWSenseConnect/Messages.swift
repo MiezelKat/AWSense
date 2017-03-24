@@ -198,11 +198,12 @@ internal class StartSensingMessage : AbstractMessage{
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        let sensArr = payload[type(of: self).configurationKey] as! [Int]
-        let s = sensArr.map{ sens in
-            return AWSSensorType(rawValue: sens)
-        } as! [AWSSensorType]
-        configuration = SensingConfiguration(withEnabledSensors: s)
+        let sensArr = payload[type(of: self).configurationKey]! as AnyObject //as! [Int]
+//        let s = sensArr.map{ sens in
+//            return AWSSensorType(rawValue: sens)
+//        } as! [AWSSensorType]
+//        let settings
+        configuration = StartSensingMessage.configFor(data: sensArr)
         transmissionIntervall = DataTransmissionInterval(payload[type(of: self).transmissionModeKey] as! Double)
         // DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)
         super.init(fromPayload: payload)
@@ -223,14 +224,34 @@ internal class StartSensingMessage : AbstractMessage{
     /// - Returns: the payload
     internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
-        let configPayload = configuration.getSensorArray().map{ s in
-            return s.rawValue
-        }
-        payload[type(of: self).configurationKey] = configPayload
+//        let configPayload = configuration.getSensorArray().map{ s in
+//            return s.rawValue
+//        }
+        payload[type(of: self).configurationKey] = dataFromConfig()
         payload[type(of: self).transmissionModeKey] = transmissionIntervall.intervallSeconds
         return payload
     }
 
+    private func dataFromConfig() -> AnyObject{
+        let sensorPayload = configuration.getSensorArray().map{ s in
+            return s.rawValue
+        }
+        let settings = Array(configuration.sensorSettings.values)
+        let settingsPayload = SensorSettingFactory.serialiseSettingsSet(settings: settings)
+        return [sensorPayload, settingsPayload] as AnyObject
+    }
+    
+    private static func configFor(data: AnyObject) -> SensingConfiguration{
+        let dataArr = data as! [AnyObject]
+        let sensArr = dataArr[0] as! [Int]
+        let s = sensArr.map{ sens in
+            return AWSSensorType(rawValue: sens)
+        } as! [AWSSensorType]
+        let sensorSettings = SensorSettingFactory.deserialiseSettingsSet(data: dataArr[1] as! [[AnyObject]])
+        
+        return SensingConfiguration(withEnabledSensors: s, sensorSettings: sensorSettings)
+    }
+    
 }
 
 

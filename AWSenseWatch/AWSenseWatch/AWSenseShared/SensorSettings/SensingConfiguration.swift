@@ -10,11 +10,20 @@ import Foundation
 
 public class SensingConfiguration{
     
-    public var enabledSensors : Set<AWSSensorType> = Set<AWSSensorType>()
+    public private(set) var enabledSensors : Set<AWSSensorType> = Set<AWSSensorType>()
     
-    public init(withEnabledSensors sensors:[AWSSensorType]) {
+    public private(set) var sensorSettings : [AWSSensorType: SensorSettings] = [AWSSensorType: SensorSettings]()
+    
+    public init(withEnabledSensors sensors:[AWSSensorType], sensorSettings settings: [SensorSettings]?) {
         for s: AWSSensorType in sensors {
             self.enableSensor(withType: s)
+        }
+        if(settings != nil){
+            for s: SensorSettings in settings!{
+                if(enabledSensors.contains(s.sensorType)){
+                    sensorSettings[s.sensorType] = s
+                }
+            }
         }
     }
     
@@ -22,13 +31,11 @@ public class SensingConfiguration{
         return Array(enabledSensors)
     }
     
-    public init() {}
-    
-    public func enableSensor(withType type : AWSSensorType){
+    internal func enableSensor(withType type : AWSSensorType, settings: SensorSettings? = nil){
         enabledSensors.insert(type)
     }
  
-    public func disableSensor(withType type : AWSSensorType){
+    internal func disableSensor(withType type : AWSSensorType, settings: SensorSettings? = nil){
         enabledSensors.remove(type)
     }
 }

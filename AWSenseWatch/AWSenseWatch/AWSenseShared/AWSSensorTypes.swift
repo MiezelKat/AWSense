@@ -17,7 +17,6 @@ public enum AWSSensorType : Int, Equatable {
     
     case heart_rate = 0
     case accelerometer
-    case ambinent_light
     case microphone
     case bluetooth
     case device_motion
@@ -41,8 +40,6 @@ public enum AWSSensorType : Int, Equatable {
             return "hr"
         case .accelerometer:
             return "ac"
-        case .ambinent_light:
-            return "al"
         case .microphone:
             return "mp"
         case .bluetooth:

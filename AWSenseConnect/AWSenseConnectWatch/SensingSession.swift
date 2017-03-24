@@ -21,24 +21,31 @@ public class SensingSession{
     
     // MARK: - init
     
-    init(enabledSensors sensors: [AWSSensorType]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
+    init(enabledSensors sensors: [AWSSensorType], sensorSettings settings: [SensorSettings], transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
         state = .created
-        if(sensors != nil){
-            sensorConfig = SensingConfiguration(withEnabledSensors: sensors!)
-        }else{
-            sensorConfig = SensingConfiguration()
-        }
-        self.transmissionIntervall = intervall
-    }
-    
-    init(enabledSensorSet sensors: Set<AWSSensorType>, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
-        state = .created
-        
-        sensorConfig = SensingConfiguration()
-        sensorConfig.enabledSensors = sensors
+
+        sensorConfig = SensingConfiguration(withEnabledSensors: sensors, sensorSettings: settings)
 
         self.transmissionIntervall = intervall
     }
+    
+    init(withConfiguration configuration : SensingConfiguration, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
+        state = .created
+        
+        sensorConfig = configuration
+        
+        self.transmissionIntervall = intervall
+    }
+
+    
+//    init(enabledSensorSet sensors: Set<AWSSensorType>, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
+//        state = .created
+//        
+//        sensorConfig = SensingConfiguration()
+//        sensorConfig.enabledSensors = sensors
+//
+//        self.transmissionIntervall = intervall
+//    }
     
     
     // MARK: - methods
