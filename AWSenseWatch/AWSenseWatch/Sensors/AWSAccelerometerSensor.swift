@@ -50,8 +50,10 @@ class AWSAccelerometerSensor : AWSSensor{
         return motionManager.isAccelerometerActive
     }
     
-    func startSensing(){
+    func startSensing(withSettings settings: SensorSettings?){
         if (motionManager.isAccelerometerAvailable == true) {
+            
+            let set = (settings != nil ? settings : RawAccelerometerSensorSettings.standardSettings) as! RawAccelerometerSensorSettings
             
             let handler:CMAccelerometerHandler = {(data: CMAccelerometerData?, error: Error?) -> Void in
                 if(data != nil && data!.timestamp != nil && data?.acceleration != nil){
@@ -61,8 +63,9 @@ class AWSAccelerometerSensor : AWSSensor{
                     print("no accelerometer data")
                 }
             }
+            print("Uptade seconds accelerometer: \(1.0/set.updateIntervallHz)")
+            motionManager.accelerometerUpdateInterval = 1.0/set.updateIntervallHz
             
-            motionManager.accelerometerUpdateInterval = 0.01
             motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler: handler)
         }
     }

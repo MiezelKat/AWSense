@@ -17,7 +17,7 @@ protocol AWSSensor{
     func isRegistered() -> Bool
     func isSensing() -> Bool
     
-    func startSensing()
+    func startSensing(withSettings: SensorSettings?)
     func stopSensing()
     
     func register(eventHander : AWSSensorEventHandler)

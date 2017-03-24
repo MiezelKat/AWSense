@@ -74,7 +74,7 @@ class AWSHeartRateSensor : NSObject, AWSSensor, HKWorkoutSessionDelegate{
         return startedSensing
     }
     
-    func startSensing(){
+    func startSensing(withSettings: SensorSettings? = nil){
         startedSensing = true
 
         // If we have already started the workout, then do nothing.

@@ -12,13 +12,13 @@ import AWSenseShared
 
 internal extension RawAccelerometerSensorSettings{
     internal func serialise() -> [AnyObject]{
-        return [self.sensorType.rawValue as AnyObject, self.updateIntervall as AnyObject] as [AnyObject]
+        return [self.sensorType.rawValue as AnyObject, self.updateIntervallHz as AnyObject] as [AnyObject]
     }
 }
 
 internal extension DeviceMotionSensorSettings{
     internal func serialise() -> [AnyObject]{
-        return [self.sensorType.rawValue as AnyObject, self.updateIntervall as AnyObject] as [AnyObject]
+        return [self.sensorType.rawValue as AnyObject, self.updateIntervallHz as AnyObject] as [AnyObject]
     }
 }
 
@@ -36,9 +36,11 @@ internal class SensorSettingFactory{
         
         switch type {
         case .accelerometer:
-            return RawAccelerometerSensorSettings(withIntervall: 0)
+            let updateIntervall : Double = data[1] as! Double
+            return RawAccelerometerSensorSettings(withIntervall_Hz: updateIntervall)
         case .device_motion:
-            return DeviceMotionSensorSettings(withIntervall: 0)
+            let updateIntervall : Double = data[1] as! Double
+            return DeviceMotionSensorSettings(withIntervall_Hz: updateIntervall)
         case .heart_rate:
             return HeartRateSensorSettings()
         default:

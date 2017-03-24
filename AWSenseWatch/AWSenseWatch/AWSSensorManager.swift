@@ -34,18 +34,27 @@ public class AWSSensorManager : NSObject{
         return sensor != nil && sensor!.isSensing()
     }
     
-    public func startSensing(with sensor: AWSSensorType) {
+    public func startSensing(withSensor sensor: AWSSensorType, settings: SensorSettings? = nil) {
         let sensor : AWSSensor? = get(sensor: sensor)
         if(sensor != nil){
-            sensor!.startSensing()
+            sensor!.startSensing(withSettings: settings)
         }else{
             //TODO: error handling
         }
     }
     
-    public func startSensing(withSensors sensors: Set<AWSSensorType>) {
-        for s in sensors{
-            startSensing(with: s)
+//    public func startSensing(withSensors sensors: Set<AWSSensorType>) {
+//        for s in sensors{
+//            startSensing(withSensor: s)
+//        }
+//    }
+    
+    public func startSensing(withConfiguration config: SensingConfiguration){
+        let enabledSensors = config.enabledSensors
+        
+        for s in enabledSensors{
+            let settings = config.sensorSettings[s]
+            startSensing(withSensor: s, settings: settings)
         }
     }
     

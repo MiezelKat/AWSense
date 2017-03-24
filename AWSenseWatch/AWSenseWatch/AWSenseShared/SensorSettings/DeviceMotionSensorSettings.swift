@@ -18,23 +18,23 @@ public struct DeviceMotionSensorSettings : SensorSettings{
     
     public static var standardSettings : SensorSettings = DeviceMotionSensorSettings()
         
-    internal static let defaultUpdateIntervall = 50.0
+    internal static let defaultUpdateIntervallHz = 50.0
     
-    public var updateIntervall : Double{
+    public var updateIntervallHz : Double{
         didSet {
-            if(updateIntervall <= 0 || updateIntervall > 100){
-                print("device motion update intervall out of range: \(updateIntervall)")
-                updateIntervall = DeviceMotionSensorSettings.defaultUpdateIntervall
+            if(updateIntervallHz <= 0 || updateIntervallHz > 100){
+                print("device motion update intervall out of range: \(updateIntervallHz)")
+                updateIntervallHz = DeviceMotionSensorSettings.defaultUpdateIntervallHz
             }
         }
     }
     
     public init(){
-        updateIntervall = DeviceMotionSensorSettings.defaultUpdateIntervall
+        updateIntervallHz = DeviceMotionSensorSettings.defaultUpdateIntervallHz
     }
     
-    public init(withIntervall intervall: Double){
-        updateIntervall = intervall
+    public init(withIntervall_Hz intervall: Double){
+        updateIntervallHz = intervall
     }
     
 }

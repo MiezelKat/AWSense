@@ -50,9 +50,11 @@ class AWSDeviceMotionSensor : AWSSensor{
         return motionManager.isDeviceMotionActive
     }
     
-    func startSensing(){
+    func startSensing(withSettings settings: SensorSettings?){
         
         if (motionManager.isDeviceMotionAvailable == true) {
+            
+            let set = (settings != nil ? settings : DeviceMotionSensorSettings.standardSettings) as! DeviceMotionSensorSettings
             
             let handler:CMDeviceMotionHandler = {(data: CMDeviceMotion?, error: Error?) -> Void in
                 if(data != nil ){
@@ -64,7 +66,7 @@ class AWSDeviceMotionSensor : AWSSensor{
                 }
             }
             
-            motionManager.deviceMotionUpdateInterval = 0.01
+            motionManager.deviceMotionUpdateInterval = 1.0/set.updateIntervallHz
             motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: handler)
         }
     }

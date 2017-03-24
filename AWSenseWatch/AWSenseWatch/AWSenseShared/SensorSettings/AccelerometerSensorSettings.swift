@@ -18,23 +18,23 @@ public struct RawAccelerometerSensorSettings : SensorSettings{
     
     public static var standardSettings : SensorSettings = RawAccelerometerSensorSettings()
     
-    internal static let defaultUpdateIntervall = 50.0
+    public static let defaultUpdateIntervallHz = 50.0
     
-    public var updateIntervall : Double{
+    public var updateIntervallHz : Double{
         didSet {
-            if(updateIntervall <= 0 || updateIntervall > 100){
-                print("accelerometer update intervall out of range: \(updateIntervall)")
-                updateIntervall = RawAccelerometerSensorSettings.defaultUpdateIntervall
+            if(updateIntervallHz <= 0 || updateIntervallHz > 100){
+                print("accelerometer update intervall out of range: \(updateIntervallHz)")
+                updateIntervallHz = RawAccelerometerSensorSettings.defaultUpdateIntervallHz
             }
         }
     }
     
     public init(){
-        updateIntervall = RawAccelerometerSensorSettings.defaultUpdateIntervall
+        updateIntervallHz = RawAccelerometerSensorSettings.defaultUpdateIntervallHz
     }
     
-    public init(withIntervall intervall: Double){
-        updateIntervall = intervall
+    public init(withIntervall_Hz intervall: Double){
+        updateIntervallHz = intervall
     }
 
 }
