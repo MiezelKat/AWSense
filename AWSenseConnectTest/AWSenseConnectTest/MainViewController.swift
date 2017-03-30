@@ -83,7 +83,7 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
         
         do {
             // TODO: test sensor settings
-            try sessionManager.startSensingSession(withName: nameTextField.text, configuration: enabledSensors, sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 1.0)], transmissionIntervall: transmissionIntervall)
+            try sessionManager.startSensingSession(withName: nameTextField.text, configuration: enabledSensors, sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 5), DeviceMotionSensorSettings(withIntervall_Hz: 5)], transmissionIntervall: transmissionIntervall)
             
         }catch let error as Error{
             print(error)

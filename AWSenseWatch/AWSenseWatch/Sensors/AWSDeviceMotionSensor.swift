@@ -65,7 +65,7 @@ class AWSDeviceMotionSensor : AWSSensor{
                     print("no devie motion data")
                 }
             }
-            
+            print("Uptade seconds accelerometer: \(1.0/set.updateIntervallHz)")
             motionManager.deviceMotionUpdateInterval = 1.0/set.updateIntervallHz
             motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: handler)
         }
