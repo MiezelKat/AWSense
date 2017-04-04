@@ -9,12 +9,18 @@ At the moment, it allows easy access to the following sensors from within a Watc
   * Linear Accelerometer
   * Gravity
   * Attitude
-  
-In the future, I plan to include the following sensors:
-* Ambient light
-* Ambient noise levels
 
-## Setup
+AWSense is separated in two parts:
+* AWSense Core: The Core is a standalone library for the Apple Watch which can be incorperated in Apple Watch apps for eased access to sensing data. It does not provice functionalities to transfer the sensing data to the phone.
+* AWSense Connect: This framework builds on top of the AWSence Core and provides communication functionalities for session management and data transmission. 
+
+This schematic highlights the architecture of the AWSense framework:
+
+![schematics of architecture][schematics-small]
+
+## AWSense Core
+
+### Setup
 
 To use the library, include it in your xCode project. Include the library in your WatchKit Extension target as embedded binary. 
 
@@ -25,3 +31,5 @@ To get sensor updates, follow these steps:
 `
 import AWSenseWatch
 `
+
+
