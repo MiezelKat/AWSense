@@ -16,7 +16,7 @@ AWSense is separated in two parts:
 
 This schematic highlights the architecture of the AWSense framework:
 
-![schematics of architecture](https://github.com/MiezelKat/AWSense/blob/working/schematics-small.png)
+-> ![schematics of architecture](https://github.com/MiezelKat/AWSense/blob/working/schematics-small.png) <-
 
 ## AWSense Core
 
