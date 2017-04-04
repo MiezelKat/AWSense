@@ -90,7 +90,9 @@ This event handler is subscribed to the sensors via the `SessionManager` singlet
 let manager = SessionManager.sharedInstance
         
 do {
-    try sessionManager.startSensingSession(withName: "test_session", configuration: [.heart_rate, .accelerometer], sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 1.0)])
+    try sessionManager.startSensingSession(withName: "test_session", 
+                                           configuration: [.heart_rate, .accelerometer], 
+                                           sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 1.0)])
             
 }catch let error as Error{
     print(error)
