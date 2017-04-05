@@ -11,7 +11,7 @@ import AWSenseShared
 
 internal class SensingDataBuffer{
     
-    private let bufferLimit = 500 //1024
+    private let bufferLimit = 1024
     
     private let bufferLimitHR = 10
     

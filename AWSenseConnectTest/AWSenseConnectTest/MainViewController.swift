@@ -65,7 +65,7 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
 
     @IBAction func startButtonPressed(_ sender: Any) {
         
-        //disableStartSessionElements()
+        disableStartSessionElements()
         
         var enabledSensors = [AWSSensorType]()
         
@@ -83,7 +83,9 @@ class MainViewController: UITableViewController, RemoteSensingEventHandler {
         
         do {
             // TODO: test sensor settings
-            try sessionManager.startSensingSession(withName: nameTextField.text, configuration: enabledSensors, sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 1.0)], transmissionIntervall: transmissionIntervall)
+            try sessionManager.startSensingSession(withName: nameTextField.text, configuration: enabledSensors,
+                                                   sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 50.0), DeviceMotionSensorSettings(withIntervall_Hz: 50.0)],
+                                                   transmissionIntervall: transmissionIntervall)
             
         }catch let error as Error{
             print(error)
