@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46FAB1E61E97B4C300D7357D /* AWSenseShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46FAB1E51E97B4C300D7357D /* AWSenseShared.framework */; };
+		46FAB1E71E97B4C300D7357D /* AWSenseShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46FAB1E51E97B4C300D7357D /* AWSenseShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4F0829CA1E588AEE0049E1D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0829C91E588AEE0049E1D0 /* AppDelegate.swift */; };
 		4F0829CC1E588AEE0049E1D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0829CB1E588AEE0049E1D0 /* ViewController.swift */; };
 		4F0829CF1E588AEE0049E1D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0829CD1E588AEE0049E1D0 /* Main.storyboard */; };
@@ -17,7 +19,6 @@
 		4F0829EA1E588AEE0049E1D0 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0829E81E588AEE0049E1D0 /* Interface.storyboard */; };
 		4F0829EC1E588AEE0049E1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0829EB1E588AEE0049E1D0 /* Assets.xcassets */; };
 		4F0829F31E588AEF0049E1D0 /* AWSenseWatchTest WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4F0829F21E588AEF0049E1D0 /* AWSenseWatchTest WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4F0829F81E588AEF0049E1D0 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0829F71E588AEF0049E1D0 /* InterfaceController.swift */; };
 		4F0829FA1E588AEF0049E1D0 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0829F91E588AEF0049E1D0 /* ExtensionDelegate.swift */; };
 		4F0829FC1E588AEF0049E1D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0829FB1E588AEF0049E1D0 /* Assets.xcassets */; };
 		4F70C29A1E58E08E00271F4A /* ConfigurationInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F70C2991E58E08E00271F4A /* ConfigurationInterfaceController.swift */; };
@@ -81,6 +82,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				46FAB1E71E97B4C300D7357D /* AWSenseShared.framework in Embed Frameworks */,
 				4F9D93181E589E0D00860463 /* AWSenseWatch.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -89,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46FAB1E51E97B4C300D7357D /* AWSenseShared.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseShared.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0829C61E588AEE0049E1D0 /* AWSenseWatchTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AWSenseWatchTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0829C91E588AEE0049E1D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F0829CB1E588AEE0049E1D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,7 +107,6 @@
 		4F0829EB1E588AEE0049E1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0829ED1E588AEE0049E1D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4F0829F21E588AEF0049E1D0 /* AWSenseWatchTest WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "AWSenseWatchTest WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F0829F71E588AEF0049E1D0 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		4F0829F91E588AEF0049E1D0 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		4F0829FB1E588AEF0049E1D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0829FD1E588AEF0049E1D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			files = (
 				4F9D93141E5899FD00860463 /* HealthKit.framework in Frameworks */,
 				4F9D93171E589E0D00860463 /* AWSenseWatch.framework in Frameworks */,
+				46FAB1E61E97B4C300D7357D /* AWSenseShared.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +151,6 @@
 		4F0829BD1E588AEE0049E1D0 = {
 			isa = PBXGroup;
 			children = (
-				4F9D93161E589E0D00860463 /* AWSenseWatch.framework */,
 				4F0829C81E588AEE0049E1D0 /* AWSenseWatchTest */,
 				4F0829E71E588AEE0049E1D0 /* AWSenseWatchTest WatchKit App */,
 				4F0829F61E588AEF0049E1D0 /* AWSenseWatchTest WatchKit Extension */,
@@ -206,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				4F9D93151E5899FD00860463 /* AWSenseWatchTest WatchKit Extension.entitlements */,
-				4F0829F71E588AEF0049E1D0 /* InterfaceController.swift */,
 				4F0829F91E588AEF0049E1D0 /* ExtensionDelegate.swift */,
 				4F70C2991E58E08E00271F4A /* ConfigurationInterfaceController.swift */,
 				4F70C29B1E58E09C00271F4A /* SensingDataInterfaceController.swift */,
@@ -219,6 +220,8 @@
 		4F9D93101E5899EF00860463 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46FAB1E51E97B4C300D7357D /* AWSenseShared.framework */,
+				4F9D93161E589E0D00860463 /* AWSenseWatch.framework */,
 				4F9D93131E5899FD00860463 /* HealthKit.framework */,
 				4F9D93111E5899EF00860463 /* HealthKit.framework */,
 			);
@@ -426,7 +429,6 @@
 				4F70C29A1E58E08E00271F4A /* ConfigurationInterfaceController.swift in Sources */,
 				4F70C29C1E58E09C00271F4A /* SensingDataInterfaceController.swift in Sources */,
 				4F0829FA1E588AEF0049E1D0 /* ExtensionDelegate.swift in Sources */,
-				4F0829F81E588AEF0049E1D0 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,10 @@ class InterfaceController: WKInterfaceController, SensingEventHandler{
    
     @IBOutlet var stateLabel: WKInterfaceLabel!
     
+    @IBOutlet var hrLabel: WKInterfaceLabel!
+    @IBOutlet var deviceMotionLabel: WKInterfaceLabel!
+    @IBOutlet var accelLabel: WKInterfaceLabel!
+    
     let sessionManager : SensingSessionManager = SensingSessionManager.instance
     
     override func awake(withContext context: Any?) {

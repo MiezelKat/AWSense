@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rFJ-5J-AFm">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rFJ-5J-AFm">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,27 +8,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
-        <scene sceneID="aou-V4-d1y">
-            <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="AWSenseWatchTest_WatchKit_App" customModuleProvider="target">
-                    <items>
-                        <label alignment="left" text="Accel Aval" id="PZs-1Z-TwH"/>
-                        <label alignment="left" text="---" id="Poe-dK-iqX">
-                            <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </label>
-                        <label alignment="left" text="HR Avail" id="rJ6-NP-fx6"/>
-                        <label alignment="left" text="---" id="YzF-ov-1Dc">
-                            <color key="textColor" red="0.4400406463" green="1" blue="0.93017141250000002" alpha="1" colorSpace="calibratedRGB"/>
-                        </label>
-                    </items>
-                    <connections>
-                        <outlet property="accelAvailableLabel" destination="Poe-dK-iqX" id="c07-8P-REC"/>
-                        <outlet property="hrAvailableLabel" destination="YzF-ov-1Dc" id="n8D-El-uet"/>
-                    </connections>
-                </controller>
-            </objects>
-        </scene>
         <!--Configuration Interface Controller-->
         <scene sceneID="6M8-XL-132">
             <objects>
@@ -96,7 +75,7 @@
                         </group>
                     </items>
                     <connections>
-                        <outlet property="accelerometerLabel" destination="YAE-wQ-Iac" id="NKh-7Q-0v6"/>
+                        <outlet property="accelerometerLabel" destination="YAE-wQ-Iac" id="Sd1-d9-L2T"/>
                         <outlet property="accelerometerTextLabel" destination="AEE-su-IJt" id="OXy-0j-XWR"/>
                         <outlet property="deviceMotionLabel" destination="HPi-WS-3a4" id="BX8-2n-xiP"/>
                         <outlet property="deviceMotionTextLabel" destination="3tD-v9-tEP" id="iic-fO-Obb"/>

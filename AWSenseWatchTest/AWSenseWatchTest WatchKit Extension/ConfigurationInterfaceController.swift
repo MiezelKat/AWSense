@@ -9,6 +9,7 @@
 import WatchKit
 import Foundation
 import AWSenseWatch
+import AWSenseShared
 
 
 class ConfigurationInterfaceController: WKInterfaceController {

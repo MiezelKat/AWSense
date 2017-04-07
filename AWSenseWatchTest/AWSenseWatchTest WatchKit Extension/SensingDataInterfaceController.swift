@@ -10,6 +10,7 @@
 import WatchKit
 import Foundation
 import AWSenseWatch
+import AWSenseShared
 
 
 class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandler {
@@ -36,7 +37,7 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
         
         if(sensors![.heart_rate]! && manager.isSensorAvailable(sensor: .heart_rate)){
             manager.register(eventhandler: self, with: .heart_rate)
-            manager.startSensing(with: .heart_rate)
+            manager.startSensing(withSensor: .heart_rate)
         }else{
             heartRateLabel.setHidden(true)
             heartRateTextLabel.setHidden(true)
@@ -44,7 +45,7 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
         
         if(sensors![.accelerometer]! && manager.isSensorAvailable(sensor: .accelerometer)){
             manager.register(eventhandler: self, with: .accelerometer)
-            manager.startSensing(with: .accelerometer)
+            manager.startSensing(withSensor: .accelerometer, settings: RawAccelerometerSensorSettings(withIntervall_Hz: 50.0))
         }else{
             accelerometerLabel.setHidden(true)
             accelerometerTextLabel.setHidden(true)
@@ -52,7 +53,7 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
         
         if(sensors![.device_motion]! && manager.isSensorAvailable(sensor: .device_motion)){
             manager.register(eventhandler: self, with: .device_motion)
-            manager.startSensing(with: .device_motion)
+            manager.startSensing(withSensor: .device_motion, settings: DeviceMotionSensorSettings(withIntervall_Hz: 50.0))
         }else{
             deviceMotionLabel.setHidden(true)
             deviceMotionTextLabel.setHidden(true)
@@ -61,27 +62,33 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
     }
     
     override func willActivate() {
+        visible = true
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     }
     
     override func didDeactivate() {
+        visible = false
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
     
+    var visible : Bool = false
+    
     func handleSensing(data: AWSSensorData, type: AWSSensorType) {
-        if(type == AWSSensorType.accelerometer){
-            DispatchQueue.main.async {
-                self.accelerometerLabel.setText(data.prettyPrint)
-            }
-        }else if(type == AWSSensorType.heart_rate){
-            DispatchQueue.main.async {
-                self.heartRateLabel.setText(data.prettyPrint)
-            }
-        }else if(type == AWSSensorType.device_motion){
-            DispatchQueue.main.async {
-                self.deviceMotionLabel.setText(data.prettyPrint)
+        if(visible){
+            if(type == AWSSensorType.accelerometer){
+                DispatchQueue.main.async {
+                    self.accelerometerLabel.setText(data.prettyPrint)
+                }
+            }else if(type == AWSSensorType.heart_rate){
+                DispatchQueue.main.async {
+                    self.heartRateLabel.setText(data.prettyPrint)
+                }
+            }else if(type == AWSSensorType.device_motion){
+                DispatchQueue.main.async {
+                    self.deviceMotionLabel.setText(data.prettyPrint)
+                }
             }
         }
     }
