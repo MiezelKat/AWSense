@@ -8,6 +8,7 @@
 
 import Foundation
 import WatchConnectivity
+import HealthKit
 
 
 /// Commication Manager class
@@ -56,8 +57,32 @@ internal class CommunicationManager: NSObject, WCSessionDelegate {
         
         if(session?.isReachable)!{
             session?.sendMessage(payload, replyHandler: nil, errorHandler: nil)
-        }else {
-            session?.transferUserInfo(payload)
+        }else if(session!.activationState == .activated){
+            #if os(watchOS)
+                session?.transferUserInfo(payload)
+            #elseif os(iOS)
+                // activate watch in background
+                if(session!.isWatchAppInstalled){
+                    let store = HKHealthStore()
+                    
+                    let wConfig = HKWorkoutConfiguration()
+                    
+                    store.startWatchApp(with: wConfig, completion: { (success, error) in
+                        // Handle errors
+                        if(self.session?.isReachable)!{
+                            self.session?.sendMessage(payload, replyHandler: nil, errorHandler: nil)
+                        }else if(self.session!.activationState == .activated){
+                            self.session?.transferUserInfo(payload)
+                        }
+                        
+                        if(!success){
+                            print("ERROR starting remote workout")
+                            print(error!)
+                        }
+                        print("started remote workout")
+                    })
+                }
+            #endif
         }
     }
     

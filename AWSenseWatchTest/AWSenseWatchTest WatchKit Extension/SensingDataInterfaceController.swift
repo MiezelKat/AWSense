@@ -93,20 +93,20 @@ class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandl
         }
     }
     
-    override func willDisappear() {
-        let manager = AWSSensorManager.sharedInstance
-        
-        if(sensors![.heart_rate]! && manager.isSensorAvailable(sensor: .heart_rate)){
-            manager.stopSensing(with: .heart_rate)
-        }
-        
-        if(sensors![.accelerometer]! && manager.isSensorAvailable(sensor: .accelerometer)){
-            manager.stopSensing(with: .accelerometer)
-        }
-        
-        if(sensors![.device_motion]! && manager.isSensorAvailable(sensor: .device_motion)){
-            manager.stopSensing(with: .device_motion)
-        }
-    }
+//    override func willDisappear() {
+//        let manager = AWSSensorManager.sharedInstance
+//        
+//        if(sensors![.heart_rate]! && manager.isSensorAvailable(sensor: .heart_rate)){
+//            manager.stopSensing(with: .heart_rate)
+//        }
+//        
+//        if(sensors![.accelerometer]! && manager.isSensorAvailable(sensor: .accelerometer)){
+//            manager.stopSensing(with: .accelerometer)
+//        }
+//        
+//        if(sensors![.device_motion]! && manager.isSensorAvailable(sensor: .device_motion)){
+//            manager.stopSensing(with: .device_motion)
+//        }
+//    }
 }
 
