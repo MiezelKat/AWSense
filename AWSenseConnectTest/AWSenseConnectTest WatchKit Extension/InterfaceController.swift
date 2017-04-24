@@ -27,19 +27,19 @@ class InterfaceController: WKInterfaceController, SensingEventHandler{
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        // Configure interface objects here.
-        
         sessionManager.subscribe(handler: self)
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
     }
     
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        //stateLabel.setText(ExtensionDelegate.testStr)
     }
     
     public func handle(withType type: SensingEventType, forSession session: SensingSession) {
@@ -47,6 +47,7 @@ class InterfaceController: WKInterfaceController, SensingEventHandler{
             if(type == .sessionCreated){
                 self.stateLabel.setText("created")
             }else if( type == .sessionStateChanged){
+                WKInterfaceDevice.current().play(.success)
                 self.stateLabel.setText(session.state.rawValue)
             }
         }

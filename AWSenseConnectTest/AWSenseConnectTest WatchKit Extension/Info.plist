@@ -4,6 +4,7 @@
 <dict>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>workout-processing</string>
 		<string>audio</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
