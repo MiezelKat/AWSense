@@ -9,8 +9,6 @@
 import WatchKit
 import Foundation
 
-import AWSenseShared
-import AWSenseWatch
 import AWSenseConnectWatch
 
 

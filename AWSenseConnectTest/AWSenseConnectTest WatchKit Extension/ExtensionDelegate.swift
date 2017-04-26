@@ -9,7 +9,6 @@
 import WatchKit
 import HealthKit
 import AWSenseConnectWatch
-import HealthKit
 
 class ExtensionDelegate: AWCExtensionDelegate {
 

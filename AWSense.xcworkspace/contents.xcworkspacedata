@@ -2,15 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:AWSenseConnectTest/AWSenseConnectTest.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:AWSenseWatchTest/AWSenseWatchTest.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:AWSenseConnect/AWSenseConnect.xcodeproj">
+      location = "group:AWSenseConnectTest/AWSenseConnectTest.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:AWSenseWatch/AWSenseWatch.xcodeproj">
+      location = "group:AWSense/AWSense.xcodeproj">
    </FileRef>
 </Workspace>

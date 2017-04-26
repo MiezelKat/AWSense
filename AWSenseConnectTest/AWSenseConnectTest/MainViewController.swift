@@ -10,7 +10,6 @@ import UIKit
 import HealthKit
 import CoreMotion
 
-import AWSenseShared
 import AWSenseConnectPhone
 
 class MainViewController: UITableViewController, RemoteSensingEventHandler {
