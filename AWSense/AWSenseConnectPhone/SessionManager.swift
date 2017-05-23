@@ -59,13 +59,13 @@ public class SessionManager : MessageEventHandler{
     
     // MARK: - methods
     
-    public func startSensingSession(withName name: String? = nil, configuration: [AWSSensorType], sensorSettings settings: [SensorSettings]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard) throws{
+    public func startSensingSession(withName name: String? = nil, configuration: [AWSSensorType], sensorSettings settings: [SensorSettings]? = nil, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard, writeToDir : String? = nil) throws{
         
         if(currentSession != nil && currentSession!.state != .stopped) {
             throw RemoteSensingSessionError.invalidSessionState(reason: "Session cannot be started, it is already running, terminated or archived")
         }
         
-        currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, sensorSettings: settings, transmissionIntervall: intervall)
+        currentSession = RemoteSensingSession(withName: name, enabledSensors: configuration, sensorSettings: settings, transmissionIntervall: intervall, writeToDir : writeToDir )
         remoteSensingEvent.raiseEvent(withType: .sessionCreated, forSession: currentSession!)
         
         sensingBuffer.initialise(withSession: currentSession!)

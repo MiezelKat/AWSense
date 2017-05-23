@@ -16,6 +16,8 @@ public class RemoteSensingSession{
     public private(set) var id : String
     public internal(set) var name : String?
     
+    public private(set) var dirToWrite : String? 
+    
     public internal(set) var state : RemoteSensingSessionState
     
     public private(set) var sensorConfig : SensingConfiguration
@@ -23,7 +25,7 @@ public class RemoteSensingSession{
     
     // MARK: - init
     
-    init(withName name: String? = nil, enabledSensors sensors: [AWSSensorType], sensorSettings settings: [SensorSettings]?, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard){
+    init(withName name: String? = nil, enabledSensors sensors: [AWSSensorType], sensorSettings settings: [SensorSettings]?, transmissionIntervall intervall: DataTransmissionInterval = DataTransmissionInterval.standard, writeToDir : String? = nil){
         state = .created
 
         sensorConfig = SensingConfiguration(withEnabledSensors: sensors, sensorSettings: settings)
@@ -31,6 +33,8 @@ public class RemoteSensingSession{
         id = UUID().uuidString
         self.name = name
         self.transmissionIntervall = intervall
+        
+        self.dirToWrite = writeToDir
     }
 
     

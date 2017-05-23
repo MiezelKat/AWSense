@@ -55,13 +55,15 @@ internal class RemoteSensingDataBuffer {
     
     func serialise(forType type: AWSSensorType){
         let batchNo = sensingBufferBatchNo[type]!
+        
+        let dirToWrite : String = sensingSession!.dirToWrite == nil ? sensingSession!.id : sensingSession!.dirToWrite!.appending("/aw")
     
         let userDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let rootDirectory = userDirectory.appending("/\(sensingSession!.id)")
+        let rootDirectory = userDirectory.appending("/\(dirToWrite)")
         
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
         let documentsDirectory = paths.first!
-        let dataPath = documentsDirectory.appending("/\(sensingSession!.id)")
+        let dataPath = documentsDirectory.appending("/\(dirToWrite)")
         
         do {
             try FileManager.default.createDirectory(atPath: dataPath, withIntermediateDirectories: true, attributes: nil)
@@ -71,7 +73,10 @@ internal class RemoteSensingDataBuffer {
         }
         
         let name = sensingSession!.name != nil ? sensingSession!.name! : "export"
-        let path = rootDirectory.appending("/\(name)_\(batchNo)_\(type.short).csv")
+        //let path = rootDirectory.appending("/\(name)_\(batchNo)_\(type.short).csv")
+        
+        let path = rootDirectory.appending("/a\(type.short.localizedUppercase)_\(batchNo).csv")
+        
         print(path)
         
         var writeString : String = type.csvHeader
