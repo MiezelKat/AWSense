@@ -78,6 +78,7 @@
 		46569ACA1E5DB39000F6C02D /* AWSenseConnectPhone.h in Headers */ = {isa = PBXBuildFile; fileRef = 46569AC81E5DB39000F6C02D /* AWSenseConnectPhone.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		46A2B0DE1EB0F3880040A84D /* SensorEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A2B0DD1EB0F3880040A84D /* SensorEvent.swift */; };
 		46A2B0DF1EB0F56E0040A84D /* SensorEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A2B0DD1EB0F3880040A84D /* SensorEvent.swift */; };
+		46A2B0E71EB102B20040A84D /* AWSessionStateChangedEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A2B0E61EB102B20040A84D /* AWSessionStateChangedEvent.swift */; };
 		46E108A31EAE2D5E00E45736 /* AWCExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E108A21EAE2D5E00E45736 /* AWCExtensionDelegate.swift */; };
 		4F5F8CB11E6C31B700CF51FE /* SensingDataBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F8CB01E6C31B700CF51FE /* SensingDataBuffer.swift */; };
 		4F5F8CB31E6C3AFB00CF51FE /* SensingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5F8CB21E6C3AFB00CF51FE /* SensingDataManager.swift */; };
@@ -123,6 +124,7 @@
 		46569AC81E5DB39000F6C02D /* AWSenseConnectPhone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSenseConnectPhone.h; sourceTree = "<group>"; };
 		46569AC91E5DB39000F6C02D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46A2B0DD1EB0F3880040A84D /* SensorEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SensorEvent.swift; path = AWSenseWatch/Helpers/SensorEvent.swift; sourceTree = SOURCE_ROOT; };
+		46A2B0E61EB102B20040A84D /* AWSessionStateChangedEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSessionStateChangedEvent.swift; path = AWSenseConnectPhone/AWSessionStateChangedEvent.swift; sourceTree = "<group>"; };
 		46E108A21EAE2D5E00E45736 /* AWCExtensionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AWCExtensionDelegate.swift; sourceTree = "<group>"; };
 		4F5F8CB01E6C31B700CF51FE /* SensingDataBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensingDataBuffer.swift; sourceTree = "<group>"; };
 		4F5F8CB21E6C3AFB00CF51FE /* SensingDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensingDataManager.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				4641FEBE1EB0E68100396B6D /* SensorSettingsExtensions.swift */,
 				4641FEBF1EB0E68100396B6D /* WatchConnectivityManager.swift */,
 				4641FEC01EB0E68100396B6D /* DataTransmissionMode.swift */,
+				46A2B0E61EB102B20040A84D /* AWSessionStateChangedEvent.swift */,
 			);
 			name = AWSenseConnectShared;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				46393B4A1E69C5A600DB8C50 /* RemoteSensingSession.swift in Sources */,
 				4641FF501EB0EBF100396B6D /* DataTransmissionMode.swift in Sources */,
 				4641FF281EB0E9F000396B6D /* AccelerometerSensorSettings.swift in Sources */,
+				46A2B0E71EB102B20040A84D /* AWSessionStateChangedEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

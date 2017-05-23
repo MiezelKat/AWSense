@@ -22,7 +22,10 @@ public class SessionManager : MessageEventHandler{
     
     public private(set) var currentSession : RemoteSensingSession?
     
+   
     private let remoteSensingEvent : RemoteSensingEvent = RemoteSensingEvent()
+    
+    private let awStateChangedEvent : AWSessionStateChangedEvent = AWSessionStateChangedEvent()
     
     private let sensingBuffer = RemoteSensingDataBuffer.instance
     
@@ -117,5 +120,14 @@ public class SessionManager : MessageEventHandler{
     public func unsubscribe(handler: RemoteSensingEventHandler){
         remoteSensingEvent.remove(handler: handler)
     }
+    
+    public func subscribeWatchEvent(handler: AWSessionStateChangedEventHandler){
+        awStateChangedEvent.add(handler: handler)
+    }
+    
+    public func unsubscribe(handler: AWSessionStateChangedEventHandler){
+        awStateChangedEvent.remove(handler: handler)
+    }
+    
     
 }
