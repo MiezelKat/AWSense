@@ -9,8 +9,7 @@
 
 import WatchKit
 import Foundation
-import AWSenseWatch
-import AWSenseShared
+import AWSense
 
 
 class SensingDataInterfaceController: WKInterfaceController, AWSSensorEventHandler {
