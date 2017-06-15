@@ -8,7 +8,6 @@
 
 import UIKit
 
-import AWSenseShared
 import AWSenseConnectPhone
 
 import HealthKit

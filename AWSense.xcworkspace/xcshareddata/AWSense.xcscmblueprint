@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2955ECD860FF0A994B0DF1637DA032E807CD6BF0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2955ECD860FF0A994B0DF1637DA032E807CD6BF0" : 9223372036854775807,
+    "8B3D884E5CB77CFCF2CE65E14C999AAC1DC843A5" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "ED7767DE-CA69-495E-B9E2-8F6F3E9722D9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2955ECD860FF0A994B0DF1637DA032E807CD6BF0" : "AWSense\/",
+    "8B3D884E5CB77CFCF2CE65E14C999AAC1DC843A5" : "AWSense\/MobiSys-Demo\/CorePlot\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AWSense",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AWSense.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/MiezelKat\/AWSense.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2955ECD860FF0A994B0DF1637DA032E807CD6BF0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/core-plot\/core-plot.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8B3D884E5CB77CFCF2CE65E14C999AAC1DC843A5"
+    }
+  ]
+}
