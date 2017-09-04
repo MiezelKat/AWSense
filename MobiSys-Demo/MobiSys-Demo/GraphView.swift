@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import GLKit
 
-class CircleClosing: UIView {
+class GraphView: CorePlotView {
     
     var _x : Double = 0
     var _y : Double = 0
@@ -45,7 +45,7 @@ class CircleClosing: UIView {
         setup()
     }
     
-    func setup() {
+    override func setup() {
         print("setup")
         self.backgroundColor = UIColor.lightGray
         //Timer.scheduledTimer(timeInterval: timeBetweenDraw, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)

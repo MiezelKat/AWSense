@@ -14,7 +14,7 @@ public struct DataTransmissionInterval{
     
     public static let standard = DataTransmissionInterval(10)
     
-    private let lowerBound = 1.0
+    private let lowerBound = 0.2
     private let upperBound = 30.0
     
     private var _intervallSeconds : Double = 10.0
@@ -28,7 +28,9 @@ public struct DataTransmissionInterval{
             if(val > lowerBound && val < upperBound){
                 _intervallSeconds = val
             }
-            
+            else{
+                print("transmission intervall out of bounds")
+            }
         }
     }
     

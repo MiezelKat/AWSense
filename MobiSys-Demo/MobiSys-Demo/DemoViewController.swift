@@ -18,9 +18,9 @@ class DemoViewController: UIViewController, RemoteSensingEventHandler {
     
     let sessionManager = SessionManager.instance
     
-    @IBOutlet weak var heartRateLabel: UILabel!
+//    @IBOutlet weak var heartRateLabel: UILabel!
     
-    @IBOutlet weak var graphView: CorePlotView! // CircleClosing!
+    @IBOutlet weak var graphView: GraphView! // CircleClosing!
     
     
     override func viewDidLoad() {
@@ -51,11 +51,12 @@ class DemoViewController: UIViewController, RemoteSensingEventHandler {
         var enabledSensors : [AWSSensorType] = [.heart_rate, .accelerometer]
 
         
-        let transmissionIntervall = DataTransmissionInterval(1)
+        let transmissionIntervall = DataTransmissionInterval(0.35)
         
         do {
             // TODO: test sensor settings
             try sessionManager.startSensingSession(withName: "test", configuration: enabledSensors, sensorSettings: [RawAccelerometerSensorSettings(withIntervall_Hz: 3)], transmissionIntervall: transmissionIntervall)
+            
             // DeviceMotionSensorSettings(withIntervall_Hz: 5)
         }catch let error as Error{
             print(error)
@@ -64,6 +65,14 @@ class DemoViewController: UIViewController, RemoteSensingEventHandler {
         
     }
 
+    @IBAction func stopPressed(_ sender: Any) {
+        do {
+            // TODO: test sensor settings
+            try sessionManager.stopSensing()
+        }catch let error as Error{
+            print(error)
+        }
+    }
     
     public func handle(withType type: RemoteSensingEventType, forSession session: RemoteSensingSession?, withData data: [AWSSensorData]?) {
         if(type == .sessionCreated){
@@ -78,22 +87,22 @@ class DemoViewController: UIViewController, RemoteSensingEventHandler {
             }
             
             if(data![0].sensorType == .heart_rate){
-                DispatchQueue.main.async {
-                    self.heartRateLabel.text = data!.last!.prettyPrint
-                }
+//                DispatchQueue.main.async {
+//                    self.heartRateLabel.text = data!.last!.prettyPrint
+//                }
             }else if(data![0].sensorType == .accelerometer){
-//                let aData = data as! [AWSRawAccelerometerSensorData]
-//                let element = aData.last!
-//                //DispatchQueue.main.async {
-//                self.graphView.set(x: element.acceleration.x, y: element.acceleration.y, z: element.acceleration.z)
-//
-//                //}
-            }else if(data![0].sensorType == .device_motion){
-//                let aData = data as! [AWSDeviceMotionSensorData]
-//                let element = aData.last!
-//                //DispatchQueue.main.async {
-//                self.graphView.set(x: element.gravity.x, y: element.gravity.y, z: element.gravity.z)
+                let aData = data as! [AWSRawAccelerometerSensorData]
+                let element = aData.last!
+                DispatchQueue.main.async {
+                    self.graphView.set(x: element.acceleration.x, y: element.acceleration.y, z: element.acceleration.z)
+                }
             }
+//            else if(data![0].sensorType == .device_motion){
+////                let aData = data as! [AWSDeviceMotionSensorData]
+////                let element = aData.last!
+////                //DispatchQueue.main.async {
+////                self.graphView.set(x: element.gravity.x, y: element.gravity.y, z: element.gravity.z)
+//            }
         }
     }
     

@@ -198,7 +198,6 @@
 		461AF5C81E8D7BE900FAE2BA /* AWSenseConnectWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSenseConnectWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46FAD8BA1E8E938600B52595 /* CorePlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CorePlotView.swift; sourceTree = "<group>"; };
 		4F524DE31EF3048E00096227 /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = CorePlot/framework/CorePlot.xcodeproj; sourceTree = "<group>"; };
-		4F524E0A1EF305E200096227 /* AWSense.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSense.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +229,6 @@
 		461AF56F1E8D7B5200FAE2BA = {
 			isa = PBXGroup;
 			children = (
-				4F524E0A1EF305E200096227 /* AWSense.framework */,
 				4F524DE31EF3048E00096227 /* CorePlot.xcodeproj */,
 				461AF5C01E8D7B9400FAE2BA /* Libs */,
 				461AF57A1E8D7B5200FAE2BA /* MobiSys-Demo */,
