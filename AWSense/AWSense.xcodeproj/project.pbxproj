@@ -61,7 +61,6 @@
 		4641FF3E1EB0EA0200396B6D /* AWSSensorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FF021EB0E8C500396B6D /* AWSSensorTypes.swift */; };
 		4641FF3F1EB0EA0200396B6D /* AWSSensorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FF021EB0E8C500396B6D /* AWSSensorTypes.swift */; };
 		4641FF411EB0EA3000396B6D /* AWSSensorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FEEA1EB0E83700396B6D /* AWSSensorManager.swift */; };
-		4641FF421EB0EA3800396B6D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4641FEEB1EB0E83700396B6D /* Info.plist */; };
 		4641FF431EB0EA4200396B6D /* AWSenseWatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4641FEEC1EB0E83700396B6D /* AWSenseWatch.h */; };
 		4641FF441EB0EA4700396B6D /* AWSAccelerometerSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FEF01EB0E84A00396B6D /* AWSAccelerometerSensor.swift */; };
 		4641FF451EB0EA4700396B6D /* AWSDeviceMotionSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FEF11EB0E84A00396B6D /* AWSDeviceMotionSensor.swift */; };
@@ -72,8 +71,6 @@
 		4641FF4E1EB0EBF100396B6D /* SensorSettingsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FEBE1EB0E68100396B6D /* SensorSettingsExtensions.swift */; };
 		4641FF4F1EB0EBF100396B6D /* WatchConnectivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FEBF1EB0E68100396B6D /* WatchConnectivityManager.swift */; };
 		4641FF501EB0EBF100396B6D /* DataTransmissionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4641FEC01EB0E68100396B6D /* DataTransmissionMode.swift */; };
-		4641FF511EB0EC1800396B6D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46569ABA1E5DB2ED00F6C02D /* Info.plist */; };
-		4641FF521EB0EC4300396B6D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46569AC91E5DB39000F6C02D /* Info.plist */; };
 		46569ABB1E5DB2ED00F6C02D /* AWSenseConnectWatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 46569AB91E5DB2ED00F6C02D /* AWSenseConnectWatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		46569ACA1E5DB39000F6C02D /* AWSenseConnectPhone.h in Headers */ = {isa = PBXBuildFile; fileRef = 46569AC81E5DB39000F6C02D /* AWSenseConnectPhone.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		46A2B0DE1EB0F3880040A84D /* SensorEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A2B0DD1EB0F3880040A84D /* SensorEvent.swift */; };
@@ -386,24 +383,25 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Katrin Haensel";
 				TargetAttributes = {
 					4641FF1D1EB0E9D300396B6D = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = G6ZDR46H87;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					46569AB51E5DB2ED00F6C02D = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = G6ZDR46H87;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					46569AC51E5DB39000F6C02D = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = G6ZDR46H87;
-						LastSwiftMigration = 0820;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -432,7 +430,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4641FF421EB0EA3800396B6D /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +437,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4641FF511EB0EC1800396B6D /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +444,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4641FF521EB0EC4300396B6D /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +559,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ac.uk.qmul.AWSense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				WATCHOS_DEPLOYMENT_TARGET = 3.1;
 			};
 			name = Debug;
@@ -585,7 +581,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ac.uk.qmul.AWSense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				WATCHOS_DEPLOYMENT_TARGET = 3.1;
 			};
 			name = Release;
@@ -599,7 +596,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -607,7 +606,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -651,7 +654,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -659,7 +664,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -705,7 +714,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -726,7 +736,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ac.uk.qmul.AWSenseConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -736,7 +747,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = G6ZDR46H87;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -751,7 +762,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -762,7 +774,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = G6ZDR46H87;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -776,7 +788,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

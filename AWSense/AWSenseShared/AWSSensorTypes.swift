@@ -27,11 +27,7 @@ public enum AWSSensorType : Int, Equatable {
     }
     
     public func isEqualTo(another: AWSSensorType) -> Bool{
-        if another is AWSSensorType{
-            return self.rawValue == (another).rawValue
-        }else{
-            return false
-        }
+        return self.rawValue == (another).rawValue
     }
     
     public var short : String{

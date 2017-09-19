@@ -72,7 +72,7 @@ internal class RemoteSensingDataBuffer {
             print(error.localizedDescription);
         }
         
-        let name = sensingSession!.name != nil ? sensingSession!.name! : "export"
+//        let name = sensingSession!.name != nil ? sensingSession!.name! : "export"
         //let path = rootDirectory.appending("/\(name)_\(batchNo)_\(type.short).csv")
         
         let path = rootDirectory.appending("/a\(type.short.localizedUppercase)_\(batchNo).csv")
@@ -88,7 +88,7 @@ internal class RemoteSensingDataBuffer {
         
         do{
             try writeString.write(toFile: path, atomically: true, encoding: .utf8)
-        }catch let error as Error{
+        }catch let error{
             print("did not write file for type \(type.short)")
             print(error.localizedDescription)
         }

@@ -55,7 +55,7 @@ class AWSAccelerometerSensor : AWSSensor{
             let set = (settings != nil ? settings : RawAccelerometerSensorSettings.standardSettings) as! RawAccelerometerSensorSettings
             
             let handler:CMAccelerometerHandler = {(data: CMAccelerometerData?, error: Error?) -> Void in
-                if(data != nil && data!.timestamp != nil && data?.acceleration != nil){
+                if(data != nil){
                     self.event.raise(data: AWSRawAccelerometerSensorData(timestamp : AWSTimestamp(ti: (data?.timestamp)!), acceleration : (data?.acceleration)!))
                 }
                 else{

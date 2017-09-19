@@ -70,7 +70,7 @@ internal class AbstractMessage : Message{
     }
     
     internal var type: MessageType{
-        return type(of: self).type
+        return Swift.type(of: self).type
     }
     
     private static let timestampKey = "ts"
@@ -80,7 +80,7 @@ internal class AbstractMessage : Message{
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        timestamp = payload[type(of: self).timestampKey] as! Date
+        timestamp = payload[Swift.type(of: self).timestampKey] as! Date
     }
     
     internal init() {
@@ -93,8 +93,8 @@ internal class AbstractMessage : Message{
     /// - Returns: the payload
     internal func createPayload() -> [String : Any] {
         var payload : [String : Any] = [String : Any]()
-        payload[type(of: self).timestampKey] = timestamp
-        payload[MessageType.typeKey] = type(of: self).type.rawValue
+        payload[Swift.type(of: self).timestampKey] = timestamp
+        payload[MessageType.typeKey] = Swift.type(of: self).type.rawValue
         return payload
     }
     
@@ -119,9 +119,9 @@ internal class SensingDataMessage : AbstractMessage{
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
         
-        sensingDataType = AWSSensorType(rawValue: payload[type(of: self).sensingDataTypeKey] as! Int)!
+        sensingDataType = AWSSensorType(rawValue: payload[Swift.type(of: self).sensingDataTypeKey] as! Int)!
         
-        let dataArr : [[AnyObject]] = payload[type(of: self).sensingDataKey] as! [[AnyObject]]
+        let dataArr : [[AnyObject]] = payload[Swift.type(of: self).sensingDataKey] as! [[AnyObject]]
 
         // TODO: That is quite ugly: Improve!
         sensingData = [AWSSensorData]()
@@ -147,8 +147,8 @@ internal class SensingDataMessage : AbstractMessage{
     /// - Returns: the payload
     internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
-        payload[type(of: self).sensingDataTypeKey] = sensingDataType.rawValue
-        payload[type(of: self).sensingDataKey] = sensingData.map{ e in
+        payload[Swift.type(of: self).sensingDataTypeKey] = sensingDataType.rawValue
+        payload[Swift.type(of: self).sensingDataKey] = sensingData.map{ e in
             return e.data
         }
         //dump(payload)
@@ -197,13 +197,13 @@ internal class StartSensingMessage : AbstractMessage{
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        let sensArr = payload[type(of: self).configurationKey]! as AnyObject //as! [Int]
+        let sensArr = payload[Swift.type(of: self).configurationKey]! as AnyObject //as! [Int]
 //        let s = sensArr.map{ sens in
 //            return AWSSensorType(rawValue: sens)
 //        } as! [AWSSensorType]
 //        let settings
         configuration = StartSensingMessage.configFor(data: sensArr)
-        transmissionIntervall = DataTransmissionInterval(payload[type(of: self).transmissionModeKey] as! Double)
+        transmissionIntervall = DataTransmissionInterval(payload[Swift.type(of: self).transmissionModeKey] as! Double)
         // DataTransmissionMode(rawValue: payload[type(of: self).transmissionModeKey] as! String)
         super.init(fromPayload: payload)
     }
@@ -226,8 +226,8 @@ internal class StartSensingMessage : AbstractMessage{
 //        let configPayload = configuration.getSensorArray().map{ s in
 //            return s.rawValue
 //        }
-        payload[type(of: self).configurationKey] = dataFromConfig()
-        payload[type(of: self).transmissionModeKey] = transmissionIntervall.intervallSeconds
+        payload[Swift.type(of: self).configurationKey] = dataFromConfig()
+        payload[Swift.type(of: self).transmissionModeKey] = transmissionIntervall.intervallSeconds
         return payload
     }
 
@@ -269,7 +269,7 @@ internal class StartedSensingMessage : AbstractMessage{
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        startTime = payload[type(of: self).startTimeKey] as! Date
+        startTime = payload[Swift.type(of: self).startTimeKey] as! Date
         super.init(fromPayload: payload)
     }
     
@@ -286,7 +286,7 @@ internal class StartedSensingMessage : AbstractMessage{
     /// - Returns: the payload
     internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
-        payload[type(of: self).startTimeKey] = startTime
+        payload[Swift.type(of: self).startTimeKey] = startTime
         return payload
     }
     
@@ -308,7 +308,7 @@ internal class StoppedSensingMessage : AbstractMessage{
     ///
     /// - Parameter payload: dictionary of values
     internal required init(fromPayload payload: [String : Any]) {
-        stopTime = payload[type(of: self).stopTimeKey] as! Date
+        stopTime = payload[Swift.type(of: self).stopTimeKey] as! Date
         super.init(fromPayload: payload)
     }
     
@@ -325,7 +325,7 @@ internal class StoppedSensingMessage : AbstractMessage{
     /// - Returns: the payload
     internal override func createPayload() -> [String : Any] {
         var payload = super.createPayload()
-        payload[type(of: self).stopTimeKey] = stopTime
+        payload[Swift.type(of: self).stopTimeKey] = stopTime
         return payload
     }
     

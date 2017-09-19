@@ -29,7 +29,7 @@ internal class CommunicationManager: NSObject, WCSessionDelegate {
     /// Init
     private override init() {
         super.init()
-        session = WCSession.default()
+        session = WCSession.default
         
         session!.delegate = self
         session!.activate()

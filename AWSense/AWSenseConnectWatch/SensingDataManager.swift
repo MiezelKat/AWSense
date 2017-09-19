@@ -50,7 +50,7 @@ internal class SensingDataManager : SensingBufferEventHandler {
     func manage(sensingData data : AWSSensorData, forType type: AWSSensorType){
         let nextTransmission = lastTransmissions[type]!.addingTimeInterval(transmissionIntervall!.intervallSeconds)
         
-        let refDate = Date().addingTimeInterval(-2)
+//        let refDate = Date().addingTimeInterval(-2)
         
         sensingDataBuffer!.append(sensingData: data, forType: type)
         //if(lastTransmissions[type]!.compare(refDate) == .orderedAscending){
